@@ -1,6 +1,6 @@
 package ChessGame.Share.Iterator;
 
-import ChessGame.View.awt.Canvas.BoardComponent;
+import ChessGame.View.awt.Component.BoardComponent;
 import ChessGame.View.awt.Graphics.CaseBoard;
 
 import java.util.Iterator;
