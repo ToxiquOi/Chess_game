@@ -16,11 +16,10 @@ import java.io.InputStream;
 
 public class BoardComponent extends JPanel {
 
-    private Dimension d = new Dimension(EWindow.WIDTH, EWindow.HEIGHT);
-    Font chessFont = new ChessFont().getChessFont();
-    JFrame frame;
+    private Dimension d;
 
-    public BoardComponent() {
+    public BoardComponent(Dimension d) {
+        this.d = d;
         this.init();
     }
 

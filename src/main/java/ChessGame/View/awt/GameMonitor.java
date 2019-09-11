@@ -15,9 +15,9 @@ import java.awt.event.WindowEvent;
 public class GameMonitor extends JFrame implements Runnable {
 
     private boolean running = false;
-    private BoardIterator bIterator;
-    private BoardComponent boardComponent = new BoardComponent();
     private Dimension d = new Dimension(EWindow.WIDTH, EWindow.HEIGHT);
+    private BoardComponent boardComponent = new BoardComponent(this.d);
+    private BoardIterator bIterator;
 
     public GameMonitor(String title, Board board) throws HeadlessException {
         super(title);
