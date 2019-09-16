@@ -1,6 +1,6 @@
-package ChessGame.Share.Enum;
+package ChessGame.Share.Constant;
 
-public class EWindow {
+public class CWindow {
     public final static int HEIGHT = 800;
     public final static int WIDTH = 800;
 }

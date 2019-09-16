@@ -1,33 +1,32 @@
 package ChessGame.View.awt;
 
+import ChessGame.Controller.Listener.MouseController;
 import ChessGame.Model.Board;
 import ChessGame.Share.Abstract.Model.BoardElement;
 import ChessGame.Share.Abstract.Model.Piece;
-import ChessGame.Share.Enum.ColorChess;
-import ChessGame.Share.Enum.EWindow;
+import ChessGame.Share.Constant.CBoard;
+import ChessGame.Share.Constant.CWindow;
 import ChessGame.Share.Iterator.BoardIterator;
 import ChessGame.View.awt.Component.BoardComponent;
+import ChessGame.View.awt.service.SpriteLoader;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-import java.io.FileInputStream;
-import java.io.IOException;
 
 public class GameMonitor extends Frame implements Runnable {
 
     private boolean running = false;
-    private Dimension d = new Dimension(EWindow.WIDTH, EWindow.HEIGHT);
-    private BoardComponent boardComponent;
-    private BoardIterator bIterator;
+    private Dimension d = new Dimension(CWindow.WIDTH, CWindow.HEIGHT);
+    SpriteLoader spriteLoader;
+    private Board board;
 
     public GameMonitor(String title, Board board) throws HeadlessException {
         super(title);
-        this.bIterator = board.iterator();
+        this.board = board;
+        this.spriteLoader = new SpriteLoader(board.iterator());
         this.init();
     }
 
@@ -50,6 +49,15 @@ public class GameMonitor extends Frame implements Runnable {
             }
         );
     }
+
+
+    private void createBoardComponent() {
+        BoardComponent boardComponent = new BoardComponent(d, this.board.iterator());
+        boardComponent.addMouseMotionListener(new MouseController(this.board));
+        this.add(boardComponent);
+        this.pack();
+    }
+
 
     @Override
     public void run() {
@@ -94,24 +102,27 @@ public class GameMonitor extends Frame implements Runnable {
             }
 
             Graphics g;
-
+            BoardIterator bi = this.board.iterator();
             try {
                 g = bs.getDrawGraphics();
+
                 // -------- draw start-------
                 bc.draw(g);
-                while (this.bIterator.hasNext()) {
 
-                    BoardElement boardElement = this.bIterator.next();
+                while(bi.hasNext()){
+                    BoardElement boardElement = bi.next();
                     if (boardElement instanceof Piece) {
-                        Piece element = (Piece) boardElement;
-
-                        final BufferedImage image = this.loadTexture(element);
-                        System.out.println(element.getPosX());
-                        // TODO: make image work
-                        g.drawImage(image, element.getPosX() * 100, element.getPosY() * 100, null);
+                        Piece piece = (Piece)boardElement;
+                        BufferedImage image = this.spriteLoader.getBufferedImage(piece);
+                        // posX * tileWidth + (tileWidth / 2 - (imageWidth / 2))
+                        g.drawImage(image,
+                                piece.getPosX() * CBoard.TILE_WIDTH_PX + (CBoard.TILE_WIDTH_PX / 2 - (image.getWidth() / 2)),
+                                piece.getPosY() * CBoard.TILE_HEIGHT_PX + (CBoard.TILE_HEIGHT_PX / 2 - (image.getHeight() / 2)),
+                                 image.getWidth(), image.getHeight(), null);
                     }
                 }
                 // -------- draw end-------
+
                 bs.show();
 
             } catch (NullPointerException e) {
@@ -119,52 +130,4 @@ public class GameMonitor extends Frame implements Runnable {
             }
         }
     }
-
-    private void createBoardComponent() {
-        BoardComponent boardComponent = new BoardComponent(d, this.bIterator);
-        this.add(boardComponent);
-        this.pack();
-    }
-
-    private BufferedImage loadTexture(Piece element) {
-        String firstChar = "" + element.getElement().toString().charAt(0);
-        String elementNameFormated = element.getElement().toString().toLowerCase().replace(firstChar.toLowerCase(), firstChar);
-        String spritePath = ((element.getColorChess() == ColorChess.WHITE)? "White" : "Black") + elementNameFormated + ".png";
-
-        BufferedImage image = null;
-        try {
-            image = ImageIO.read(new FileInputStream(System.getProperty("user.dir") + "/rsc/Pieces/" + spritePath));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return image;
-    }
 }
-
-//    private void render() {
-//        while(this.bIterator.hasNext()) {
-//            BoardElement boardElement = this.bIterator.next();
-//
-//            if (boardElement instanceof Piece) {
-//                Piece element = (Piece) boardElement;
-//
-//                final BufferedImage image = this.loadTexture(element);
-//                JPanel component = new JPanel() {
-//                    @Override
-//                    public void paint(Graphics g) {
-//                        super.paint(g);
-//                        if(image == null){
-//                            System.out.println("null");
-//                        }
-//                        g.drawImage(image,  element.getPosX() * 100, element.getPosY() * 100,null);
-//                    }
-//                };
-//                this.add(component);
-//
-//            } else {
-////                System.out.println(boardElement.getElement());
-//            }
-//        }
-//    }
-

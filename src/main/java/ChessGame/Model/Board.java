@@ -3,8 +3,9 @@ package ChessGame.Model;
 import ChessGame.Model.BoardElement.Pieces.*;
 import ChessGame.Model.BoardElement.StaticElement.Empty;
 import ChessGame.Share.Abstract.Model.BoardElement;
+import ChessGame.Share.Constant.CBoard;
 import ChessGame.Share.Enum.ColorChess;
-import ChessGame.Share.Enum.EWindow;
+import ChessGame.Share.Constant.CWindow;
 import ChessGame.Share.Iterator.BoardIterator;
 
 public class Board implements Iterable<BoardElement>{
@@ -12,23 +13,22 @@ public class Board implements Iterable<BoardElement>{
     private BoardElement[][] board;
 
     public Board() {
+        this.board = new BoardElement[CBoard.TILE_HEIGHT_TAB][CBoard.TILE_WIDTH_TAB];
         this.generateBoard();
     }
 
     public int getHeight(){
-        return EWindow.HEIGHT / 100;
+        return CWindow.HEIGHT / CBoard.TILE_HEIGHT_PX;
     }
 
     public int getWidth() {
-        return EWindow.WIDTH / 100;
+        return CWindow.WIDTH / CBoard.TILE_WIDTH_PX;
     }
 
     private void generateBoard() {
-        this.board = new BoardElement[this.getWidth()][this.getWidth()];
-
-        for (int y = 0; y < 8; y++) {
+        for (int y = 0; y < CBoard.TILE_HEIGHT_TAB; y++) {
 //            System.out.println("y: " + y);
-            for (int x = 0; x < 8; x++) {
+            for (int x = 0; x < CBoard.TILE_WIDTH_TAB; x++) {
 
 //                System.out.println("x: " + x);
                 this.board[y][x] = new Empty(x, y);
@@ -40,8 +40,8 @@ public class Board implements Iterable<BoardElement>{
 
     }
 
-    public BoardElement getElement(int x, int y) {
-        return this.board[y][x];
+    public BoardElement getElement(int y, int x) {
+        return this.board[x][y];
     }
 
     private void piecesDisposition(ColorChess colorChess) {
@@ -50,22 +50,22 @@ public class Board implements Iterable<BoardElement>{
 
         for(int i = 0; i < 8; i++) {
             if(i == 0 || i == 7) {
-                this.board[x1][i] = new Rook(x1, i, colorChess);
+                this.board[i][x1] = new Rook(x1, i, colorChess);
             }
             if(i == 1 || i == 6) {
-                this.board[x1][i] = new Knight(x1, i, colorChess);
+                this.board[i][x1] = new Knight(x1, i, colorChess);
             }
             if(i == 2 || i == 5) {
-                this.board[x1][i] = new Bishop(x1, i, colorChess);
+                this.board[i][x1] = new Bishop(x1, i, colorChess);
             }
             if(i == 3) {
-                this.board[x1][i] = new Queen(x1, i, colorChess);
+                this.board[i][x1] = new Queen(x1, i, colorChess);
             }
             if(i == 4) {
-                this.board[x1][i] = new King(x1, i, colorChess);
+                this.board[i][x1] = new King(x1, i, colorChess);
             }
 
-            this.board[x2][i] = new Pawn(x2, i, colorChess);
+            this.board[i][x2] = new Pawn(x2, i, colorChess);
         }
     }
 

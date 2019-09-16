@@ -28,7 +28,7 @@ public class BoardIterator implements Iterator<BoardElement> {
 
     @Override
     public BoardElement next() {
-        if(this.x + 1 < 8) {
+        if(this.x + 1 < this.board.getWidth()) {
             this.x++;
         }
         else if(this.y + 1 < this.board.getHeight()) {
@@ -40,6 +40,11 @@ public class BoardIterator implements Iterator<BoardElement> {
         }
 
         return this.board.getElement(this.x, this.y);
+    }
+
+    public void resetIterator() {
+        this.x = -1;
+        this.y = 0;
     }
 
     public int getX() {
