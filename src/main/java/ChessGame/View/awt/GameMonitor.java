@@ -168,17 +168,3 @@ public class GameMonitor extends Frame implements Runnable {
 //        }
 //    }
 
-//    private BufferedImage loadTexture(Piece element) {
-//        String firstChar = "" + element.getElement().toString().charAt(0);
-//        String elementNameFormated = element.getElement().toString().toLowerCase().replace(firstChar.toLowerCase(), firstChar);
-//        String spritePath = ((element.getColorChess() == ColorChess.WHITE)? "White" : "Black") + elementNameFormated + ".png";
-//
-//        BufferedImage image = null;
-//        try {
-//            image = ImageIO.read(new FileInputStream(System.getProperty("user.dir") + "/rsc/Pieces/" + spritePath));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return image;
-//    }

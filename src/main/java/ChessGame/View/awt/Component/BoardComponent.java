@@ -50,23 +50,6 @@ public class BoardComponent extends Canvas {
 
 }
 
-//public class BoardComponent extends JPanel {
-//
-//    private BoardIterator bIterator;
-//    private Dimension d;
-//
-//    public BoardComponent(Dimension d, Board board) {
-//        this.bIterator = board.iterator();
-//        this.d = d;
-//        this.init();
-//    }
-//
-//    private void init() {
-//        this.setPreferredSize(this.d);
-//        this.setMaximumSize(this.d);
-//        this.setMinimumSize(this.d);
-//    }
-//
 //    public void paint(Graphics g) {
 //        for(int y = 0; y < (this.d.getHeight() / 100); y++) {
 //            for(int x = 0; x < (this.d.getWidth() / 100); x++) {
@@ -94,20 +77,4 @@ public class BoardComponent extends Canvas {
 //            }
 //        }
 //    }
-//
-//    private BufferedImage loadTexture(Piece element) {
-//        String firstChar = "" + element.getElement().toString().charAt(0);
-//        String elementNameFormated = element.getElement().toString().toLowerCase().replace(firstChar.toLowerCase(), firstChar);
-//        String spritePath = ((element.getColorChess() == ColorChess.WHITE)? "White" : "Black") + elementNameFormated + ".png";
-//
-//        System.out.println(spritePath);
-//        BufferedImage image = null;
-//        try {
-//            image = ImageIO.read(new FileInputStream(System.getProperty("user.dir") + "/rsc/Pieces/" + spritePath));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return image;
-//    }
-//}
+
