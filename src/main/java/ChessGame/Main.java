@@ -14,9 +14,9 @@ public class Main {
      */
     public static void main(String[] args) {
         Board board = new Board();
-        GameMonitor gw = new GameMonitor("Chess", board);
-        gw.setVisible(true);
-        gw.run();
+        GameMonitor gm = new GameMonitor("Chess", board);
+        gm.setVisible(true);
+        gm.run();
     }
 
 }

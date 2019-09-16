@@ -13,11 +13,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class GameMonitor extends JFrame implements Runnable {
+public class GameMonitor extends Frame implements Runnable {
 
     private boolean running = false;
     private Dimension d = new Dimension(EWindow.WIDTH, EWindow.HEIGHT);
@@ -26,9 +27,7 @@ public class GameMonitor extends JFrame implements Runnable {
 
     public GameMonitor(String title, Board board) throws HeadlessException {
         super(title);
-        this.boardComponent = new BoardComponent(this.d, board);
         this.bIterator = board.iterator();
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.init();
     }
 
@@ -38,7 +37,6 @@ public class GameMonitor extends JFrame implements Runnable {
         this.setMinimumSize(this.d);
         this.setResizable(false);
         this.setLayout(new BorderLayout());
-        this.getContentPane().add(this.boardComponent);
         this.setVisible(true);
         this.pack();
         this.running = true;
@@ -58,6 +56,8 @@ public class GameMonitor extends JFrame implements Runnable {
         int fps = 60;
         long nanoPerFrame = (long) (1000000000.0 / fps);
         long lastTime = System.nanoTime();
+
+        this.createBoardComponent();
 
         while (this.running) {
             long nowTime = System.nanoTime();
@@ -82,6 +82,45 @@ public class GameMonitor extends JFrame implements Runnable {
     }
 
     private void render() {
+        Component component = this.getComponent(0);
+
+        if (component instanceof BoardComponent) {
+            BoardComponent bc = (BoardComponent) component;
+            BufferStrategy bs = bc.getBufferStrategy();
+
+            if (bs == null) {
+                bc.createBufferStrategy(2);
+                bs = bc.getBufferStrategy();
+            }
+
+            Graphics g;
+
+            try {
+                g = bs.getDrawGraphics();
+                if(g == null) {
+                    System.out.println("fck");
+                }
+                else {
+                    System.out.println("draw");
+                }
+                g.setColor(Color.BLACK);
+                g.fillRect(0, 0, 100, 100);
+                bs.show();
+
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void createBoardComponent() {
+        BoardComponent boardComponent = new BoardComponent(d, this.bIterator);
+        this.add(boardComponent);
+        this.pack();
+    }
+}
+
+//    private void render() {
 //        while(this.bIterator.hasNext()) {
 //            BoardElement boardElement = this.bIterator.next();
 //
@@ -105,7 +144,7 @@ public class GameMonitor extends JFrame implements Runnable {
 ////                System.out.println(boardElement.getElement());
 //            }
 //        }
-    }
+//    }
 
 //    private BufferedImage loadTexture(Piece element) {
 //        String firstChar = "" + element.getElement().toString().charAt(0);
@@ -121,5 +160,3 @@ public class GameMonitor extends JFrame implements Runnable {
 //
 //        return image;
 //    }
-
-}
