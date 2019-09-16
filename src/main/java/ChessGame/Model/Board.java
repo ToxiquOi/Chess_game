@@ -27,10 +27,10 @@ public class Board implements Iterable<BoardElement>{
         this.board = new BoardElement[this.getWidth()][this.getWidth()];
 
         for (int y = 0; y < 8; y++) {
-            System.out.println("y: " + y);
+//            System.out.println("y: " + y);
             for (int x = 0; x < 8; x++) {
 
-                System.out.println("x: " + x);
+//                System.out.println("x: " + x);
                 this.board[y][x] = new Empty(x, y);
             }
         }
