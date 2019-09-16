@@ -33,6 +33,20 @@ public class BoardComponent extends Canvas {
         this.setBackground(Color.GRAY);
     }
 
+    public void draw(Graphics g) {
+        for(int y = 0; y < (this.d.getHeight() / 100); y++) {
+            for(int x = 0; x < (this.d.getWidth() / 100); x++) {
+//                System.out.println("" + x + " " + y);
+                if(((x + y) % 2) == 1) {
+                    g.setColor(Color.WHITE);
+                }
+                else {
+                    g.setColor(Color.BLACK);
+                }
+                new CaseBoard(x, y, g);
+            }
+        }
+    }
 
 }
 

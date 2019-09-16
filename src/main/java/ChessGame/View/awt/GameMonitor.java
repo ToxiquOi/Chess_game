@@ -97,14 +97,21 @@ public class GameMonitor extends Frame implements Runnable {
 
             try {
                 g = bs.getDrawGraphics();
-                if(g == null) {
-                    System.out.println("fck");
+                // -------- draw start-------
+                bc.draw(g);
+                while (this.bIterator.hasNext()) {
+
+                    BoardElement boardElement = this.bIterator.next();
+                    if (boardElement instanceof Piece) {
+                        Piece element = (Piece) boardElement;
+
+                        final BufferedImage image = this.loadTexture(element);
+                        System.out.println(element.getPosX());
+                        // TODO: make image work
+                        g.drawImage(image, element.getPosX() * 100, element.getPosY() * 100, null);
+                    }
                 }
-                else {
-                    System.out.println("draw");
-                }
-                g.setColor(Color.BLACK);
-                g.fillRect(0, 0, 100, 100);
+                // -------- draw end-------
                 bs.show();
 
             } catch (NullPointerException e) {
@@ -117,6 +124,21 @@ public class GameMonitor extends Frame implements Runnable {
         BoardComponent boardComponent = new BoardComponent(d, this.bIterator);
         this.add(boardComponent);
         this.pack();
+    }
+
+    private BufferedImage loadTexture(Piece element) {
+        String firstChar = "" + element.getElement().toString().charAt(0);
+        String elementNameFormated = element.getElement().toString().toLowerCase().replace(firstChar.toLowerCase(), firstChar);
+        String spritePath = ((element.getColorChess() == ColorChess.WHITE)? "White" : "Black") + elementNameFormated + ".png";
+
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(new FileInputStream(System.getProperty("user.dir") + "/rsc/Pieces/" + spritePath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return image;
     }
 }
 
