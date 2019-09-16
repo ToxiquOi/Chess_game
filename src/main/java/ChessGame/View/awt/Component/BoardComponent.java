@@ -24,8 +24,8 @@ public class BoardComponent extends Canvas {
     }
 
     public void draw(Graphics g) {
-        for(int y = 0; y < (this.d.getHeight() / CBoard.TILE_HEIGHT_PX); y++) {
-            for(int x = 0; x < (this.d.getWidth() / CBoard.TILE_WIDTH_PX); x++) {
+        for(int x = 0; x < (this.d.getWidth() / CBoard.TILE_WIDTH_PX); x++) {
+            for(int y = 0; y < (this.d.getHeight() / CBoard.TILE_HEIGHT_PX); y++) {
 //                System.out.println("" + x + " " + y);
                 if(((x + y) % 2) == 1) {
                     g.setColor(Color.WHITE);

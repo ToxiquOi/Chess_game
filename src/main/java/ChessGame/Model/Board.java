@@ -3,6 +3,7 @@ package ChessGame.Model;
 import ChessGame.Model.BoardElement.Pieces.*;
 import ChessGame.Model.BoardElement.StaticElement.Empty;
 import ChessGame.Share.Abstract.Model.BoardElement;
+import ChessGame.Share.Abstract.Model.Piece;
 import ChessGame.Share.Constant.CBoard;
 import ChessGame.Share.Enum.ColorChess;
 import ChessGame.Share.Constant.CWindow;
@@ -44,9 +45,18 @@ public class Board implements Iterable<BoardElement>{
         return this.board[x][y];
     }
 
+    public void moveElement(int y, int x, Piece piece) {
+        this.board[y][x] = piece;
+        piece.setPos(x, y);
+    }
+
+    public void setEmptyElement(int y, int x) {
+        this.board[y][x] = new Empty(x, y);
+    }
+
     private void piecesDisposition(ColorChess colorChess) {
-        int x1 = (colorChess == ColorChess.WHITE)? 0 : 7;
-        int x2 = (colorChess == ColorChess.WHITE)? 1 : 6;
+        int x1 = (colorChess == ColorChess.WHITE)? 7 : 0;
+        int x2 = (colorChess == ColorChess.WHITE)? 6 : 1;
 
         for(int i = 0; i < 8; i++) {
             if(i == 0 || i == 7) {

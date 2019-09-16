@@ -27,7 +27,7 @@ public abstract class Position {
         this.initialPos.add(1, y);
     }
 
-    private void setPos(int x, int y){
+    public void setPos(int x, int y){
         this.pos.clear();
         this.pos.add(0, x);
         this.pos.add(1, y);
