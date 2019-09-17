@@ -12,8 +12,6 @@ import java.awt.event.MouseMotionListener;
 public class Mouse implements MouseListener, MouseMotionListener {
 
     private Board board;
-    private int pieceSelectedX;
-    private int pieceSelectedY;
     private boolean[] buttons = new boolean[4];
     private int x;
     private int y;
@@ -37,17 +35,15 @@ public class Mouse implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-//        System.out.println("clicked at mouseX: " + e.getX() / 100 + "mouseY: " + e.getY() / 100);
         this.x = e.getX();
         this.y = e.getY();
-
-//        System.out.println(this.board.getElement(e.getY() / CBoard.TILE_HEIGHT_PX, e.getX() / CBoard.TILE_WIDTH_PX).getElement().toString());
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
         if (e.getButton() <= 3) {
             this.buttons[e.getButton()] = true;
+            System.out.println(e.getButton());
         }
     }
 

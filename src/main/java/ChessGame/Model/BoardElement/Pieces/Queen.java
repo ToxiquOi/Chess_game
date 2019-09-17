@@ -14,28 +14,7 @@ import ChessGame.Share.Enum.ColorChess;
  * @author tox
  */
 public class Queen extends Piece {
-
     public Queen(int x, int y, ColorChess colorChess) {
         super(x, y, colorChess);
-    }
-
-    @Override
-    public void moveUp(int x, int y) {
-
-    }
-
-    @Override
-    public void moveDown(int x, int y) {
-
-    }
-
-    @Override
-    public void moveLeft(int x, int y) {
-
-    }
-
-    @Override
-    public void moveRight(int x, int y) {
-
     }
 }

@@ -20,20 +20,23 @@ import java.awt.image.BufferedImage;
 
 public class GameMonitor extends Frame implements Runnable {
 
+
     private boolean running = false;
     private Dimension d = new Dimension(CWindow.WIDTH, CWindow.HEIGHT);
-    SpriteLoader spriteLoader;
+    private SpriteLoader spriteLoader;
     private Board board;
 
     private int pieceSelectedX = 0;
     private int pieceSelectedY = 0;
+    private Color colorSelect = null;
+
     private Mouse mouse;
 
-    public GameMonitor(String title, Board board) throws HeadlessException {
+    public GameMonitor(String title, Board board, Mouse mouse) throws HeadlessException {
         super(title);
         this.board = board;
         this.spriteLoader = new SpriteLoader(board.iterator());
-        this.mouse = new Mouse(board);
+        this.mouse = mouse;
         this.init();
     }
 
@@ -64,6 +67,11 @@ public class GameMonitor extends Frame implements Runnable {
         boardComponent.addMouseMotionListener(this.mouse);
         this.add(boardComponent);
         this.pack();
+    }
+
+    private void selectTile() {
+        this.pieceSelectedX = this.mouse.getX() / CBoard.TILE_WIDTH_PX;
+        this.pieceSelectedY = this.mouse.getY() / CBoard.TILE_HEIGHT_PX;
     }
 
 
@@ -99,10 +107,7 @@ public class GameMonitor extends Frame implements Runnable {
 
     private void render() {
         Component component = this.getComponent(0);
-        if (this.mouse.isButtonPressed(MouseEvent.BUTTON1)) {
-            this.pieceSelectedX = this.mouse.getX() / CBoard.TILE_WIDTH_PX;
-            this.pieceSelectedY = this.mouse.getY() / CBoard.TILE_HEIGHT_PX;
-        }
+
 
         if (component instanceof BoardComponent) {
             BoardComponent bc = (BoardComponent) component;
@@ -113,29 +118,47 @@ public class GameMonitor extends Frame implements Runnable {
                 bs = bc.getBufferStrategy();
             }
 
+
             Graphics g;
             BoardIterator bi = this.board.iterator();
+
+            if (this.mouse.isButtonPressed(MouseEvent.BUTTON1)) {
+                this.selectTile();
+                this.colorSelect = new Color(0x128E00);
+
+            } else if (this.mouse.isButtonPressed(MouseEvent.BUTTON3)) {
+                this.selectTile();
+                this.colorSelect = new Color(0xEB0900);
+                BoardElement boardElement = this.board.getElement(this.mouse.getY() / CBoard.TILE_HEIGHT_PX, this.mouse.getX() / CBoard.TILE_WIDTH_PX);
+                if(boardElement instanceof Piece) {
+                    Piece piece = (Piece) boardElement;
+                    piece.die();
+                }
+            }
 
             try {
                 g = bs.getDrawGraphics();
                 // -------- draw start-------
-
                 bc.draw(g);
 
-                if(this.pieceSelectedY >= 0 && this.pieceSelectedX >= 0 && this.pieceSelectedY <= CBoard.TILE_HEIGHT_TAB && this.pieceSelectedX <= CBoard.TILE_WIDTH_TAB) {
-                    new BorderTile(g, this.pieceSelectedX, this.pieceSelectedY);
+
+
+                if(this.pieceSelectedY >= 0 && this.pieceSelectedX >= 0 && this.pieceSelectedY <= CBoard.TILE_HEIGHT_TAB && this.pieceSelectedX <= CBoard.TILE_WIDTH_TAB && this.colorSelect != null) {
+                    new BorderTile(g, this.pieceSelectedX, this.pieceSelectedY, this.colorSelect);
                 }
 
-                while(bi.hasNext()){
+
+                while(bi.hasNext()) {
                     BoardElement boardElement = bi.next();
 
                     if (boardElement instanceof Piece) {
                         Piece piece = (Piece)boardElement;
-                        BufferedImage image = this.spriteLoader.getBufferedImage(piece);
-                        // posX * tileWidth + (tileWidth / 2 - (imageWidth / 2))
-                        g.drawImage(image, piece.getPosY() * CBoard.TILE_HEIGHT_PX + (CBoard.TILE_HEIGHT_PX / 2 - (image.getHeight() / 2)),
-                                piece.getPosX() * CBoard.TILE_WIDTH_PX + (CBoard.TILE_WIDTH_PX / 2 - (image.getWidth() / 2)),
-                                 image.getWidth(), image.getHeight(), null);
+                        if(piece.isAlive()) {
+                            BufferedImage image = this.spriteLoader.getBufferedImage(piece);
+                            g.drawImage(image, piece.getPosY() * CBoard.TILE_HEIGHT_PX + (CBoard.TILE_HEIGHT_PX / 2 - (image.getHeight() / 2)),
+                                    piece.getPosX() * CBoard.TILE_WIDTH_PX + (CBoard.TILE_WIDTH_PX / 2 - (image.getWidth() / 2)),
+                                    image.getWidth(), image.getHeight(), null);
+                        }
                     }
                 }
 

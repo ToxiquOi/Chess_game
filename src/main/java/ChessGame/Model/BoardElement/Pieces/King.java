@@ -19,24 +19,4 @@ public class King extends Piece {
         super(x, y, colorChess);
     }
 
-    @Override
-    public void moveUp(int x, int y) {
-
-    }
-
-    @Override
-    public void moveDown(int x, int y) {
-
-    }
-
-    @Override
-    public void moveLeft(int x, int y) {
-
-    }
-
-    @Override
-    public void moveRight(int x, int y) {
-
-    }
-    
 }

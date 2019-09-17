@@ -13,7 +13,7 @@ import ChessGame.Share.Interfaces.Model.IMovement;
  *
  * @author tox
  */
-public abstract class Piece extends BoardElement implements IMovement {
+public abstract class Piece extends BoardElement {
 
     protected boolean isAlive;
     private ColorChess colorChess;
@@ -21,38 +21,19 @@ public abstract class Piece extends BoardElement implements IMovement {
     public Piece(int x, int y, ColorChess colorChess) {
         super(x, y);
         this.colorChess = colorChess;
+        this.isAlive = true;
     }
 
     public boolean isAlive() {
-        return this.isAlive();
+        return this.isAlive;
+    }
+
+    public void die() {
+        this.isAlive = false;
     }
 
     public ColorChess getColorChess() {
         return colorChess;
     }
 
-    @Override
-    public void move(Move move) {
-        
-        switch(move) {
-            case UP: 
-                this.moveUp(this.getPosX() + 1, this.getPosY());
-                break;
-            
-            case DOWN: 
-                this.moveDown(this.getPosX() - 1, this.getPosY());
-                break;
-                
-            case LEFT:
-                this.moveLeft(this.getPosX(), this.getPosY() - 1);
-                break;
-                
-            case RIGHT:
-                this.moveRight(this.getPosX(), this.getPosY() + 1);
-                break;
-                
-            default: 
-                break;
-        }
-    }
 }
