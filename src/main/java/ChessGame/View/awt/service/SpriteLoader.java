@@ -4,8 +4,11 @@ import ChessGame.Share.Abstract.Model.BoardElement;
 import ChessGame.Share.Abstract.Model.Piece;
 import ChessGame.Share.Enum.ColorChess;
 import ChessGame.Share.Iterator.BoardIterator;
+import ChessGame.View.awt.Component.BoardComponent;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -13,9 +16,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SpriteLoader {
-    private ArrayList<HashMap<String, BufferedImage>> bufferedImages = new ArrayList<>(2);
 
-    public SpriteLoader(BoardIterator boardIterator) {
+    private ArrayList<HashMap<String, BufferedImage>> bufferedImages = new ArrayList<>(2);
+    private Frame frame;
+
+    public SpriteLoader(BoardIterator boardIterator, Frame frame) {
+        this.frame = frame;
+
+        this.init(boardIterator);
+    }
+
+    private void init(BoardIterator boardIterator) {
+
         this.bufferedImages.add(0, new HashMap<>());
         this.bufferedImages.add(1, new HashMap<>());
 
@@ -35,14 +47,25 @@ public class SpriteLoader {
         String elementNameFormated = element.getElement().toString().toLowerCase().replace(firstChar.toLowerCase(), firstChar);
         String spritePath = ((element.getColorChess() == ColorChess.WHITE)? "White" : "Black") + elementNameFormated + ".png";
 
+        Graphics g;
         BufferedImage image = null;
+
         try {
             image = ImageIO.read(new FileInputStream(System.getProperty("user.dir") + "/rsc/Pieces/" + spritePath));
+            image = this.makeCompatibleFormatImage(image);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         this.bufferedImages.get(element.getColorChess() == ColorChess.WHITE? 0 : 1).put(element.getElement().toString(), image);
+    }
+
+    private BufferedImage makeCompatibleFormatImage(BufferedImage image) {
+        BufferedImage compatibleTexture = this.frame.getGraphicsConfiguration().createCompatibleImage(image.getWidth(), image.getHeight(), Color.TRANSLUCENT);
+        Graphics gCompText = compatibleTexture.createGraphics();
+        gCompText.drawImage(image, 0, 0, null);
+
+        return compatibleTexture;
     }
 
     public BufferedImage getBufferedImage(Piece piece) {

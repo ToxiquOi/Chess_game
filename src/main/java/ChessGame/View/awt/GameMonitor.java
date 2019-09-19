@@ -20,6 +20,7 @@ import java.awt.image.BufferedImage;
 
 public class GameMonitor extends Frame implements Runnable {
 
+    Thread thread;
 
     private boolean running = false;
     private Dimension d = new Dimension(CWindow.WIDTH, CWindow.HEIGHT);
@@ -32,11 +33,17 @@ public class GameMonitor extends Frame implements Runnable {
 
     private Mouse mouse;
 
+    public void start() {
+        this.running = true;
+        this.thread = new Thread(this, "Chess_Game");
+        this.thread.start();
+    }
+
     public GameMonitor(String title, Board board, Mouse mouse) throws HeadlessException {
         super(title);
         this.board = board;
-        this.spriteLoader = new SpriteLoader(board.iterator());
         this.mouse = mouse;
+        this.spriteLoader = new SpriteLoader(board.iterator(), this);
         this.init();
     }
 
@@ -48,7 +55,6 @@ public class GameMonitor extends Frame implements Runnable {
         this.setLayout(new BorderLayout());
         this.setVisible(true);
         this.pack();
-        this.running = true;
 
         this.addWindowListener(
             new WindowAdapter() {
@@ -61,12 +67,13 @@ public class GameMonitor extends Frame implements Runnable {
     }
 
 
-    private void createBoardComponent() {
+    private BoardComponent createBoardComponent() {
         BoardComponent boardComponent = new BoardComponent(d, this.board.iterator());
         boardComponent.addMouseListener(this.mouse);
         boardComponent.addMouseMotionListener(this.mouse);
         this.add(boardComponent);
         this.pack();
+        return boardComponent;
     }
 
     private void selectTile() {
@@ -74,6 +81,24 @@ public class GameMonitor extends Frame implements Runnable {
         this.pieceSelectedY = this.mouse.getY() / CBoard.TILE_HEIGHT_PX;
     }
 
+    public void bench() {
+        this.running = true;
+        int count = 0;
+        long begin = System.nanoTime();
+
+        BoardComponent boardComponent = this.createBoardComponent();
+
+        while(this.running) {
+            this.render(boardComponent);
+            count++;
+        }
+
+        long end = System.nanoTime();
+        double fps = count / ((end - begin) / 1000000000.0);
+        System.out.println("FPS: " + fps);
+
+        this.dispose();
+    }
 
     @Override
     public void run() {
@@ -81,7 +106,7 @@ public class GameMonitor extends Frame implements Runnable {
         long nanoPerFrame = (long) (1000000000.0 / fps);
         long lastTime = System.nanoTime();
 
-        this.createBoardComponent();
+        BoardComponent boardComponent = this.createBoardComponent();
 
         while (this.running) {
             long nowTime = System.nanoTime();
@@ -90,7 +115,7 @@ public class GameMonitor extends Frame implements Runnable {
             }
             lastTime = nowTime;
 
-            this.render();
+            this.render(boardComponent);
 
             long elapsed = System.nanoTime() - lastTime;
             long millisleep = (nanoPerFrame - elapsed) / 1000000;
@@ -105,29 +130,25 @@ public class GameMonitor extends Frame implements Runnable {
         this.dispose();
     }
 
-    private void render() {
-        Component component = this.getComponent(0);
+    private void render(BoardComponent bc) {
+        BufferStrategy bs = bc.getBufferStrategy();
+
+        if (bs == null) {
+            bc.createBufferStrategy(2);
+            bs = bc.getBufferStrategy();
+        }
+
+        Graphics g;
+        BoardIterator bi = this.board.iterator();
 
 
-        if (component instanceof BoardComponent) {
-            BoardComponent bc = (BoardComponent) component;
-            BufferStrategy bs = bc.getBufferStrategy();
+        if (this.mouse.isButtonPressed(MouseEvent.BUTTON1)) {
+            this.selectTile();
+            this.colorSelect = new Color(0x128E00);
 
-            if (bs == null) {
-                bc.createBufferStrategy(2);
-                bs = bc.getBufferStrategy();
-            }
-
-
-            Graphics g;
-            BoardIterator bi = this.board.iterator();
-
-            if (this.mouse.isButtonPressed(MouseEvent.BUTTON1)) {
-                this.selectTile();
-                this.colorSelect = new Color(0x128E00);
-
-            } else if (this.mouse.isButtonPressed(MouseEvent.BUTTON3)) {
-                this.selectTile();
+        } else if (this.mouse.isButtonPressed(MouseEvent.BUTTON3)) {
+            this.selectTile();
+            if(this.pieceSelectedY > 0 && this.pieceSelectedX > 0 && this.pieceSelectedY <= CBoard.TILE_HEIGHT_TAB && this.pieceSelectedX <= CBoard.TILE_WIDTH_TAB && this.colorSelect != null) {
                 this.colorSelect = new Color(0xEB0900);
                 BoardElement boardElement = this.board.getElement(this.mouse.getY() / CBoard.TILE_HEIGHT_PX, this.mouse.getX() / CBoard.TILE_WIDTH_PX);
                 if(boardElement instanceof Piece) {
@@ -135,39 +156,43 @@ public class GameMonitor extends Frame implements Runnable {
                     piece.die();
                 }
             }
+        }
 
-            try {
-                g = bs.getDrawGraphics();
-                // -------- draw start-------
-                bc.draw(g);
-
-
-
-                if(this.pieceSelectedY >= 0 && this.pieceSelectedX >= 0 && this.pieceSelectedY <= CBoard.TILE_HEIGHT_TAB && this.pieceSelectedX <= CBoard.TILE_WIDTH_TAB && this.colorSelect != null) {
-                    new BorderTile(g, this.pieceSelectedX, this.pieceSelectedY, this.colorSelect);
-                }
+        try {
+            g = bs.getDrawGraphics();
+            // -------- draw start-------
+            bc.draw(g);
 
 
-                while(bi.hasNext()) {
-                    BoardElement boardElement = bi.next();
 
-                    if (boardElement instanceof Piece) {
-                        Piece piece = (Piece)boardElement;
-                        if(piece.isAlive()) {
-                            BufferedImage image = this.spriteLoader.getBufferedImage(piece);
-                            g.drawImage(image, piece.getPosY() * CBoard.TILE_HEIGHT_PX + (CBoard.TILE_HEIGHT_PX / 2 - (image.getHeight() / 2)),
-                                    piece.getPosX() * CBoard.TILE_WIDTH_PX + (CBoard.TILE_WIDTH_PX / 2 - (image.getWidth() / 2)),
-                                    image.getWidth(), image.getHeight(), null);
-                        }
+            if(this.pieceSelectedY > 0 && this.pieceSelectedX > 0 && this.pieceSelectedY <= CBoard.TILE_HEIGHT_TAB && this.pieceSelectedX <= CBoard.TILE_WIDTH_TAB && this.colorSelect != null) {
+                new BorderTile(g, this.pieceSelectedX, this.pieceSelectedY, this.colorSelect);
+            }
+
+
+            while(bi.hasNext()) {
+                BoardElement boardElement = bi.next();
+
+                if (boardElement instanceof Piece) {
+                    Piece piece = (Piece)boardElement;
+
+                    if(piece.isAlive()) {
+                        // get image
+                        BufferedImage image = this.spriteLoader.getBufferedImage(piece);
+
+                        // draw sprite
+                        g.drawImage(image, piece.getPosY() * CBoard.TILE_HEIGHT_PX + (CBoard.TILE_HEIGHT_PX / 2 - (image.getHeight() / 2)),
+                                piece.getPosX() * CBoard.TILE_WIDTH_PX + (CBoard.TILE_WIDTH_PX / 2 - (image.getWidth() / 2)),
+                                image.getWidth(), image.getHeight(), null);
                     }
                 }
-
-                // -------- draw end-------
-                bs.show();
-
-            } catch (NullPointerException e) {
-                e.printStackTrace();
             }
+
+            // -------- draw end-------
+            bs.show();
+
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
     }
 }

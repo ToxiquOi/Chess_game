@@ -8,8 +8,8 @@ public class InputController {
 
     private Mouse mouse;
 
-    public InputController(Board board) {
-        this.mouse = new Mouse(board);
+    public InputController() {
+        this.mouse = new Mouse();
     }
 
     public Mouse getMouse() {

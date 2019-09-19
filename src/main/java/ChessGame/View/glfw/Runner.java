@@ -1,4 +1,4 @@
-package ChessGame.Share.Abstract.Main;
+package ChessGame.View.glfw;
 
 import org.lwjgl.glfw.GLFWVidMode;
 
@@ -8,10 +8,10 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 
 
 
-public abstract class Runner implements Runnable {
+public class Runner implements Runnable {
 
-    private int height = 720;
-    private int width = 1280;
+    private int height = 800;
+    private int width = 800;
 
     private Thread thread;
     private boolean isRunning  = false;

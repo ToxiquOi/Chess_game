@@ -17,10 +17,11 @@ public class Main {
      */
     public static void main(String[] args) {
         Board board = new Board();
-        InputController inputController = new InputController(board);
+        InputController inputController = new InputController();
         GameMonitor gm = new GameMonitor(AppTitle, board, inputController.getMouse());
         gm.setVisible(true);
-        gm.run();
+        gm.start();
+//        gm.bench();
     }
 
 }

@@ -9,7 +9,7 @@ import ChessGame.Share.Enum.ColorChess;
 import ChessGame.Share.Constant.CWindow;
 import ChessGame.Share.Iterator.BoardIterator;
 
-public class Board implements Iterable<BoardElement>{
+public class Board implements Iterable<BoardElement> {
 
     private BoardElement[][] board;
 
@@ -36,9 +36,9 @@ public class Board implements Iterable<BoardElement>{
             }
         }
 
+
         this.piecesDisposition(ColorChess.WHITE);
         this.piecesDisposition(ColorChess.BLACK);
-
     }
 
     public BoardElement getElement(int y, int x) {

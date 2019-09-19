@@ -1,9 +1,6 @@
 package ChessGame.Controller.Listener;
 
 import ChessGame.Model.Board;
-import ChessGame.Share.Abstract.Model.BoardElement;
-import ChessGame.Share.Abstract.Model.Piece;
-import ChessGame.Share.Constant.CBoard;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -11,14 +8,13 @@ import java.awt.event.MouseMotionListener;
 
 public class Mouse implements MouseListener, MouseMotionListener {
 
-    private Board board;
     private boolean[] buttons = new boolean[4];
     private int x;
     private int y;
 
 
-    public Mouse(Board board) {
-        this.board = board;
+    public Mouse() {
+
     }
 
     public int getX() {
@@ -43,7 +39,6 @@ public class Mouse implements MouseListener, MouseMotionListener {
     public void mousePressed(MouseEvent e) {
         if (e.getButton() <= 3) {
             this.buttons[e.getButton()] = true;
-            System.out.println(e.getButton());
         }
     }
 
@@ -51,8 +46,6 @@ public class Mouse implements MouseListener, MouseMotionListener {
     public void mouseReleased(MouseEvent e) {
         if (e.getButton() <= 3) {
             this.buttons[e.getButton()] = false;
-//            System.out.println("released at mouseX: " + this.x + " mouseY: " + this.y);
-
         }
     }
 
@@ -70,15 +63,11 @@ public class Mouse implements MouseListener, MouseMotionListener {
     public void mouseDragged(MouseEvent e) {
         this.x = e.getX();
         this.y = e.getY();
-//        System.out.println("Dragged mouseX: " + this.x / 100 + " mouseY: " + this.y / 100);
-//        System.out.println("dragged " + e.getButton());
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
         this.x = e.getX();
         this.y = e.getY();
-//        System.out.println(this.board.getElement(e.getY() / CBoard.TILE_HEIGHT_PX, e.getX() / CBoard.TILE_WIDTH_PX).getElement().toString());
-
     }
 }
