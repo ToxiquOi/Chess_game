@@ -165,7 +165,7 @@ public class GameMonitor extends Frame implements Runnable {
 
 
 
-            if(this.pieceSelectedY > 0 && this.pieceSelectedX > 0 && this.pieceSelectedY <= CBoard.TILE_HEIGHT_TAB && this.pieceSelectedX <= CBoard.TILE_WIDTH_TAB && this.colorSelect != null) {
+            if(this.pieceSelectedY > 0 && this.pieceSelectedX > 0 && this.pieceSelectedY < CBoard.TILE_HEIGHT_TAB && this.pieceSelectedX < CBoard.TILE_WIDTH_TAB && this.colorSelect != null) {
                 new BorderTile(g, this.pieceSelectedX, this.pieceSelectedY, this.colorSelect);
             }
 
