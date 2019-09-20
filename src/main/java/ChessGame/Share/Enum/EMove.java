@@ -9,7 +9,7 @@ package ChessGame.Share.Enum;
  *
  * @author tox
  */
-public enum Move {
+public enum EMove {
     UP,
     DOWN,
     LEFT,

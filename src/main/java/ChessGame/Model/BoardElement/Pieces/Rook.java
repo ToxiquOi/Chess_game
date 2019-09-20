@@ -7,14 +7,23 @@ package ChessGame.Model.BoardElement.Pieces;
 
 
 import ChessGame.Share.Abstract.Model.Piece;
-import ChessGame.Share.Enum.ColorChess;
+import ChessGame.Share.Enum.EColorChess;
+import ChessGame.Share.Enum.EMove;
 
 /**
  *
  * @author tox
  */
 public class Rook extends Piece {
-    public Rook(int x, int y, ColorChess colorChess) {
-        super(x, y, colorChess);
+
+    private EMove[] moves = {
+            EMove.UP,
+            EMove.DOWN,
+            EMove.LEFT,
+            EMove.RIGHT,
+    };
+
+    public Rook(int x, int y, EColorChess EColorChess) {
+        super(x, y, EColorChess);
     }
 }

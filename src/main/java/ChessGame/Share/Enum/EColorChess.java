@@ -9,7 +9,7 @@ package ChessGame.Share.Enum;
  *
  * @author tox
  */
-public enum ColorChess {
+public enum EColorChess {
     WHITE,
     BLACK
 }

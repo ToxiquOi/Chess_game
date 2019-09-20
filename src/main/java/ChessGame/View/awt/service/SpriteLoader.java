@@ -2,13 +2,11 @@ package ChessGame.View.awt.service;
 
 import ChessGame.Share.Abstract.Model.BoardElement;
 import ChessGame.Share.Abstract.Model.Piece;
-import ChessGame.Share.Enum.ColorChess;
+import ChessGame.Share.Enum.EColorChess;
 import ChessGame.Share.Iterator.BoardIterator;
-import ChessGame.View.awt.Component.BoardComponent;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -45,19 +43,19 @@ public class SpriteLoader {
     private void getTextureFromFile(Piece element) {
         String firstChar = "" + element.getElement().toString().charAt(0);
         String elementNameFormated = element.getElement().toString().toLowerCase().replace(firstChar.toLowerCase(), firstChar);
-        String spritePath = ((element.getColorChess() == ColorChess.WHITE)? "White" : "Black") + elementNameFormated + ".png";
+        String spritePath = ((element.getEColorChess() == EColorChess.WHITE)? "White" : "Black") + elementNameFormated + ".png";
 
-        Graphics g;
         BufferedImage image = null;
 
         try {
             image = ImageIO.read(new FileInputStream(System.getProperty("user.dir") + "/rsc/Pieces/" + spritePath));
             image = this.makeCompatibleFormatImage(image);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        this.bufferedImages.get(element.getColorChess() == ColorChess.WHITE? 0 : 1).put(element.getElement().toString(), image);
+        this.bufferedImages.get(element.getEColorChess() == EColorChess.WHITE? 0 : 1).put(element.getElement().toString(), image);
     }
 
     private BufferedImage makeCompatibleFormatImage(BufferedImage image) {
@@ -69,6 +67,6 @@ public class SpriteLoader {
     }
 
     public BufferedImage getBufferedImage(Piece piece) {
-        return this.bufferedImages.get((piece.getColorChess() == ColorChess.WHITE)? 1 : 0).get(piece.getElement().toString());
+        return this.bufferedImages.get((piece.getEColorChess() == EColorChess.WHITE)? 1 : 0).get(piece.getElement().toString());
     }
 }

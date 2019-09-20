@@ -1,7 +1,7 @@
 package ChessGame.Share.Interfaces.Model;
 
-import ChessGame.Share.Enum.Element;
+import ChessGame.Share.Enum.EElement;
 
 public interface IElement {
-    public Element getElement();
+    public EElement getElement();
 }

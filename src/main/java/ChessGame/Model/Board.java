@@ -5,7 +5,7 @@ import ChessGame.Model.BoardElement.StaticElement.Empty;
 import ChessGame.Share.Abstract.Model.BoardElement;
 import ChessGame.Share.Abstract.Model.Piece;
 import ChessGame.Share.Constant.CBoard;
-import ChessGame.Share.Enum.ColorChess;
+import ChessGame.Share.Enum.EColorChess;
 import ChessGame.Share.Constant.CWindow;
 import ChessGame.Share.Iterator.BoardIterator;
 
@@ -33,8 +33,8 @@ public class Board implements Iterable<BoardElement> {
             }
         }
 
-        this.piecesDisposition(ColorChess.WHITE);
-        this.piecesDisposition(ColorChess.BLACK);
+        this.piecesDisposition(EColorChess.WHITE);
+        this.piecesDisposition(EColorChess.BLACK);
     }
 
     public BoardElement getElement(int y, int x) {
@@ -60,28 +60,28 @@ public class Board implements Iterable<BoardElement> {
         this.board[y][x] = new Empty(x, y);
     }
 
-    private void piecesDisposition(ColorChess colorChess) {
-        int x1 = (colorChess == ColorChess.WHITE)? 7 : 0;
-        int x2 = (colorChess == ColorChess.WHITE)? 6 : 1;
+    private void piecesDisposition(EColorChess EColorChess) {
+        int x1 = (EColorChess == EColorChess.WHITE)? 7 : 0;
+        int x2 = (EColorChess == EColorChess.WHITE)? 6 : 1;
 
         for(int i = 0; i < 8; i++) {
             if(i == 0 || i == 7) {
-                this.board[i][x1] = new Rook(x1, i, colorChess);
+                this.board[i][x1] = new Rook(x1, i, EColorChess);
             }
             if(i == 1 || i == 6) {
-                this.board[i][x1] = new Knight(x1, i, colorChess);
+                this.board[i][x1] = new Knight(x1, i, EColorChess);
             }
             if(i == 2 || i == 5) {
-                this.board[i][x1] = new Bishop(x1, i, colorChess);
+                this.board[i][x1] = new Bishop(x1, i, EColorChess);
             }
             if(i == 3) {
-                this.board[i][x1] = new Queen(x1, i, colorChess);
+                this.board[i][x1] = new Queen(x1, i, EColorChess);
             }
             if(i == 4) {
-                this.board[i][x1] = new King(x1, i, colorChess);
+                this.board[i][x1] = new King(x1, i, EColorChess);
             }
 
-            this.board[i][x2] = new Pawn(x2, i, colorChess);
+            this.board[i][x2] = new Pawn(x2, i, EColorChess);
         }
     }
 

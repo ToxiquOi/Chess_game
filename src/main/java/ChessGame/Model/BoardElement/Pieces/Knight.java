@@ -7,7 +7,8 @@ package ChessGame.Model.BoardElement.Pieces;
 
 
 import ChessGame.Share.Abstract.Model.Piece;
-import ChessGame.Share.Enum.ColorChess;
+import ChessGame.Share.Enum.EColorChess;
+import ChessGame.Share.Enum.EMove;
 
 /**
  *
@@ -15,8 +16,19 @@ import ChessGame.Share.Enum.ColorChess;
  */
 public class Knight extends Piece {
 
-    public Knight(int x, int y, ColorChess colorChess) {
-        super(x, y, colorChess);
+    private EMove[] moves = {
+            EMove.UP_LEFT,
+            EMove.UP_RIGHT,
+            EMove.DOWN_LEFT,
+            EMove.DOWN_RIGHT,
+            EMove.RIGHT_UP,
+            EMove.RIGHT_DOWN,
+            EMove.LEFT_UP,
+            EMove.LEFT_DOWN,
+    };
+
+    public Knight(int x, int y, EColorChess EColorChess) {
+        super(x, y, EColorChess);
     }
 
 }

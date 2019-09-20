@@ -1,6 +1,6 @@
 package ChessGame.Share.Abstract.Model;
 
-import ChessGame.Share.Enum.Element;
+import ChessGame.Share.Enum.EElement;
 import ChessGame.Share.Interfaces.Model.IElement;
 
 public abstract class BoardElement extends Position implements IElement {
@@ -8,8 +8,8 @@ public abstract class BoardElement extends Position implements IElement {
         super(x, y);
     }
 
-    public Element getElement() {
+    public EElement getElement() {
         String className = this.getClass().getSimpleName();
-        return Element.valueOf(className.toUpperCase());
+        return EElement.valueOf(className.toUpperCase());
     }
 }

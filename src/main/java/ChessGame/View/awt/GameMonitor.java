@@ -11,16 +11,21 @@ import ChessGame.View.awt.Component.BoardComponent;
 import ChessGame.View.awt.Graphics.BorderTile;
 import ChessGame.View.awt.service.SpriteLoader;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class GameMonitor extends Frame implements Runnable {
 
     Thread thread;
+    private float alpha = (float) 0.9;
 
     private boolean running = false;
     private Dimension d = new Dimension(CWindow.WIDTH, CWindow.HEIGHT);
@@ -173,6 +178,7 @@ public class GameMonitor extends Frame implements Runnable {
 
         try {
             g = bs.getDrawGraphics();
+            Graphics2D g2 = (Graphics2D) g;
 
             // -------- draw start-------
             bc.draw(g);
@@ -185,14 +191,20 @@ public class GameMonitor extends Frame implements Runnable {
                 BoardElement boardElement = bi.next();
 
                 if (bi.isInstanceOfPiece(boardElement)) {
-
                     Piece piece = (Piece)boardElement;
+
                     if(piece.isAlive()) {
 
                         BufferedImage image = this.spriteLoader.getBufferedImage(piece);
-                        g.drawImage(image, piece.getPosY() * CBoard.TILE_HEIGHT_PX + (CBoard.TILE_HEIGHT_PX / 2 - (image.getHeight() / 2)),
+
+                        Composite oldCompo = g2.getComposite();
+                        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, this.alpha));
+
+                        g2.drawImage(image, piece.getPosY() * CBoard.TILE_HEIGHT_PX + (CBoard.TILE_HEIGHT_PX / 2 - (image.getHeight() / 2)),
                                 piece.getPosX() * CBoard.TILE_WIDTH_PX + (CBoard.TILE_WIDTH_PX / 2 - (image.getWidth() / 2)),
                                 image.getWidth(), image.getHeight(), null);
+
+                        g2.setComposite(oldCompo);
                     }
                 }
             }

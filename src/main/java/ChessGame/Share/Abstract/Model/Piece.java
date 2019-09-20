@@ -5,9 +5,8 @@
  */
 package ChessGame.Share.Abstract.Model;
 
-import ChessGame.Share.Enum.ColorChess;
-import ChessGame.Share.Enum.Move;
-import ChessGame.Share.Interfaces.Model.IMovement;
+import ChessGame.Share.Enum.EColorChess;
+import ChessGame.Share.Enum.EMove;
 
 /**
  *
@@ -15,12 +14,14 @@ import ChessGame.Share.Interfaces.Model.IMovement;
  */
 public abstract class Piece extends BoardElement {
 
-    protected boolean isAlive;
-    private ColorChess colorChess;
+    private boolean isAlive;
+    protected EColorChess EColorChess;
+    private EMove[] moves;
 
-    public Piece(int x, int y, ColorChess colorChess) {
+
+    public Piece(int x, int y, EColorChess EColorChess) {
         super(x, y);
-        this.colorChess = colorChess;
+        this.EColorChess = EColorChess;
         this.isAlive = true;
     }
 
@@ -32,8 +33,8 @@ public abstract class Piece extends BoardElement {
         this.isAlive = false;
     }
 
-    public ColorChess getColorChess() {
-        return colorChess;
+    public EColorChess getEColorChess() {
+        return EColorChess;
     }
 
 }

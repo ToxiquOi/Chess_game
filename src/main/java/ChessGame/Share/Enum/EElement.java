@@ -1,6 +1,6 @@
 package ChessGame.Share.Enum;
 
-public enum Element {
+public enum EElement {
     EMPTY("EMPTY"),
     PAWN("PAWN"),
     KING("KING"),
@@ -11,7 +11,7 @@ public enum Element {
 
     String value;
 
-    Element(String value) {
+    EElement(String value) {
 
     }
 

@@ -5,14 +5,14 @@
  */
 package ChessGame.Share.Interfaces.Model;
 
-import ChessGame.Share.Enum.Move;
+import ChessGame.Share.Enum.EMove;
 
 /**
  *
  * @author tox
  */
 public interface IMovement {
-    void move(Move move);
+    void move(EMove EMove);
     void moveUp(int x, int y);
     void moveDown(int x, int y);
     void moveLeft(int x, int y);
