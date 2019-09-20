@@ -83,8 +83,11 @@ public class GameMonitor extends Frame implements Runnable {
             this.pieceSelectedY = this.mouse.getY() / CBoard.TILE_HEIGHT_PX;
             return true;
         }
-
-        return false;
+        else {
+            this.pieceSelectedX = -1;
+            this.pieceSelectedY = -1;
+            return false;
+        }
     }
 
 
@@ -150,13 +153,14 @@ public class GameMonitor extends Frame implements Runnable {
         Graphics g;
         BoardIterator bi = this.board.iterator();
 
-
         if (this.mouse.isButtonPressed(MouseEvent.BUTTON1)) {
+
             if(this.selectTile()) {
                 this.colorSelect = new Color(0x128E00);
             }
 
         } else if (this.mouse.isButtonPressed(MouseEvent.BUTTON3)) {
+
             if(this.selectTile()) {
                 this.colorSelect = new Color(0xEB0900);
                 BoardElement boardElement = this.board.getElement(this.mouse.getY() / CBoard.TILE_HEIGHT_PX, this.mouse.getX() / CBoard.TILE_WIDTH_PX);
@@ -169,35 +173,31 @@ public class GameMonitor extends Frame implements Runnable {
 
         try {
             g = bs.getDrawGraphics();
+
             // -------- draw start-------
             bc.draw(g);
 
-
-
-            if(this.pieceSelectedY > 0 && this.pieceSelectedX > 0 && this.pieceSelectedY < CBoard.TILE_HEIGHT_TAB && this.pieceSelectedX < CBoard.TILE_WIDTH_TAB && this.colorSelect != null) {
+            if(this.pieceSelectedX != -1 && this.pieceSelectedY != -1 && this.colorSelect != null) {
                 new BorderTile(g, this.pieceSelectedX, this.pieceSelectedY, this.colorSelect);
             }
-
 
             while(bi.hasNext()) {
                 BoardElement boardElement = bi.next();
 
                 if (bi.isInstanceOfPiece(boardElement)) {
+
                     Piece piece = (Piece)boardElement;
-
                     if(piece.isAlive()) {
-                        // get image
-                        BufferedImage image = this.spriteLoader.getBufferedImage(piece);
 
-                        // draw sprite
+                        BufferedImage image = this.spriteLoader.getBufferedImage(piece);
                         g.drawImage(image, piece.getPosY() * CBoard.TILE_HEIGHT_PX + (CBoard.TILE_HEIGHT_PX / 2 - (image.getHeight() / 2)),
                                 piece.getPosX() * CBoard.TILE_WIDTH_PX + (CBoard.TILE_WIDTH_PX / 2 - (image.getWidth() / 2)),
                                 image.getWidth(), image.getHeight(), null);
                     }
                 }
             }
-
             // -------- draw end-------
+
             bs.show();
 
         } catch (NullPointerException e) {

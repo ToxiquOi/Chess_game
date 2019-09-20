@@ -28,21 +28,20 @@ public class Board implements Iterable<BoardElement> {
 
     private void generateBoard() {
         for (int y = 0; y < CBoard.TILE_HEIGHT_TAB; y++) {
-//            System.out.println("y: " + y);
             for (int x = 0; x < CBoard.TILE_WIDTH_TAB; x++) {
-
-//                System.out.println("x: " + x);
                 this.board[y][x] = new Empty(x, y);
             }
         }
-
 
         this.piecesDisposition(ColorChess.WHITE);
         this.piecesDisposition(ColorChess.BLACK);
     }
 
     public BoardElement getElement(int y, int x) {
-        return this.board[x][y];
+        if (y < CBoard.TILE_HEIGHT_TAB && x < CBoard.TILE_WIDTH_TAB && y >= 0 && x >= 0) {
+            return this.board[x][y];
+        }
+        return null;
     }
 
     public Boolean isInstanceOfPiece(BoardElement boardElement) {
