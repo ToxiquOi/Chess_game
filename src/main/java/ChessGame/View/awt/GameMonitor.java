@@ -76,10 +76,17 @@ public class GameMonitor extends Frame implements Runnable {
         return boardComponent;
     }
 
-    private void selectTile() {
-        this.pieceSelectedX = this.mouse.getX() / CBoard.TILE_WIDTH_PX;
-        this.pieceSelectedY = this.mouse.getY() / CBoard.TILE_HEIGHT_PX;
+
+    private boolean selectTile() {
+        if(this.board.isInstanceOfPiece(this.board.getElement(this.mouse.getY() / CBoard.TILE_HEIGHT_PX, this.mouse.getX() / CBoard.TILE_WIDTH_PX))) {
+            this.pieceSelectedX = this.mouse.getX() / CBoard.TILE_WIDTH_PX;
+            this.pieceSelectedY = this.mouse.getY() / CBoard.TILE_HEIGHT_PX;
+            return true;
+        }
+
+        return false;
     }
+
 
     public void bench() {
         this.running = true;
@@ -99,6 +106,7 @@ public class GameMonitor extends Frame implements Runnable {
 
         this.dispose();
     }
+
 
     @Override
     public void run() {
@@ -130,6 +138,7 @@ public class GameMonitor extends Frame implements Runnable {
         this.dispose();
     }
 
+
     private void render(BoardComponent bc) {
         BufferStrategy bs = bc.getBufferStrategy();
 
@@ -143,15 +152,15 @@ public class GameMonitor extends Frame implements Runnable {
 
 
         if (this.mouse.isButtonPressed(MouseEvent.BUTTON1)) {
-            this.selectTile();
-            this.colorSelect = new Color(0x128E00);
+            if(this.selectTile()) {
+                this.colorSelect = new Color(0x128E00);
+            }
 
         } else if (this.mouse.isButtonPressed(MouseEvent.BUTTON3)) {
-            this.selectTile();
-            if(this.pieceSelectedY > 0 && this.pieceSelectedX > 0 && this.pieceSelectedY <= CBoard.TILE_HEIGHT_TAB && this.pieceSelectedX <= CBoard.TILE_WIDTH_TAB && this.colorSelect != null) {
+            if(this.selectTile()) {
                 this.colorSelect = new Color(0xEB0900);
                 BoardElement boardElement = this.board.getElement(this.mouse.getY() / CBoard.TILE_HEIGHT_PX, this.mouse.getX() / CBoard.TILE_WIDTH_PX);
-                if(boardElement instanceof Piece) {
+                if(this.board.isInstanceOfPiece(boardElement)) {
                     Piece piece = (Piece) boardElement;
                     piece.die();
                 }
@@ -173,7 +182,7 @@ public class GameMonitor extends Frame implements Runnable {
             while(bi.hasNext()) {
                 BoardElement boardElement = bi.next();
 
-                if (boardElement instanceof Piece) {
+                if (bi.isInstanceOfPiece(boardElement)) {
                     Piece piece = (Piece)boardElement;
 
                     if(piece.isAlive()) {

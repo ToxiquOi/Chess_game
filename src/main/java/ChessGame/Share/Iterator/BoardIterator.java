@@ -2,6 +2,7 @@ package ChessGame.Share.Iterator;
 
 import ChessGame.Model.Board;
 import ChessGame.Share.Abstract.Model.BoardElement;
+import ChessGame.Share.Constant.CBoard;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -20,7 +21,7 @@ public class BoardIterator implements Iterator<BoardElement> {
 
     @Override
     public boolean hasNext() {
-        if(this.x + 1 < 8) {
+        if(this.x + 1 < board.getWidth()) {
             return true;
         }
         else return this.y + 1 < board.getHeight();
@@ -40,6 +41,10 @@ public class BoardIterator implements Iterator<BoardElement> {
         }
 
         return this.board.getElement(this.x, this.y);
+    }
+
+    public Boolean isInstanceOfPiece(BoardElement boardElement){
+        return this.board.isInstanceOfPiece(boardElement);
     }
 
     public void resetIterator() {

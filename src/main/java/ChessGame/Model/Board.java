@@ -45,6 +45,13 @@ public class Board implements Iterable<BoardElement> {
         return this.board[x][y];
     }
 
+    public Boolean isInstanceOfPiece(BoardElement boardElement) {
+        if(boardElement instanceof Piece) {
+            return true;
+        }
+        return false;
+    }
+
     public void moveElement(int y, int x, Piece piece) {
         this.board[y][x] = piece;
         piece.setPos(x, y);
