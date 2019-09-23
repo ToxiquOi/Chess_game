@@ -10,7 +10,7 @@ import ChessGame.Share.Iterator.BoardIterator;
 import ChessGameTest.Model.ClassTest.BoardClassTest;
 import junit.framework.TestCase;
 
-import javax.swing.text.Element;
+
 
 public class TestBoard extends TestCase {
 
@@ -20,7 +20,7 @@ public class TestBoard extends TestCase {
         super(name);
     }
 
-    protected void setUp() {
+    protected void setUp() throws Exception {
         super.setUp();
         this.boardClassTest = new BoardClassTest();
         this.boardClassTest.generateBoard();
@@ -109,7 +109,7 @@ public class TestBoard extends TestCase {
         }
 
 
-        assertTrue("testMovePieces", true, isPieceMoved);
+        assertTrue("testMovePieces", isPieceMoved);
     }
 
 }

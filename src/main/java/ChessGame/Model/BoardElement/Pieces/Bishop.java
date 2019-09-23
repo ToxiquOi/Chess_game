@@ -15,12 +15,14 @@ import ChessGame.Share.Enum.EMove;
  * @author tox
  */
 public class Bishop extends Piece {
+
     private EMove[] moves = {
             EMove.DIAG_DOWN_LEFT,
             EMove.DIAG_DOWN_RIGHT,
             EMove.DIAG_UP_LEFT,
             EMove.DIAG_UP_RIGHT
     };
+
 
     public Bishop(int x, int y, EColorChess EColorChess) {
         super(x, y, EColorChess);

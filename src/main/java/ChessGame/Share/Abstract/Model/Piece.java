@@ -25,6 +25,10 @@ public abstract class Piece extends BoardElement {
         this.isAlive = true;
     }
 
+    public EMove[] getMoves() {
+        return this.moves;
+    }
+
     public boolean isAlive() {
         return this.isAlive;
     }
