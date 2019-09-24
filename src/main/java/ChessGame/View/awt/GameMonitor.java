@@ -10,6 +10,7 @@ import ChessGame.Share.Iterator.BoardIterator;
 import ChessGame.View.awt.Component.BoardComponent;
 import ChessGame.View.awt.Graphics.BorderTile;
 import ChessGame.View.awt.service.SpriteLoader;
+import ChessGame.View.awt.service.TileSelector;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -20,19 +21,18 @@ import java.awt.image.BufferedImage;
 
 public class GameMonitor extends Frame implements Runnable {
 
-    Thread thread;
-    private float alpha = (float) 0.9;
+    private Thread thread;
+    private Mouse mouse;
+
+    private SpriteLoader spriteLoader;
+    private TileSelector tileSelector;
+    private Board board;
 
     private boolean running = false;
     private Dimension d = new Dimension(CWindow.WIDTH, CWindow.HEIGHT);
-    private SpriteLoader spriteLoader;
-    private Board board;
 
-    private int pieceSelectedX = 0;
-    private int pieceSelectedY = 0;
-    private Color colorSelect = null;
+    private BoardComponent boardComponent;
 
-    private Mouse mouse;
 
     public void start() {
         this.running = true;
@@ -45,6 +45,7 @@ public class GameMonitor extends Frame implements Runnable {
         this.board = board;
         this.mouse = mouse;
         this.spriteLoader = new SpriteLoader(board.iterator(), this);
+        this.tileSelector = new TileSelector(board, mouse);
         this.init();
     }
 
@@ -55,7 +56,7 @@ public class GameMonitor extends Frame implements Runnable {
         this.setResizable(false);
         this.setLayout(new BorderLayout());
         this.setVisible(true);
-        this.pack();
+        this.boardComponent = this.createBoardComponent();
 
         this.addWindowListener(
             new WindowAdapter() {
@@ -78,29 +79,13 @@ public class GameMonitor extends Frame implements Runnable {
     }
 
 
-    private boolean selectTile() {
-        if(this.board.isInstanceOfPiece(this.board.getElement(this.mouse.getY() / CBoard.TILE_HEIGHT_PX, this.mouse.getX() / CBoard.TILE_WIDTH_PX))) {
-            this.pieceSelectedX = this.mouse.getX() / CBoard.TILE_WIDTH_PX;
-            this.pieceSelectedY = this.mouse.getY() / CBoard.TILE_HEIGHT_PX;
-            return true;
-        }
-        else {
-            this.pieceSelectedX = -1;
-            this.pieceSelectedY = -1;
-            return false;
-        }
-    }
-
-
     public void bench() {
         this.running = true;
         int count = 0;
         long begin = System.nanoTime();
 
-        BoardComponent boardComponent = this.createBoardComponent();
-
         while(this.running) {
-            this.render(boardComponent);
+            this.render();
             count++;
         }
 
@@ -118,7 +103,6 @@ public class GameMonitor extends Frame implements Runnable {
         long nanoPerFrame = (long) (1000000000.0 / fps);
         long lastTime = System.nanoTime();
 
-        BoardComponent boardComponent = this.createBoardComponent();
 
         while (this.running) {
             long nowTime = System.nanoTime();
@@ -127,7 +111,7 @@ public class GameMonitor extends Frame implements Runnable {
             }
             lastTime = nowTime;
 
-            this.render(boardComponent);
+            this.render();
 
             long elapsed = System.nanoTime() - lastTime;
             long millisleep = (nanoPerFrame - elapsed) / 1000000;
@@ -143,45 +127,25 @@ public class GameMonitor extends Frame implements Runnable {
     }
 
 
-    private void render(BoardComponent bc) {
-        BufferStrategy bs = bc.getBufferStrategy();
+    private void render() {
+        BufferStrategy bs = this.boardComponent.getBufferStrategy();
 
         if (bs == null) {
-            bc.createBufferStrategy(2);
-            bs = bc.getBufferStrategy();
+            this.boardComponent.createBufferStrategy(2);
+            bs = this.boardComponent.getBufferStrategy();
         }
 
         Graphics g;
         BoardIterator bi = this.board.iterator();
 
-        if (this.mouse.isButtonPressed(MouseEvent.BUTTON1)) {
-
-            if(this.selectTile()) {
-                this.colorSelect = new Color(0x128E00);
-            }
-
-        } else if (this.mouse.isButtonPressed(MouseEvent.BUTTON3)) {
-
-            if(this.selectTile()) {
-                this.colorSelect = new Color(0xEB0900);
-                BoardElement boardElement = this.board.getElement(this.mouse.getY() / CBoard.TILE_HEIGHT_PX, this.mouse.getX() / CBoard.TILE_WIDTH_PX);
-                if(this.board.isInstanceOfPiece(boardElement)) {
-                    Piece piece = (Piece) boardElement;
-                    piece.die();
-                }
-            }
-        }
+        this.tileSelector.clickChecker();
 
         try {
             g = bs.getDrawGraphics();
-            Graphics2D g2 = (Graphics2D) g;
 
             // -------- draw start-------
-            bc.draw(g);
-
-            if(this.pieceSelectedX != -1 && this.pieceSelectedY != -1 && this.colorSelect != null) {
-                new BorderTile(g, this.pieceSelectedX, this.pieceSelectedY, this.colorSelect);
-            }
+            this.boardComponent.draw(g);
+            this.tileSelector.drawTile(g);
 
             while(bi.hasNext()) {
                 BoardElement boardElement = bi.next();
@@ -192,24 +156,17 @@ public class GameMonitor extends Frame implements Runnable {
                     if(piece.isAlive()) {
 
                         BufferedImage image = this.spriteLoader.getBufferedImage(piece);
-
-                        Composite oldCompo = g2.getComposite();
-                        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, this.alpha));
-
-                        g2.drawImage(image, piece.getPosY() * CBoard.TILE_HEIGHT_PX + (CBoard.TILE_HEIGHT_PX / 2 - (image.getHeight() / 2)),
+                        g.drawImage(image, piece.getPosY() * CBoard.TILE_HEIGHT_PX + (CBoard.TILE_HEIGHT_PX / 2 - (image.getHeight() / 2)),
                                 piece.getPosX() * CBoard.TILE_WIDTH_PX + (CBoard.TILE_WIDTH_PX / 2 - (image.getWidth() / 2)),
                                 image.getWidth(), image.getHeight(), null);
-
-                        g2.setComposite(oldCompo);
                     }
                 }
             }
             // -------- draw end-------
-
-            bs.show();
-
         } catch (NullPointerException e) {
             e.printStackTrace();
+        } finally {
+            bs.show();
         }
     }
 }
