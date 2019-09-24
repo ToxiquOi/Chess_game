@@ -6,7 +6,7 @@
 package ChessGame.Model.BoardElement.Pieces;
 
 
-import ChessGame.Share.Abstract.Model.Piece;
+import ChessGame.Model.Abstract.Piece;
 import ChessGame.Share.Enum.EColorChess;
 import ChessGame.Share.Enum.EMove;
 

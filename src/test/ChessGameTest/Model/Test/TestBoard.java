@@ -1,9 +1,8 @@
 package ChessGameTest.Model.Test;
 
-import ChessGame.Model.Board;
 import ChessGame.Model.BoardElement.Pieces.Pawn;
 import ChessGame.Model.BoardElement.StaticElement.Empty;
-import ChessGame.Share.Abstract.Model.BoardElement;
+import ChessGame.Model.Abstract.BoardElement;
 import ChessGame.Share.Constant.CBoard;
 import ChessGame.Share.Enum.EColorChess;
 import ChessGame.Share.Enum.EElement;
@@ -85,18 +84,23 @@ public class TestBoard extends TestCase {
         int posX = 0, posY = 6;
         this.boardClassTest.initPiecesPosition(EColorChess.WHITE);
 
-        System.out.println(this.boardClassTest.getElement(posY, posX).getElement());
+        //
+        System.out.println("test setEmptyTest: " + this.boardClassTest.getElement(posY, posX).getElement());
 
         BoardElement boardElement = this.boardClassTest.getElement(posY, posX);
 
         if(boardElement instanceof Pawn) {
-            System.out.println("setEmpty");
+            System.out.println("test is Pawn:  setEmpty");
+            //
             this.boardClassTest.setEmptyElement(posY, posX);
         }
 
-        boardElement = this.boardClassTest.getElement(posY, posX);
-        System.out.println(boardElement.getElement());
-        if (boardElement instanceof Empty) {
+        BoardElement boardElement2 = this.boardClassTest.getElement(posY, posX);
+
+        //
+        System.out.println("test setEmptyTest: " + boardElement.getElement());
+
+        if (boardElement2 instanceof Empty) {
             System.out.println("setTrue");
             isEmpty = true;
         }
@@ -111,8 +115,6 @@ public class TestBoard extends TestCase {
         int initialPosX = 0, initialPosY = 6;
         int movedPosX = 0, movedPosY = 4;
 
-        BoardClassTest boardClassTest = new BoardClassTest();
-        boardClassTest.generateBoard();
         boardClassTest.initPiecesPosition(EColorChess.WHITE);
 
         BoardElement boardElement = boardClassTest.getElement(initialPosY, initialPosX);
@@ -120,6 +122,8 @@ public class TestBoard extends TestCase {
         if (boardElement.getElement() == EElement.EMPTY) {
             isEmptyElement = 1;
         }
+
+        boardElement = boardClassTest.getElement(movedPosY, movedPosX);
 
         if (boardElement.getElement() == EElement.PAWN) {
             isPawnElement = 1;

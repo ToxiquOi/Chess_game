@@ -1,7 +1,7 @@
 package ChessGame.View.awt.service;
 
-import ChessGame.Share.Abstract.Model.BoardElement;
-import ChessGame.Share.Abstract.Model.Piece;
+import ChessGame.Model.Abstract.BoardElement;
+import ChessGame.Model.Abstract.Piece;
 import ChessGame.Share.Enum.EColorChess;
 import ChessGame.Share.Iterator.BoardIterator;
 

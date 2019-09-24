@@ -2,8 +2,8 @@ package ChessGame.Model;
 
 import ChessGame.Model.BoardElement.Pieces.*;
 import ChessGame.Model.BoardElement.StaticElement.Empty;
-import ChessGame.Share.Abstract.Model.BoardElement;
-import ChessGame.Share.Abstract.Model.Piece;
+import ChessGame.Model.Abstract.BoardElement;
+import ChessGame.Model.Abstract.Piece;
 import ChessGame.Share.Constant.CBoard;
 import ChessGame.Share.Enum.EColorChess;
 import ChessGame.Share.Constant.CWindow;
@@ -11,7 +11,7 @@ import ChessGame.Share.Iterator.BoardIterator;
 
 public class Board implements Iterable<BoardElement> {
 
-    private BoardElement[][] board;
+    protected BoardElement[][] board;
 
     public Board() {
         this.board = new BoardElement[CBoard.TILE_HEIGHT_TAB][CBoard.TILE_WIDTH_TAB];
@@ -58,8 +58,8 @@ public class Board implements Iterable<BoardElement> {
     }
 
     public void setEmptyElement(int y, int x) {
-        Empty empty = new Empty(x, y);
-        this.board[y][x] = empty;
+        this.board[y][x] = new Empty(x, y);
+        System.out.println("in setEmpty: " + this.board[y][x].getElement());
     }
 
     protected void initPiecesPosition(EColorChess eColorChess) {
@@ -86,7 +86,6 @@ public class Board implements Iterable<BoardElement> {
             this.board[i][x2] = new Pawn(x2, i, eColorChess);
         }
     }
-
 
     @Override
     public BoardIterator iterator() {

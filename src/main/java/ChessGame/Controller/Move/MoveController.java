@@ -1,7 +1,7 @@
 package ChessGame.Controller.Move;
 
 import ChessGame.Model.Board;
-import ChessGame.Share.Abstract.Model.Piece;
+import ChessGame.Model.Abstract.Piece;
 
 public class MoveController {
 

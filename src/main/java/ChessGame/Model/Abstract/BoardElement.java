@@ -1,7 +1,7 @@
-package ChessGame.Share.Abstract.Model;
+package ChessGame.Model.Abstract;
 
 import ChessGame.Share.Enum.EElement;
-import ChessGame.Share.Interfaces.Model.IElement;
+import ChessGame.Model.Interface.IElement;
 
 public abstract class BoardElement extends Position implements IElement {
     public BoardElement(int x, int y) {

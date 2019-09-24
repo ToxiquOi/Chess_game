@@ -1,7 +1,7 @@
 package ChessGame.Share.Iterator;
 
 import ChessGame.Model.Board;
-import ChessGame.Share.Abstract.Model.BoardElement;
+import ChessGame.Model.Abstract.BoardElement;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

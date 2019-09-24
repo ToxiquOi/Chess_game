@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ChessGame.Share.Interfaces.Model;
+package ChessGame.Model.Interface;
 
 import ChessGame.Share.Enum.EMove;
 

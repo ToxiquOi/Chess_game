@@ -2,8 +2,8 @@ package ChessGame.View.awt;
 
 import ChessGame.Controller.Listener.Mouse;
 import ChessGame.Model.Board;
-import ChessGame.Share.Abstract.Model.BoardElement;
-import ChessGame.Share.Abstract.Model.Piece;
+import ChessGame.Model.Abstract.BoardElement;
+import ChessGame.Model.Abstract.Piece;
 import ChessGame.Share.Constant.CBoard;
 import ChessGame.Share.Constant.CWindow;
 import ChessGame.Share.Iterator.BoardIterator;
@@ -11,16 +11,12 @@ import ChessGame.View.awt.Component.BoardComponent;
 import ChessGame.View.awt.Graphics.BorderTile;
 import ChessGame.View.awt.service.SpriteLoader;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 public class GameMonitor extends Frame implements Runnable {
 

@@ -1,4 +1,4 @@
-package ChessGame.Share.Interfaces.Model;
+package ChessGame.Model.Interface;
 
 import ChessGame.Share.Enum.EElement;
 
