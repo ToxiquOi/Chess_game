@@ -1,15 +1,15 @@
 package ChessGameTest.Model.Test;
 
+import ChessGame.Model.Board;
 import ChessGame.Model.BoardElement.Pieces.Pawn;
+import ChessGame.Model.BoardElement.StaticElement.Empty;
 import ChessGame.Share.Abstract.Model.BoardElement;
-import ChessGame.Share.Abstract.Model.Piece;
 import ChessGame.Share.Constant.CBoard;
 import ChessGame.Share.Enum.EColorChess;
 import ChessGame.Share.Enum.EElement;
 import ChessGame.Share.Iterator.BoardIterator;
 import ChessGameTest.Model.ClassTest.BoardClassTest;
 import junit.framework.TestCase;
-import org.junit.Test;
 
 
 
@@ -89,13 +89,14 @@ public class TestBoard extends TestCase {
 
         BoardElement boardElement = this.boardClassTest.getElement(posY, posX);
 
-        if(boardElement.getElement().toString() == EElement.) {
+        if(boardElement instanceof Pawn) {
             System.out.println("setEmpty");
             this.boardClassTest.setEmptyElement(posY, posX);
         }
 
         boardElement = this.boardClassTest.getElement(posY, posX);
-        if (boardElement.getElement() == EElement.EMPTY) {
+        System.out.println(boardElement.getElement());
+        if (boardElement instanceof Empty) {
             System.out.println("setTrue");
             isEmpty = true;
         }
@@ -105,8 +106,8 @@ public class TestBoard extends TestCase {
 
     //TODO: finish test
     public void testMovePiece() {
-        boolean isEmptyElement = false, isPawnElement = false;
-        boolean isPieceMoved = false;
+        int isEmptyElement = 0, isPawnElement = 0;
+        int isPieceMoved = 0;
         int initialPosX = 0, initialPosY = 6;
         int movedPosX = 0, movedPosY = 4;
 
@@ -116,20 +117,20 @@ public class TestBoard extends TestCase {
 
         BoardElement boardElement = boardClassTest.getElement(initialPosY, initialPosX);
 
-        if (boardClassTest.getElement(initialPosY, initialPosX).getElement() == EElement.EMPTY) {
-            isEmptyElement = true;
+        if (boardElement.getElement() == EElement.EMPTY) {
+            isEmptyElement = 1;
         }
 
-        if (boardClassTest.getElement(movedPosY, movedPosX).getElement() == EElement.PAWN) {
-            isPawnElement = true;
+        if (boardElement.getElement() == EElement.PAWN) {
+            isPawnElement = 1;
         }
 
-        if (isEmptyElement && isPawnElement) {
-            isPieceMoved = true;
+        if (isEmptyElement == 1 && isPawnElement == 1) {
+            isPieceMoved = 1;
         }
 
 
-        assertTrue("testMovePieces", isPieceMoved);
+        assertEquals("testMovePieces", 1, isPieceMoved);
     }
 
 }

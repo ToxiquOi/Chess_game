@@ -58,7 +58,8 @@ public class Board implements Iterable<BoardElement> {
     }
 
     public void setEmptyElement(int y, int x) {
-        this.board[y][x] = new Empty(x, y);
+        Empty empty = new Empty(x, y);
+        this.board[y][x] = empty;
     }
 
     protected void initPiecesPosition(EColorChess eColorChess) {
