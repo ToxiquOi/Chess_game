@@ -1,5 +1,7 @@
 package ChessGameTest.Model.Test;
 
+import ChessGame.Model.Abstract.Piece;
+import ChessGame.Model.Abstract.Position;
 import ChessGame.Model.BoardElement.Pieces.Pawn;
 import ChessGame.Model.BoardElement.StaticElement.Empty;
 import ChessGame.Model.Abstract.BoardElement;
@@ -100,6 +102,26 @@ public class TestBoard extends TestCase {
         }
 
         assertTrue("testSetEmpty", isEmpty);
+    }
+
+    public void testFindPiece() {
+        this.boardClassTest.initPiecesPosition(EColorChess.WHITE);
+        boolean validate = false;
+        int posY = 6, posX = 0;
+        Position pos = null;
+
+        BoardElement boardElement = this.boardClassTest.getElement(posY, posX);
+        if (this.boardClassTest.isInstanceOfPiece(boardElement)) {
+            Piece piece = (Piece) boardElement;
+            pos = this.boardClassTest.findPiecePosition(piece);
+        }
+
+        // pas faire attention pour le moment
+        if (posX == pos.getPosX() && posY == pos.getPosY()) {
+            validate = true;
+        }
+
+        assertTrue("testFindPiece", validate);
     }
 
 

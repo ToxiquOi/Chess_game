@@ -67,18 +67,19 @@ public class Board implements Iterable<BoardElement> {
 
         }
 
-        return new Position(boardIterator.getX(), boardIterator.getY());
+        return new Position(boardIterator.getY(), boardIterator.getX());
     }
 
 
     public void moveElement(int moveToY, int moveToX, BoardElement boardElement) {
         if (this.isInstanceOfPiece(boardElement)) {
             Piece piece = (Piece) boardElement;
-
             Position pos = this.findPiecePosition(piece);
 
-            this.setEmptyElement(pos.getPosX(), pos.getPosY());
-            this.board[moveToX][moveToY] = piece;
+            if (moveToY < CBoard.TILE_HEIGHT_TAB && moveToX < CBoard.TILE_WIDTH_TAB && moveToY >= 0 && moveToX >= 0) {
+                this.setEmptyElement(pos.getPosX(), pos.getPosY());
+                this.board[moveToX][moveToY] = piece;
+            }
         }
     }
 
