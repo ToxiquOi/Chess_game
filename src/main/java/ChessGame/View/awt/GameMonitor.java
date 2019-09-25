@@ -153,13 +153,11 @@ public class GameMonitor extends Frame implements Runnable {
                 if (bi.isInstanceOfPiece(boardElement)) {
                     Piece piece = (Piece)boardElement;
 
-                    if(piece.isAlive()) {
-
-                        BufferedImage image = this.spriteLoader.getBufferedImage(piece);
-                        g.drawImage(image, piece.getPosY() * CBoard.TILE_HEIGHT_PX + (CBoard.TILE_HEIGHT_PX / 2 - (image.getHeight() / 2)),
-                                piece.getPosX() * CBoard.TILE_WIDTH_PX + (CBoard.TILE_WIDTH_PX / 2 - (image.getWidth() / 2)),
+                    BufferedImage image = this.spriteLoader.getBufferedImage(piece);
+                    g.drawImage(image, bi.getY() * CBoard.TILE_HEIGHT_PX + (CBoard.TILE_HEIGHT_PX / 2 - (image.getHeight() / 2)),
+                                bi.getX() * CBoard.TILE_WIDTH_PX + (CBoard.TILE_WIDTH_PX / 2 - (image.getWidth() / 2)),
                                 image.getWidth(), image.getHeight(), null);
-                    }
+
                 }
             }
             // -------- draw end-------

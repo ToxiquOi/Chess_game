@@ -27,8 +27,11 @@ public class King extends Piece {
             EMove.DIAG_UP_RIGHT
     };
 
-    public King(int x, int y, EColorChess EColorChess) {
-        super(x, y, EColorChess);
+    public King(EColorChess eColorChess) {
+        super(eColorChess);
     }
 
+    public King(Piece piece) {
+        super(piece);
+    }
 }

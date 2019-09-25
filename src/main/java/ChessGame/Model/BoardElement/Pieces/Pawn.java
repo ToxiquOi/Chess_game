@@ -20,8 +20,11 @@ public class Pawn extends Piece {
             EMove.UP,
     };
 
-    public Pawn(int x, int y, EColorChess EColorChess) {
-        super(x, y, EColorChess);
+    public Pawn(EColorChess eColorChess) {
+        super(eColorChess);
     }
 
+    public Pawn(Piece piece) {
+        super(piece);
+    }
 }

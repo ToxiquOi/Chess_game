@@ -27,8 +27,11 @@ public class Knight extends Piece {
             EMove.LEFT_DOWN,
     };
 
-    public Knight(int x, int y, EColorChess EColorChess) {
-        super(x, y, EColorChess);
+    public Knight(EColorChess eColorChess) {
+        super(eColorChess);
     }
 
+    public Knight(Piece piece) {
+        super(piece);
+    }
 }

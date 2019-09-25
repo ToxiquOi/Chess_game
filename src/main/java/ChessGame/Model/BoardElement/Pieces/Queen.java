@@ -27,7 +27,11 @@ public class Queen extends Piece {
             EMove.DIAG_UP_RIGHT
     };
 
-    public Queen(int x, int y, EColorChess EColorChess) {
-        super(x, y, EColorChess);
+    public Queen(EColorChess eColorChess) {
+        super(eColorChess);
+    }
+
+    public Queen(Piece piece) {
+        super(piece);
     }
 }

@@ -32,7 +32,7 @@ public class TestBoard extends TestCase {
         BoardIterator bi = this.boardClassTest.iterator();
 
         while (bi.hasNext()) {
-            if(bi.next().getElement() == EElement.EMPTY) {
+            if(bi.next().getEelement() == EElement.EMPTY) {
                 count++;
             }
         }
@@ -47,11 +47,11 @@ public class TestBoard extends TestCase {
 
         this.boardClassTest.initPiecesPosition(EColorChess.WHITE);
 
-        if (boardClassTest.getElement(0, 0).getElement() == EElement.EMPTY) {
+        if (boardClassTest.getElement(0, 0).getEelement() == EElement.EMPTY) {
             isEmptyElement = true;
         }
 
-        if (boardClassTest.getElement(6, 0).getElement() == EElement.PAWN) {
+        if (boardClassTest.getElement(6, 0).getEelement() == EElement.PAWN) {
             isPawnElement = true;
         }
 
@@ -78,63 +78,62 @@ public class TestBoard extends TestCase {
     }
 
 
-    //TODO: finish test
     public void testSetEmpty() {
         boolean isEmpty = false;
-        int posX = 0, posY = 6;
+        int posX = 0, posY = 0;
         this.boardClassTest.initPiecesPosition(EColorChess.WHITE);
+        BoardIterator boardIterator = this.boardClassTest.iterator();
+        BoardElement boardElement = null;
 
-        //
-        System.out.println("test setEmptyTest: " + this.boardClassTest.getElement(posY, posX).getElement());
-
-        BoardElement boardElement = this.boardClassTest.getElement(posY, posX);
-
-        if(boardElement instanceof Pawn) {
-            System.out.println("test is Pawn:  setEmpty");
-            //
-            this.boardClassTest.setEmptyElement(posY, posX);
+        while (boardIterator.hasNext() && !this.boardClassTest.isInstanceOfPiece(boardElement)) {
+            boardElement = boardIterator.next();
+            posX = boardIterator.getX();
+            posY = boardIterator.getY();
         }
 
-        BoardElement boardElement2 = this.boardClassTest.getElement(posY, posX);
+        this.boardClassTest.setEmptyElement(posY, posX);
 
-        //
-        System.out.println("test setEmptyTest: " + boardElement.getElement());
+        boardElement = this.boardClassTest.getElement(posY, posX);
 
-        if (boardElement2 instanceof Empty) {
-            System.out.println("setTrue");
+        if (boardElement instanceof Empty) {
             isEmpty = true;
         }
 
         assertTrue("testSetEmpty", isEmpty);
     }
 
-    //TODO: finish test
+
     public void testMovePiece() {
-        int isEmptyElement = 0, isPawnElement = 0;
-        int isPieceMoved = 0;
+        boolean isEmptyElement = false, isPawnElement = false;
+        boolean isPieceMoved = false;
+
         int initialPosX = 0, initialPosY = 6;
         int movedPosX = 0, movedPosY = 4;
 
         boardClassTest.initPiecesPosition(EColorChess.WHITE);
 
-        BoardElement boardElement = boardClassTest.getElement(initialPosY, initialPosX);
+        BoardElement boardElement = this.boardClassTest.getElement(initialPosY, initialPosX);
+        this.boardClassTest.moveElement(movedPosY, movedPosX, boardElement);
 
-        if (boardElement.getElement() == EElement.EMPTY) {
-            isEmptyElement = 1;
+
+        boardElement = this.boardClassTest.getElement(initialPosY, initialPosX);
+
+        if (boardElement.getEelement() == EElement.EMPTY) {
+            isEmptyElement = true;
+            System.out.println("isEmpty");
         }
 
-        boardElement = boardClassTest.getElement(movedPosY, movedPosX);
-
-        if (boardElement.getElement() == EElement.PAWN) {
-            isPawnElement = 1;
+        boardElement = this.boardClassTest.getElement(movedPosY, initialPosX);
+        if (boardElement.getEelement() == EElement.PAWN) {
+            isPawnElement = true;
+            System.out.println("isPawn");
         }
 
-        if (isEmptyElement == 1 && isPawnElement == 1) {
-            isPieceMoved = 1;
+        if (isEmptyElement && isPawnElement) {
+            isPieceMoved = true;
         }
 
-
-        assertEquals("testMovePieces", 1, isPieceMoved);
+        assertTrue("testMovePieces", isPieceMoved);
     }
 
 }

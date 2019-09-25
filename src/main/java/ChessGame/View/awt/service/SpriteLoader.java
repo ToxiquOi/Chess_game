@@ -41,8 +41,8 @@ public class SpriteLoader {
 
 
     private void getTextureFromFile(Piece element) {
-        String firstChar = "" + element.getElement().toString().charAt(0);
-        String elementNameFormated = element.getElement().toString().toLowerCase().replace(firstChar.toLowerCase(), firstChar);
+        String firstChar = "" + element.getEelement().toString().charAt(0);
+        String elementNameFormated = element.getEelement().toString().toLowerCase().replace(firstChar.toLowerCase(), firstChar);
         String spritePath = ((element.getEColorChess() == EColorChess.WHITE)? "White" : "Black") + elementNameFormated + ".png";
 
         BufferedImage image = null;
@@ -55,7 +55,7 @@ public class SpriteLoader {
             e.printStackTrace();
         }
 
-        this.bufferedImages.get(element.getEColorChess() == EColorChess.WHITE? 0 : 1).put(element.getElement().toString(), image);
+        this.bufferedImages.get(element.getEColorChess() == EColorChess.WHITE? 0 : 1).put(element.getEelement().toString(), image);
     }
 
     private BufferedImage makeCompatibleFormatImage(BufferedImage image) {
@@ -67,6 +67,6 @@ public class SpriteLoader {
     }
 
     public BufferedImage getBufferedImage(Piece piece) {
-        return this.bufferedImages.get((piece.getEColorChess() == EColorChess.WHITE)? 1 : 0).get(piece.getElement().toString());
+        return this.bufferedImages.get((piece.getEColorChess() == EColorChess.WHITE)? 1 : 0).get(piece.getEelement().toString());
     }
 }

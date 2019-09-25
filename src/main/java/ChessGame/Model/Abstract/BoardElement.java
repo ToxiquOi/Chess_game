@@ -3,12 +3,11 @@ package ChessGame.Model.Abstract;
 import ChessGame.Share.Enum.EElement;
 import ChessGame.Model.Interface.IElement;
 
-public abstract class BoardElement extends Position implements IElement {
-    public BoardElement(int x, int y) {
-        super(x, y);
+public abstract class BoardElement implements IElement {
+    public BoardElement() {
     }
 
-    public EElement getElement() {
+    public EElement getEelement() {
         String className = this.getClass().getSimpleName();
         return EElement.valueOf(className.toUpperCase());
     }

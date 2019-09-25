@@ -19,10 +19,19 @@ public abstract class Piece extends BoardElement {
     private EMove[] moves;
 
 
-    public Piece(int x, int y, EColorChess EColorChess) {
-        super(x, y);
+    public Piece(EColorChess EColorChess) {
         this.EColorChess = EColorChess;
         this.isAlive = true;
+    }
+
+    public Piece(Piece piece) {
+        this.isAlive = piece.getIsAlive();
+        this.EColorChess = piece.getEColorChess();
+        this.moves = piece.getMoves();
+    }
+
+    public boolean getIsAlive() {
+        return this.isAlive;
     }
 
     public EMove[] getMoves() {
@@ -40,5 +49,6 @@ public abstract class Piece extends BoardElement {
     public EColorChess getEColorChess() {
         return EColorChess;
     }
+
 
 }

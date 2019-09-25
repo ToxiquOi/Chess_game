@@ -1,5 +1,6 @@
 package ChessGameTest.Model.ClassTest;
 
+import ChessGame.Model.Abstract.Position;
 import ChessGame.Model.Board;
 import ChessGame.Model.Abstract.BoardElement;
 import ChessGame.Model.Abstract.Piece;
@@ -33,13 +34,18 @@ public class BoardClassTest extends Board {
     }
 
     @Override
-    public Boolean isInstanceOfPiece(BoardElement boardElement) {
-        return super.isInstanceOfPiece(boardElement);
+    public Position findPiecePosition(Piece piece) {
+        return super.findPiecePosition(piece);
     }
 
     @Override
-    public void moveElement(int y, int x, Piece piece) {
-        super.moveElement(y, x, piece);
+    public void moveElement(int y, int x, BoardElement boardElement) {
+        super.moveElement(y, x, boardElement);
+    }
+
+    @Override
+    public Boolean isInstanceOfPiece(BoardElement boardElement) {
+        return super.isInstanceOfPiece(boardElement);
     }
 
     @Override

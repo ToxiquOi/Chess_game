@@ -3,7 +3,7 @@ package ChessGame.Model.BoardElement.StaticElement;
 import ChessGame.Model.Abstract.BoardElement;
 
 public class Empty extends BoardElement {
-    public Empty(int x, int y) {
-        super(x, y);
+    public Empty() {
+
     }
 }

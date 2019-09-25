@@ -23,7 +23,11 @@ public class Rook extends Piece {
             EMove.RIGHT,
     };
 
-    public Rook(int x, int y, EColorChess EColorChess) {
-        super(x, y, EColorChess);
+    public Rook(EColorChess eColorChess) {
+        super(eColorChess);
+    }
+
+    public Rook(Piece piece) {
+        super(piece);
     }
 }

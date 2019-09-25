@@ -12,11 +12,11 @@ import java.util.List;
  *
  * @author tox
  */
-public abstract class Position {
+public class Position {
     public List<Integer> pos = new ArrayList<>(2);
     public List<Integer> initialPos = new ArrayList<>(2);
 
-    Position(int x, int y) {
+    public Position(int x, int y) {
         this.setPos(x, y);
         this.setInitialPos(x,y);
     }

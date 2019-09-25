@@ -24,7 +24,11 @@ public class Bishop extends Piece {
     };
 
 
-    public Bishop(int x, int y, EColorChess EColorChess) {
-        super(x, y, EColorChess);
+    public Bishop(EColorChess eColorChess) {
+        super(eColorChess);
+    }
+
+    public Bishop(Piece piece) {
+        super(piece);
     }
 }

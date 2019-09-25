@@ -50,6 +50,7 @@ public class TileSelector {
                 if(this.board.isInstanceOfPiece(boardElement)) {
                     Piece piece = (Piece) boardElement;
                     piece.die();
+                    this.board.setEmptyElement(this.mouse.getY() / CBoard.TILE_HEIGHT_PX, this.mouse.getX() / CBoard.TILE_WIDTH_PX);
                 }
             }
         }
