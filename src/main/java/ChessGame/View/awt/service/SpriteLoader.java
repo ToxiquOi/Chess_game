@@ -3,6 +3,7 @@ package ChessGame.View.awt.service;
 import ChessGame.Model.Abstract.BoardElement;
 import ChessGame.Model.Abstract.Piece;
 import ChessGame.Share.Enum.EColorChess;
+import ChessGame.Share.Enum.EElement;
 import ChessGame.Share.Iterator.BoardIterator;
 
 import javax.imageio.ImageIO;
@@ -15,16 +16,14 @@ import java.util.HashMap;
 
 public class SpriteLoader {
 
-    private ArrayList<HashMap<String, BufferedImage>> bufferedImages = new ArrayList<>(2);
-    private Frame frame;
+    protected ArrayList<HashMap<EElement, BufferedImage>> bufferedImages = new ArrayList<>(2);
+    protected Frame frame;
 
-    public SpriteLoader(BoardIterator boardIterator, Frame frame) {
+    public SpriteLoader( Frame frame) {
         this.frame = frame;
-
-        this.init(boardIterator);
     }
 
-    private void init(BoardIterator boardIterator) {
+    public void init(BoardIterator boardIterator) {
 
         this.bufferedImages.add(0, new HashMap<>());
         this.bufferedImages.add(1, new HashMap<>());
@@ -39,8 +38,11 @@ public class SpriteLoader {
         }
     }
 
+    protected ArrayList<HashMap<EElement, BufferedImage>> getBufferedImages() {
+        return this.bufferedImages;
+    }
 
-    private void getTextureFromFile(Piece element) {
+    protected void getTextureFromFile(Piece element) {
         String firstChar = "" + element.getEelement().toString().charAt(0);
         String elementNameFormated = element.getEelement().toString().toLowerCase().replace(firstChar.toLowerCase(), firstChar);
         String spritePath = ((element.getEColorChess() == EColorChess.WHITE)? "White" : "Black") + elementNameFormated + ".png";
@@ -55,10 +57,10 @@ public class SpriteLoader {
             e.printStackTrace();
         }
 
-        this.bufferedImages.get(element.getEColorChess() == EColorChess.WHITE? 0 : 1).put(element.getEelement().toString(), image);
+        this.bufferedImages.get(element.getEColorChess() == EColorChess.WHITE? 0 : 1).put(element.getEelement(), image);
     }
 
-    private BufferedImage makeCompatibleFormatImage(BufferedImage image) {
+    protected BufferedImage makeCompatibleFormatImage(BufferedImage image) {
         BufferedImage compatibleTexture = this.frame.getGraphicsConfiguration().createCompatibleImage(image.getWidth(), image.getHeight(), Color.TRANSLUCENT);
         Graphics gCompText = compatibleTexture.createGraphics();
         gCompText.drawImage(image, 0, 0, null);
@@ -67,6 +69,6 @@ public class SpriteLoader {
     }
 
     public BufferedImage getBufferedImage(Piece piece) {
-        return this.bufferedImages.get((piece.getEColorChess() == EColorChess.WHITE)? 1 : 0).get(piece.getEelement().toString());
+        return this.bufferedImages.get((piece.getEColorChess() == EColorChess.WHITE)? 0 : 1).get(piece.getEelement());
     }
 }

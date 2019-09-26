@@ -72,6 +72,7 @@ public class Board implements Iterable<BoardElement> {
 
 
     public void moveElement(int moveToY, int moveToX, BoardElement boardElement) {
+        System.out.println("moveElement: " + boardElement.getEelement());
         if (this.isInstanceOfPiece(boardElement)) {
             Piece piece = (Piece) boardElement;
             Position pos = this.findPiecePosition(piece);
@@ -88,8 +89,8 @@ public class Board implements Iterable<BoardElement> {
     }
 
     protected void initPiecesPosition(EColorChess eColorChess) {
-        int y1 = (eColorChess == EColorChess.WHITE)? 7 : 0;
-        int y2 = (eColorChess == EColorChess.WHITE)? 6 : 1;
+        int y1 = (eColorChess == EColorChess.WHITE)? 0 : 7;
+        int y2 = (eColorChess == EColorChess.WHITE)? 1 : 6;
 
         for(int i = 0; i < 8; i++) {
             if(i == 0 || i == 7) {

@@ -8,12 +8,10 @@ import ChessGame.Share.Constant.CBoard;
 import ChessGame.Share.Constant.CWindow;
 import ChessGame.Share.Iterator.BoardIterator;
 import ChessGame.View.awt.Component.BoardComponent;
-import ChessGame.View.awt.Graphics.BorderTile;
 import ChessGame.View.awt.service.SpriteLoader;
 import ChessGame.View.awt.service.TileSelector;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
@@ -40,22 +38,35 @@ public class GameMonitor extends Frame implements Runnable {
         this.thread.start();
     }
 
-    public GameMonitor(String title, Board board, Mouse mouse) throws HeadlessException {
+    public GameMonitor(String title) throws HeadlessException {
         super(title);
-        this.board = board;
-        this.mouse = mouse;
-        this.spriteLoader = new SpriteLoader(board.iterator(), this);
-        this.tileSelector = new TileSelector(board, mouse);
-        this.init();
     }
 
-    private void init() {
+    public void addBoard(Board board) {
+        this.board = board;
+    }
+
+    public void addMouse(Mouse mouse) {
+        this.mouse = mouse;
+    }
+
+    public void setSriteLoader() {
+        this.spriteLoader = new SpriteLoader(this);
+        this.spriteLoader.init(this.board.iterator());
+    }
+
+    public void setTileSelector() {
+        this.tileSelector = new TileSelector(this.board, this.mouse);
+    }
+
+    public void init() {
         this.setPreferredSize(this.d);
         this.setMaximumSize(this.d);
         this.setMinimumSize(this.d);
         this.setResizable(false);
         this.setLayout(new BorderLayout());
         this.setVisible(true);
+
         this.boardComponent = this.createBoardComponent();
 
         this.addWindowListener(
@@ -73,6 +84,7 @@ public class GameMonitor extends Frame implements Runnable {
         BoardComponent boardComponent = new BoardComponent(d, this.board.iterator());
         boardComponent.addMouseListener(this.mouse);
         boardComponent.addMouseMotionListener(this.mouse);
+
         this.add(boardComponent);
         this.pack();
         return boardComponent;
