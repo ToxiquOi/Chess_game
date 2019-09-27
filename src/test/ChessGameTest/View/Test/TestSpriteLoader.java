@@ -7,56 +7,54 @@ import ChessGame.Share.Enum.EColorChess;
 import ChessGame.Share.Enum.EElement;
 import ChessGame.View.awt.GameMonitor;
 import ChessGameTest.View.ClassTest.SpriteLoaderClassTest;
-import junit.framework.TestCase;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class TestSpriteLoader extends TestCase {
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-    private Board board;
+class TestSpriteLoader {
+
+    private Board board = new Board();
+    private GameMonitor gm = new GameMonitor("test");
     private SpriteLoaderClassTest spriteLoaderClassTest;
+    InputController inputController = new InputController();
 
-    public TestSpriteLoader(String name) {
-        super(name);
-    }
-
-    public void setUp() throws Exception {
-        super.setUp();
-        this.board = new Board();
-        InputController inputController = new InputController();
-
-        GameMonitor gm = new GameMonitor("test");
-
-        gm.addBoard(board);
-        gm.addMouse(inputController.getMouse());
-
+    @BeforeEach
+    void setUp() {
         this.spriteLoaderClassTest = new SpriteLoaderClassTest(gm);
     }
 
-    public void testInitSpriteLoader() {
+    @Test
+    void testInitSpriteLoader() {
         this.spriteLoaderClassTest.init(this.board.iterator());
         ArrayList<HashMap<EElement, BufferedImage>> arrayList = this.spriteLoaderClassTest.getBufferedImages();
 
-        assertNotNull("test init sprite loader", arrayList.get(0));
+        assertNotNull(arrayList.get(0), "test init sprite loader");
     }
 
-    public void testGetTextureFromFile() {
+    @Test
+    void testGetTextureFromFile() {
+        Pawn pawn = new Pawn(EColorChess.WHITE);
+
+        this.spriteLoaderClassTest.init(this.board.iterator());
+        this.spriteLoaderClassTest.getTextureFromFile(pawn);
+
+        assertNotNull(this.spriteLoaderClassTest.getBufferedImages().get(0).get(pawn.getEelement()), "test get texture from file");
+    }
+
+    @Test
+    void testGetBufferedImage() {
         Pawn pawn = new Pawn(EColorChess.WHITE);
 
         this.spriteLoaderClassTest.getBufferedImages().add(new HashMap<>());
+
         this.spriteLoaderClassTest.getTextureFromFile(pawn);
 
-        assertNotNull("test get texture from file", this.spriteLoaderClassTest.getBufferedImages().get(0).get(pawn.getEelement()));
-    }
-
-    public void testGetBufferedImage() {
-        Pawn pawn = new Pawn(EColorChess.WHITE);
-        this.spriteLoaderClassTest.getBufferedImages().add(new HashMap<>());
-        this.spriteLoaderClassTest.getTextureFromFile(pawn);
-
-        assertNotNull("test get buffered image", this.spriteLoaderClassTest.getBufferedImage(pawn));
+        assertNotNull(this.spriteLoaderClassTest.getBufferedImage(pawn), "test get buffered image");
     }
 
 }

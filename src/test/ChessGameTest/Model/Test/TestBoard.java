@@ -10,25 +10,25 @@ import ChessGame.Share.Enum.EColorChess;
 import ChessGame.Share.Enum.EElement;
 import ChessGame.Share.Iterator.BoardIterator;
 import ChessGameTest.Model.ClassTest.BoardClassTest;
-import junit.framework.TestCase;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-
-public class TestBoard extends TestCase {
+class TestBoard {
 
     private BoardClassTest boardClassTest;
 
-    public TestBoard(String name) {
-        super(name);
-    }
-
-    protected void setUp() throws Exception {
-        super.setUp();
+    @BeforeEach
+    void setUp() {
         this.boardClassTest = new BoardClassTest();
         this.boardClassTest.generateBoard();
     }
 
-    public void testGenerateBoard() {
+    @Test
+    void testGenerateBoard() {
         int count = 0, size = CBoard.TILE_HEIGHT_TAB * CBoard.TILE_WIDTH_TAB;
 
         BoardIterator bi = this.boardClassTest.iterator();
@@ -39,11 +39,11 @@ public class TestBoard extends TestCase {
             }
         }
 
-        assertEquals("generation board", size, count);
+        assertEquals(size, count, "generation board");
     }
 
-
-    public void testGetElement() {
+    @Test
+    void testGetElement() {
         boolean isEmptyElement = false, isPawnElement = false;
         boolean validate = false;
 
@@ -60,11 +60,11 @@ public class TestBoard extends TestCase {
             validate = true;
         }
 
-        assertTrue("testGetElement", validate);
+        assertTrue(validate, "testGetElement");
     }
 
-
-    public void testInitPiecesPosition() {
+    @Test
+    void testInitPiecesPosition() {
         int countWhitePawn = 0, whitePawnNb = 8;
 
         this.boardClassTest.initPiecesPosition(EColorChess.WHITE);
@@ -75,11 +75,11 @@ public class TestBoard extends TestCase {
             }
         }
 
-        assertEquals("testInitPiecesPosition count number of pawn", whitePawnNb, countWhitePawn);
+        assertEquals(whitePawnNb, countWhitePawn, "testInitPiecesPosition count number of pawn");
     }
 
-
-    public void testSetEmpty() {
+    @Test
+    void testSetEmpty() {
         boolean isEmpty = false;
         int posX = 0, posY = 0;
         this.boardClassTest.initPiecesPosition(EColorChess.WHITE);
@@ -100,10 +100,11 @@ public class TestBoard extends TestCase {
             isEmpty = true;
         }
 
-        assertTrue("testSetEmpty", isEmpty);
+        assertTrue(isEmpty, "testSetEmpty");
     }
 
-    public void testFindPiece() {
+    @Test
+    void testFindPiece() {
         this.boardClassTest.initPiecesPosition(EColorChess.WHITE);
         boolean validate = false;
         int posY = 1, posX = 0;
@@ -120,7 +121,7 @@ public class TestBoard extends TestCase {
             validate = true;
         }
 
-        assertTrue("testFindPiece", validate);
+        assertTrue(validate, "testFindPiece");
     }
 
 

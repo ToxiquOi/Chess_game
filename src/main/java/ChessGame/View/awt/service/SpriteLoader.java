@@ -48,9 +48,13 @@ public class SpriteLoader {
         String spritePath = ((element.getEColorChess() == EColorChess.WHITE)? "White" : "Black") + elementNameFormated + ".png";
 
         BufferedImage image = null;
+        String rootPath = System.getProperty("user.dir");
+        if (rootPath.contains("test")) {
+            rootPath = rootPath.replace("src/test", "");
+        }
 
         try {
-            image = ImageIO.read(new FileInputStream(System.getProperty("user.dir") + "/rsc/Pieces/" + spritePath));
+            image = ImageIO.read(new FileInputStream(rootPath + "/rsc/Pieces/" + spritePath));
             image = this.makeCompatibleFormatImage(image);
 
         } catch (IOException e) {
