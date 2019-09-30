@@ -75,6 +75,7 @@ public class GameMonitor extends Frame implements Runnable {
                 public void windowClosing(WindowEvent e) {
                     running = false;
                 }
+
             }
         );
     }
