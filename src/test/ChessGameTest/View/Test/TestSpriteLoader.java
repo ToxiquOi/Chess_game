@@ -51,7 +51,6 @@ class TestSpriteLoader {
         Pawn pawn = new Pawn(EColorChess.WHITE);
 
         this.spriteLoaderClassTest.getBufferedImages().add(new HashMap<>());
-
         this.spriteLoaderClassTest.getTextureFromFile(pawn);
 
         assertNotNull(this.spriteLoaderClassTest.getBufferedImage(pawn), "test get buffered image");
