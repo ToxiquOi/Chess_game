@@ -54,7 +54,7 @@ public class SpriteLoader {
         }
 
         try {
-            image = ImageIO.read(new FileInputStream(rootPath + "/src/main/rsc/Pieces/" + spritePath));
+            image = ImageIO.read(new FileInputStream(rootPath + "/src/main/resources/Pieces/" + spritePath));
             image = this.makeCompatibleFormatImage(image);
 
         } catch (IOException e) {

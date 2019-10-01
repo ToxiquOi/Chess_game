@@ -1,14 +1,21 @@
 apply plugin: 'java'
-apply plugin: 'jacoco'
-apply plugin: 'application'
-
-mainClassName = 'ChessGame.Main'
 
 project.ext.lwjglVersion = "3.2.2"
 project.ext.lwjglNatives = "natives-linux"
 
 repositories {
     mavenCentral()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+        resources {
+            srcDirs = ['src/main/resources']
+        }
+    }
 }
 
 dependencies {
