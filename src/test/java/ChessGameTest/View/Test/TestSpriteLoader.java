@@ -1,6 +1,5 @@
 package ChessGameTest.View.Test;
 
-import ChessGame.Controller.InputController;
 import ChessGame.Model.Board;
 import ChessGame.Model.BoardElement.Pieces.Pawn;
 import ChessGame.Share.Enum.EColorChess;
@@ -21,7 +20,6 @@ class TestSpriteLoader {
     private Board board = new Board();
     private GameMonitor gm = new GameMonitor("test");
     private SpriteLoaderClassTest spriteLoaderClassTest;
-    InputController inputController = new InputController();
 
     @BeforeEach
     void setUp() {
