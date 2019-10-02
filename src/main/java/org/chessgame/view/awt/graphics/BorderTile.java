@@ -4,7 +4,8 @@ import org.chessgame.share.constant.CBoard;
 
 import java.awt.*;
 
-public class BorderTile extends Panel {
+public class BorderTile {
+    private BorderTile() {}
 
     public static void draw(Graphics g, int posX, int posY, Color color) {
         Graphics2D g2 = (Graphics2D) g;

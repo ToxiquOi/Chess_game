@@ -6,6 +6,7 @@ import org.chessgame.share.constant.CBoard;
 import java.awt.*;
 
 public class CaseBoard {
+    private CaseBoard() {}
 
     private static final int WIDTH = CBoard.TILE_WIDTH_PX;
     private static final int HEIGHT = CBoard.TILE_WIDTH_PX;

@@ -53,7 +53,6 @@ public class TileSelector implements Serializable {
 
                 if(Boolean.TRUE.equals(b)) {
                     Piece piece = (Piece) boardElement;
-//                    this.board.moveElement((this.mouse.getY() / CBoard.TILE_HEIGHT_PX) + 2, (this.mouse.getX() / CBoard.TILE_WIDTH_PX) + 2, piece);
                     piece.die();
                     this.board.setEmptyElement(this.mouse.getY() / CBoard.TILE_HEIGHT_PX, this.mouse.getX() / CBoard.TILE_WIDTH_PX);
                 }

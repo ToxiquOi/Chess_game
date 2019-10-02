@@ -82,7 +82,6 @@ public class GameMonitor extends Frame implements Runnable {
         );
     }
 
-
     private BoardComponent createBoardComponent() {
         BoardComponent boardComponent = new BoardComponent(d);
         boardComponent.addMouseListener(this.mouse);
@@ -106,7 +105,7 @@ public class GameMonitor extends Frame implements Runnable {
 
         long end = System.nanoTime();
         double fps = count / ((end - begin) / 1000000000.0);
-        System.out.println("FPS: " + fps);
+        logger.log(Level.INFO,"FPS: " + fps);
 
         this.dispose();
     }
