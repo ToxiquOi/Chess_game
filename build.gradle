@@ -1,5 +1,7 @@
-apply plugin: 'java'
-apply plugin: 'org.sonarqube'
+plugins {
+    id "org.sonarqube" version "2.7.1"
+    id "java"
+}
 
 project.ext.lwjglVersion = "3.2.2"
 project.ext.lwjglNatives = "natives-linux"
@@ -21,7 +23,7 @@ sourceSets {
 
 sonarqube {
     properties {
-        sonar.projectKey = ToxiquOi_Chess_game
+        property "sonar.projectKey",  "ToxiquOi_Chess_game"
     }
 }
 
