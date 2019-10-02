@@ -14,7 +14,7 @@ cache:
     - $HOME/.gradle/wrapper/
 addons:
   sonarcloud:
-    organization: "ToxiquOi" # the key of the org you chose at step #3
+    organization: "toxiquoi" # the key of the org you chose at step #3
     token:
       secure: $SONAR_TOKEN # encrypted value of your token
 script:
