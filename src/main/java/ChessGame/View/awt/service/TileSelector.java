@@ -59,7 +59,7 @@ public class TileSelector {
 
     public void drawTile(Graphics g) {
         if(this.pieceSelectedX != -1 && this.pieceSelectedY != -1 && this.colorSelect != null) {
-            new BorderTile(g, this.pieceSelectedX, this.pieceSelectedY, this.colorSelect);
+            BorderTile.draw(g, this.pieceSelectedX, this.pieceSelectedY, this.colorSelect);
         }
     }
 }

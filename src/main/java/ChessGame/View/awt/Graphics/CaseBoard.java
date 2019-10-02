@@ -12,5 +12,7 @@ public class CaseBoard {
         g.fillRect(posX * 100, posY * 100, WIDTH, HEIGHT);
     }
 
-
+    public static void draw(int posX, int posY, Graphics g) {
+        g.fillRect(posX * 100, posY * 100, WIDTH, HEIGHT);
+    }
 }

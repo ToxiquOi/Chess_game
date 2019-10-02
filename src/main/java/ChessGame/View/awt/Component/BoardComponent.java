@@ -33,7 +33,7 @@ public class BoardComponent extends Canvas {
                 else {
                     g.setColor(Color.DARK_GRAY);
                 }
-                new CaseBoard(x, y, g);
+                CaseBoard.draw(x, y, g);
             }
         }
     }
