@@ -134,6 +134,7 @@ public class GameMonitor extends Frame implements Runnable {
                     Thread.sleep(millisleep);
                 } catch (InterruptedException e) {
                     logger.log(Level.WARNING, e.toString());
+                    Thread.currentThread().interrupt();
                 }
             }
         }
