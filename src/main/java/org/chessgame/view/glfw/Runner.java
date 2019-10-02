@@ -13,15 +13,14 @@ public class Runner implements Runnable {
     private int height = 800;
     private int width = 800;
 
-    private Thread thread;
     private boolean isRunning  = false;
 
     private long window;
 
     public void start() {
         this.isRunning = true;
-        this.thread = new Thread(this, "Game");
-        this.thread.start();
+        Thread thread = new Thread(this, "Game");
+        thread.start();
     }
 
     private void init(){

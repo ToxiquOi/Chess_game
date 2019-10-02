@@ -25,7 +25,8 @@ public class TileSelector {
     }
 
     private boolean selectTile() {
-        if(this.board.isInstanceOfPiece(this.board.getElement(this.mouse.getY() / CBoard.TILE_HEIGHT_PX, this.mouse.getX() / CBoard.TILE_WIDTH_PX))) {
+        boolean b = this.board.isInstanceOfPiece(this.board.getElement(this.mouse.getY() / CBoard.TILE_HEIGHT_PX, this.mouse.getX() / CBoard.TILE_WIDTH_PX));
+        if(Boolean.TRUE.equals(b)) {
             this.pieceSelectedX = this.mouse.getX() / CBoard.TILE_WIDTH_PX;
             this.pieceSelectedY = this.mouse.getY() / CBoard.TILE_HEIGHT_PX;
             return true;
@@ -47,7 +48,9 @@ public class TileSelector {
             if(this.selectTile()) {
                 this.colorSelect = new Color(0xEB0900);
                 BoardElement boardElement = this.board.getElement(this.mouse.getY() / CBoard.TILE_HEIGHT_PX, this.mouse.getX() / CBoard.TILE_WIDTH_PX);
-                if(this.board.isInstanceOfPiece(boardElement)) {
+                boolean b = this.board.isInstanceOfPiece(boardElement);
+
+                if(Boolean.TRUE.equals(b)) {
                     Piece piece = (Piece) boardElement;
 //                    this.board.moveElement((this.mouse.getY() / CBoard.TILE_HEIGHT_PX) + 2, (this.mouse.getX() / CBoard.TILE_WIDTH_PX) + 2, piece);
                     piece.die();

@@ -165,7 +165,8 @@ public class GameMonitor extends Frame implements Runnable {
             while(bi.hasNext()) {
                 BoardElement boardElement = bi.next();
 
-                if (bi.isInstanceOfPiece(boardElement)) {
+                boolean b = bi.isInstanceOfPiece(boardElement);
+                if (Boolean.TRUE.equals(b)) {
                     Piece piece = (Piece)boardElement;
 
                     BufferedImage image = this.spriteLoader.getBufferedImage(piece);

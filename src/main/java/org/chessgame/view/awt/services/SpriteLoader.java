@@ -34,7 +34,8 @@ public class SpriteLoader {
         while (boardIterator.hasNext()) {
 
             BoardElement boardElement = boardIterator.next();
-            if (boardIterator.isInstanceOfPiece(boardElement)) {
+            boolean b = boardIterator.isInstanceOfPiece(boardElement);
+            if (Boolean.TRUE.equals(b)) {
                 Piece element = (Piece) boardElement;
                 this.getTextureFromFile(element);
             }
