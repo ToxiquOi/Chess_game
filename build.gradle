@@ -18,6 +18,16 @@ sourceSets {
     }
 }
 
+plugins {
+    id "org.sonarqube" version "2.7.1"
+}
+
+sonarqube {
+    properties {
+        sonar.projectKey = ToxiquOi_Chess_game
+    }
+}
+
 dependencies {
     implementation "org.lwjgl:lwjgl:${lwjglVersion}"
     implementation "org.lwjgl:lwjgl-assimp:${lwjglVersion}"
@@ -37,5 +47,3 @@ dependencies {
 test {
     useJUnitPlatform()
 }
-
-//travis encrypt 302f7a4418b9ddcb796b989fd83d8126bc89825a
