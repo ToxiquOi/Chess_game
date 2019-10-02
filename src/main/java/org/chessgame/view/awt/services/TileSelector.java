@@ -9,8 +9,9 @@ import org.chessgame.view.awt.graphics.BorderTile;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.io.Serializable;
 
-public class TileSelector {
+public class TileSelector implements Serializable {
 
     private Mouse mouse;
     private Board board;

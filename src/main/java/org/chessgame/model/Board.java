@@ -10,7 +10,9 @@ import org.chessgame.share.enumeration.EColorChess;
 import org.chessgame.share.constant.CWindow;
 import org.chessgame.share.iterator.BoardIterator;
 
-public class Board implements Iterable<BoardElement> {
+import java.io.Serializable;
+
+public class Board implements Iterable<BoardElement>, Serializable {
 
     protected BoardElement[][] board;
 

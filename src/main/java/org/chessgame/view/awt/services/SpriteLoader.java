@@ -12,13 +12,14 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 
 import static java.awt.Transparency.TRANSLUCENT;
 
-public class SpriteLoader {
+public class SpriteLoader implements Serializable {
 
     private static ChessLogger chessLogger = new ChessLogger(SpriteLoader.class);
     private ArrayList<HashMap<EElement, BufferedImage>> bufferedImages = new ArrayList<>(2);

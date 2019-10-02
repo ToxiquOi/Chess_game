@@ -3,15 +3,13 @@ package org.chessgame.controller.listener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.Serializable;
 
-public class Mouse implements MouseListener, MouseMotionListener {
+public class Mouse implements MouseListener, MouseMotionListener, Serializable {
 
     private boolean[] buttons = new boolean[4];
     private int x;
     private int y;
-
-
-    public Mouse() {}
 
     public int getX() {
         return this.x;
