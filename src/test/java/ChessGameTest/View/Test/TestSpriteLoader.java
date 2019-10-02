@@ -1,10 +1,10 @@
 package ChessGameTest.View.Test;
 
-import ChessGame.Model.Board;
-import ChessGame.Model.BoardElement.Pieces.Pawn;
-import ChessGame.Share.Enum.EColorChess;
-import ChessGame.Share.Enum.EElement;
-import ChessGame.View.awt.GameMonitor;
+import org.ChessGame.Model.Board;
+import org.ChessGame.Model.BoardElement.Pieces.Pawn;
+import org.ChessGame.Share.Enum.EColorChess;
+import org.ChessGame.Share.Enum.EElement;
+import org.ChessGame.View.awt.GameMonitor;
 import ChessGameTest.View.ClassTest.SpriteLoaderClassTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
