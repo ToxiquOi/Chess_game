@@ -1,14 +1,14 @@
 package ChessGameTest.Model.Test;
 
-import org.ChessGame.Model.Abstract.Piece;
-import org.ChessGame.Model.Abstract.Position;
-import org.ChessGame.Model.BoardElement.Pieces.Pawn;
-import org.ChessGame.Model.BoardElement.StaticElement.Empty;
-import org.ChessGame.Model.Abstract.BoardElement;
-import org.ChessGame.Share.Constant.CBoard;
-import org.ChessGame.Share.Enum.EColorChess;
-import org.ChessGame.Share.Enum.EElement;
-import org.ChessGame.Share.Iterator.BoardIterator;
+import org.chessgame.model.abstract_class.Piece;
+import org.chessgame.model.abstract_class.Position;
+import org.chessgame.model.board_element.pieces.Pawn;
+import org.chessgame.model.board_element.static_element.Empty;
+import org.chessgame.model.abstract_class.BoardElement;
+import org.chessgame.share.constant.CBoard;
+import org.chessgame.share.enumeration.EColorChess;
+import org.chessgame.share.enumeration.EElement;
+import org.chessgame.share.iterator.BoardIterator;
 import ChessGameTest.Model.ClassTest.BoardClassTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

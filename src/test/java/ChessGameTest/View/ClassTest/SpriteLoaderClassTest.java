@@ -1,9 +1,9 @@
 package ChessGameTest.View.ClassTest;
 
-import org.ChessGame.Model.Abstract.Piece;
-import org.ChessGame.Share.Enum.EElement;
-import org.ChessGame.Share.Iterator.BoardIterator;
-import org.ChessGame.View.awt.service.SpriteLoader;
+import org.chessgame.model.abstract_class.Piece;
+import org.chessgame.share.enumeration.EElement;
+import org.chessgame.share.iterator.BoardIterator;
+import org.chessgame.view.awt.service.SpriteLoader;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

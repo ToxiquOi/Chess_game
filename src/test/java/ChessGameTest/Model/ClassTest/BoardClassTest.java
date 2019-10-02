@@ -1,10 +1,10 @@
 package ChessGameTest.Model.ClassTest;
 
-import org.ChessGame.Model.Abstract.Position;
-import org.ChessGame.Model.Board;
-import org.ChessGame.Model.Abstract.BoardElement;
-import org.ChessGame.Model.Abstract.Piece;
-import org.ChessGame.Share.Enum.EColorChess;
+import org.chessgame.model.abstract_class.Position;
+import org.chessgame.model.Board;
+import org.chessgame.model.abstract_class.BoardElement;
+import org.chessgame.model.abstract_class.Piece;
+import org.chessgame.share.enumeration.EColorChess;
 
 public class BoardClassTest extends Board {
 
