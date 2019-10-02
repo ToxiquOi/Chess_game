@@ -84,7 +84,7 @@ public class GameMonitor extends Frame implements Runnable {
 
 
     private BoardComponent createBoardComponent() {
-        BoardComponent boardComponent = new BoardComponent(d, this.board.iterator());
+        BoardComponent boardComponent = new BoardComponent(d);
         boardComponent.addMouseListener(this.mouse);
         boardComponent.addMouseMotionListener(this.mouse);
 

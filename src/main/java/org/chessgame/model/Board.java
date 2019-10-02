@@ -9,15 +9,17 @@ import org.chessgame.share.constant.CBoard;
 import org.chessgame.share.enumeration.EColorChess;
 import org.chessgame.share.constant.CWindow;
 import org.chessgame.share.iterator.BoardIterator;
+import org.chessgame.share.services.ChessLogger;
 
 import java.io.Serializable;
 
 public class Board implements Iterable<BoardElement>, Serializable {
 
-    protected BoardElement[][] board;
+    private static ChessLogger chessLogger = new ChessLogger(Board.class);
+    protected BoardElement[][] boardElement;
 
     public Board() {
-        this.board = new BoardElement[CBoard.TILE_HEIGHT_TAB][CBoard.TILE_WIDTH_TAB];
+        this.boardElement = new BoardElement[CBoard.TILE_HEIGHT_TAB][CBoard.TILE_WIDTH_TAB];
         this.generateBoard();
         this.initPiecesPosition(EColorChess.WHITE);
         this.initPiecesPosition(EColorChess.BLACK);
@@ -35,14 +37,14 @@ public class Board implements Iterable<BoardElement>, Serializable {
     protected void generateBoard() {
         for (int y = 0; y < CBoard.TILE_HEIGHT_TAB; y++) {
             for (int x = 0; x < CBoard.TILE_WIDTH_TAB; x++) {
-                this.board[x][y] = new Empty();
+                this.boardElement[x][y] = new Empty();
             }
         }
     }
 
     public BoardElement getElement(int y, int x) {
         if (y < CBoard.TILE_HEIGHT_TAB && x < CBoard.TILE_WIDTH_TAB && y >= 0 && x >= 0) {
-            return this.board[x][y];
+            return this.boardElement[x][y];
         }
         return null;
     }
@@ -72,7 +74,6 @@ public class Board implements Iterable<BoardElement>, Serializable {
 
 
     public void moveElement(int moveToY, int moveToX, BoardElement boardElement) {
-        System.out.println("moveElement: " + boardElement.getEelement());
         Boolean b = this.isInstanceOfPiece(boardElement);
         if (Boolean.TRUE.equals(b)) {
             Piece piece = (Piece) boardElement;
@@ -80,13 +81,13 @@ public class Board implements Iterable<BoardElement>, Serializable {
 
             if (moveToY < CBoard.TILE_HEIGHT_TAB && moveToX < CBoard.TILE_WIDTH_TAB && moveToY >= 0 && moveToX >= 0) {
                 this.setEmptyElement(pos.getPosX(), pos.getPosY());
-                this.board[moveToX][moveToY] = piece;
+                this.boardElement[moveToX][moveToY] = piece;
             }
         }
     }
 
     public void setEmptyElement(int y, int x) {
-        this.board[x][y] = new Empty();
+        this.boardElement[x][y] = new Empty();
     }
 
     protected void initPiecesPosition(EColorChess eColorChess) {
@@ -95,22 +96,22 @@ public class Board implements Iterable<BoardElement>, Serializable {
 
         for(int i = 0; i < 8; i++) {
             if(i == 0 || i == 7) {
-                this.board[i][y1] = new Rook(eColorChess);
+                this.boardElement[i][y1] = new Rook(eColorChess);
             }
             if(i == 1 || i == 6) {
-                this.board[i][y1] = new Knight(eColorChess);
+                this.boardElement[i][y1] = new Knight(eColorChess);
             }
             if(i == 2 || i == 5) {
-                this.board[i][y1] = new Bishop(eColorChess);
+                this.boardElement[i][y1] = new Bishop(eColorChess);
             }
             if(i == 3) {
-                this.board[i][y1] = new Queen(eColorChess);
+                this.boardElement[i][y1] = new Queen(eColorChess);
             }
             if(i == 4) {
-                this.board[i][y1] = new King(eColorChess);
+                this.boardElement[i][y1] = new King(eColorChess);
             }
 
-            this.board[i][y2] = new Pawn(eColorChess);
+            this.boardElement[i][y2] = new Pawn(eColorChess);
         }
     }
 

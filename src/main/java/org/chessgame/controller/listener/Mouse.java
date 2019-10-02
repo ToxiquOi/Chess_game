@@ -1,12 +1,16 @@
 package org.chessgame.controller.listener;
 
+import org.chessgame.share.services.ChessLogger;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.Serializable;
+import java.util.logging.Level;
 
 public class Mouse implements MouseListener, MouseMotionListener, Serializable {
 
+    private static ChessLogger chessLogger = new ChessLogger(Mouse.class);
     private boolean[] buttons = new boolean[4];
     private int x;
     private int y;
@@ -45,12 +49,12 @@ public class Mouse implements MouseListener, MouseMotionListener, Serializable {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        System.out.println("enter in window");
+        chessLogger.log(Level.INFO, "enter in window");
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        System.out.println("exit in window");
+        chessLogger.log(Level.INFO, "exit window");
     }
 
     @Override

@@ -11,7 +11,7 @@ public class BoardComponent extends Canvas {
 
     private Dimension d;
 
-    public BoardComponent(Dimension d, BoardIterator bi) {
+    public BoardComponent(Dimension d) {
         this.d = d;
         this.init();
     }
