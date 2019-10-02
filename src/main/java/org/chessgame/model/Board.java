@@ -46,10 +46,7 @@ public class Board implements Iterable<BoardElement> {
     }
 
     public Boolean isInstanceOfPiece(BoardElement boardElement) {
-        if(boardElement instanceof Piece) {
-            return true;
-        }
-        return false;
+        return boardElement instanceof Piece;
     }
 
     public Position findPiecePosition(Piece piece) {
@@ -57,8 +54,9 @@ public class Board implements Iterable<BoardElement> {
 
         while (boardIterator.hasNext()) {
             BoardElement boardElement = boardIterator.next();
+            Boolean b = this.isInstanceOfPiece(boardElement);
 
-            if (this.isInstanceOfPiece(boardElement)) {
+            if (Boolean.TRUE.equals(b)) {
                 Piece p = (Piece) boardElement;
                 if (p.getEelement() == piece.getEelement() && p.getEColorChess() == piece.getEColorChess()) {
                     break;
@@ -73,7 +71,8 @@ public class Board implements Iterable<BoardElement> {
 
     public void moveElement(int moveToY, int moveToX, BoardElement boardElement) {
         System.out.println("moveElement: " + boardElement.getEelement());
-        if (this.isInstanceOfPiece(boardElement)) {
+        Boolean b = this.isInstanceOfPiece(boardElement);
+        if (Boolean.TRUE.equals(b)) {
             Piece piece = (Piece) boardElement;
             Position pos = this.findPiecePosition(piece);
 

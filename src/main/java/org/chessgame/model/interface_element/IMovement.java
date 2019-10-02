@@ -12,7 +12,7 @@ import org.chessgame.share.enumeration.EMove;
  * @author tox
  */
 public interface IMovement {
-    void move(EMove EMove);
+    void move(EMove eMove);
     void moveUp(int x, int y);
     void moveDown(int x, int y);
     void moveLeft(int x, int y);

@@ -1,6 +1,6 @@
 package org.chessgame.share.constant;
 
 public class CWindow {
-    public final static int HEIGHT = 800;
-    public final static int WIDTH = 800;
+    public static final int HEIGHT = 800;
+    public static final int WIDTH = 800;
 }

@@ -1,10 +1,11 @@
-package org.chessgame.view.awt.service;
+package org.chessgame.view.awt.services;
 
 import org.chessgame.model.abstract_class.BoardElement;
 import org.chessgame.model.abstract_class.Piece;
 import org.chessgame.share.enumeration.EColorChess;
 import org.chessgame.share.enumeration.EElement;
 import org.chessgame.share.iterator.BoardIterator;
+import org.chessgame.share.services.ChessLogger;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -13,11 +14,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
 
 public class SpriteLoader {
 
-    protected ArrayList<HashMap<EElement, BufferedImage>> bufferedImages = new ArrayList<>(2);
-    protected Frame frame;
+    private static ChessLogger chessLogger = new ChessLogger(SpriteLoader.class);
+    private ArrayList<HashMap<EElement, BufferedImage>> bufferedImages = new ArrayList<>(2);
+    private Frame frame;
 
     public SpriteLoader( Frame frame) {
         this.frame = frame;
@@ -58,7 +61,7 @@ public class SpriteLoader {
             image = this.makeCompatibleFormatImage(image);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            chessLogger.log(Level.WARNING, e.toString());
         }
 
         this.bufferedImages.get(element.getEColorChess() == EColorChess.WHITE? 0 : 1).put(element.getEelement(), image);

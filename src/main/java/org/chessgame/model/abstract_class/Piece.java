@@ -15,18 +15,18 @@ import org.chessgame.share.enumeration.EMove;
 public abstract class Piece extends BoardElement {
 
     private boolean isAlive;
-    protected EColorChess EColorChess;
+    protected EColorChess eColorChess;
     private EMove[] moves;
 
 
-    public Piece(EColorChess EColorChess) {
-        this.EColorChess = EColorChess;
+    public Piece(EColorChess eColorChess) {
+        this.eColorChess = eColorChess;
         this.isAlive = true;
     }
 
     public Piece(Piece piece) {
         this.isAlive = piece.getIsAlive();
-        this.EColorChess = piece.getEColorChess();
+        this.eColorChess = piece.getEColorChess();
         this.moves = piece.getMoves();
     }
 
@@ -47,7 +47,7 @@ public abstract class Piece extends BoardElement {
     }
 
     public EColorChess getEColorChess() {
-        return EColorChess;
+        return this.eColorChess;
     }
 
 

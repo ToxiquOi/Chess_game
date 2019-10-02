@@ -7,10 +7,12 @@ import org.chessgame.model.abstract_class.Piece;
 import org.chessgame.share.constant.CBoard;
 import org.chessgame.share.constant.CWindow;
 import org.chessgame.share.iterator.BoardIterator;
+import org.chessgame.share.services.ChessLogger;
 import org.chessgame.view.awt.component.BoardComponent;
-import org.chessgame.view.awt.service.SpriteLoader;
-import org.chessgame.view.awt.service.TileSelector;
+import org.chessgame.view.awt.services.SpriteLoader;
+import org.chessgame.view.awt.services.TileSelector;
 
+import java.util.logging.Level;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -19,12 +21,12 @@ import java.awt.image.BufferedImage;
 
 public class GameMonitor extends Frame implements Runnable {
 
-    private Thread thread;
+    private Board board;
     private Mouse mouse;
+    private static ChessLogger logger = new ChessLogger(GameMonitor.class);
 
     private SpriteLoader spriteLoader;
     private TileSelector tileSelector;
-    private Board board;
 
     private boolean running = false;
     private Dimension d = new Dimension(CWindow.WIDTH, CWindow.HEIGHT);
@@ -34,11 +36,11 @@ public class GameMonitor extends Frame implements Runnable {
 
     public void start() {
         this.running = true;
-        this.thread = new Thread(this, "Chess_Game");
-        this.thread.start();
+        Thread thread = new Thread(this, "Chess_Game");
+        thread.start();
     }
 
-    public GameMonitor(String title) throws HeadlessException {
+    public GameMonitor(String title) {
         super(title);
     }
 
@@ -132,7 +134,7 @@ public class GameMonitor extends Frame implements Runnable {
                 try {
                     Thread.sleep(millisleep);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    logger.log(Level.WARNING, e.toString());
                 }
             }
         }
@@ -175,7 +177,7 @@ public class GameMonitor extends Frame implements Runnable {
             }
             // -------- draw end-------
         } catch (NullPointerException e) {
-            e.printStackTrace();
+            logger.log(Level.WARNING, e.toString());
         } finally {
             bs.show();
         }

@@ -1,4 +1,4 @@
-package org.chessgame.view.awt.service;
+package org.chessgame.view.awt.services;
 
 import org.chessgame.controller.listener.Mouse;
 import org.chessgame.model.abstract_class.BoardElement;

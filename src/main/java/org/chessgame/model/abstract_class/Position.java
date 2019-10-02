@@ -13,8 +13,8 @@ import java.util.List;
  * @author tox
  */
 public class Position {
-    public List<Integer> pos = new ArrayList<>(2);
-    public List<Integer> initialPos = new ArrayList<>(2);
+    private static final List<Integer> pos = new ArrayList<>(2);
+    private static final List<Integer> initialPos = new ArrayList<>(2);
 
     public Position(int x, int y) {
         this.setPos(x, y);
@@ -22,27 +22,27 @@ public class Position {
     }
 
     private void setInitialPos(int x, int y) {
-        this.initialPos.clear();
-        this.initialPos.add(0, x);
-        this.initialPos.add(1, y);
+        initialPos.clear();
+        initialPos.add(0, x);
+        initialPos.add(1, y);
     }
 
-    public void setPos(int x, int y){
-        this.pos.clear();
-        this.pos.add(0, x);
-        this.pos.add(1, y);
+    private void setPos(int x, int y){
+        pos.clear();
+        pos.add(0, x);
+        pos.add(1, y);
     }
 
     public List<Integer> getInitialPos() {
-        return this.initialPos;
+        return initialPos;
     }
 
     public int getInitialPosX() {
-        return this.initialPos.get(0);
+        return initialPos.get(0);
     }
 
     public int getInitialPosY() {
-        return this.initialPos.get(1);
+        return initialPos.get(1);
     }
 
 
@@ -51,10 +51,10 @@ public class Position {
     }
 
     public int getPosX() {
-        return this.pos.get(0);
+        return pos.get(0);
     }
 
     public int getPosY() {
-        return this.pos.get(1);
+        return pos.get(1);
     }
 }

@@ -3,7 +3,7 @@ package ChessGameTest.View.ClassTest;
 import org.chessgame.model.abstract_class.Piece;
 import org.chessgame.share.enumeration.EElement;
 import org.chessgame.share.iterator.BoardIterator;
-import org.chessgame.view.awt.service.SpriteLoader;
+import org.chessgame.view.awt.services.SpriteLoader;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
