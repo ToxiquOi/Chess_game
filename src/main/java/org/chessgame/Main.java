@@ -10,7 +10,7 @@ import org.chessgame.view.awt.GameMonitor;
  */
 public class Main {
 
-    private static final String AppTitle = "chess";
+    private static final String appTitle = "chess";
 
     /**
      * @param args the command line arguments
@@ -18,7 +18,7 @@ public class Main {
     public static void main(String[] args) {
         Board board = new Board();
         InputController inputController = new InputController();
-        GameMonitor gm = new GameMonitor(AppTitle);
+        GameMonitor gm = new GameMonitor(appTitle);
 
         gm.addBoard(board);
         gm.addMouse(inputController.getMouse());

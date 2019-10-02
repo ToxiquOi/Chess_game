@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 
+import static java.awt.Transparency.TRANSLUCENT;
+
 public class SpriteLoader {
 
     private static ChessLogger chessLogger = new ChessLogger(SpriteLoader.class);
@@ -69,7 +71,7 @@ public class SpriteLoader {
     }
 
     protected BufferedImage makeCompatibleFormatImage(BufferedImage image) {
-        BufferedImage compatibleTexture = this.frame.getGraphicsConfiguration().createCompatibleImage(image.getWidth(), image.getHeight(), Color.TRANSLUCENT);
+        BufferedImage compatibleTexture = this.frame.getGraphicsConfiguration().createCompatibleImage(image.getWidth(), image.getHeight(), TRANSLUCENT);
         Graphics gCompText = compatibleTexture.createGraphics();
         gCompText.drawImage(image, 0, 0, null);
 

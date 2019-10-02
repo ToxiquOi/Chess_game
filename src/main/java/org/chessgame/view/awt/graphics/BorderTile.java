@@ -6,8 +6,6 @@ import java.awt.*;
 
 public class BorderTile extends Panel {
 
-    public BorderTile() {}
-
     public static void draw(Graphics g, int posX, int posY, Color color) {
         Graphics2D g2 = (Graphics2D) g;
         g2.setStroke(new BasicStroke(3));

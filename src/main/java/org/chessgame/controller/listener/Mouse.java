@@ -11,9 +11,7 @@ public class Mouse implements MouseListener, MouseMotionListener {
     private int y;
 
 
-    public Mouse() {
-
-    }
+    public Mouse() {}
 
     public int getX() {
         return this.x;
