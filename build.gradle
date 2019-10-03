@@ -56,6 +56,4 @@ sonarqube {
 
 jacoco {
     toolVersion = "0.8.4"
-    reportsDir = file("$buildDir/customJacocoReportDir")
-    applyTo run
 }
