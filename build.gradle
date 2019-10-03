@@ -5,8 +5,9 @@ plugins {
     id 'application'
 }
 
-project.ext.lwjglVersion = "3.2.2"
-project.ext.lwjglNatives = "natives-linux"
+application {
+    mainClassName = 'org.chessgame.Main'
+}
 
 repositories {
     mavenCentral()
@@ -22,6 +23,9 @@ sourceSets {
         }
     }
 }
+
+project.ext.lwjglVersion = "3.2.2"
+project.ext.lwjglNatives = "natives-linux"
 
 dependencies {
     implementation "org.lwjgl:lwjgl:${lwjglVersion}"
@@ -42,10 +46,6 @@ dependencies {
 
 test {
     useJUnitPlatform()
-}
-
-application {
-    mainClassName = 'org.chessgame.Main'
 }
 
 sonarqube {
