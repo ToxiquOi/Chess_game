@@ -59,11 +59,3 @@ jacoco {
     reportsDir = file("$buildDir/customJacocoReportDir")
     applyTo run
 }
-
-jacocoTestReport {
-    reports {
-        xml.enabled false
-        csv.enabled false
-        html.destination file("${buildDir}/jacocoHtml")
-    }
-}
