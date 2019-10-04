@@ -1,4 +1,4 @@
-package org.chessgame;
+package org;
 
 import org.chessgame.share.services.ChessLogger;
 
