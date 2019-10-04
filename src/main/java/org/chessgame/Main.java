@@ -2,7 +2,7 @@ package org.chessgame;
 
 import org.chessgame.share.services.ChessLogger;
 import org.chessgame.view.awt.AWTGUIFacade;
-import org.chessgame.view.awt.awtinterface.IGUIFacade;
+import org.chessgame.view.viewinterface.IGUIFacade;
 
 import java.util.logging.Level;
 

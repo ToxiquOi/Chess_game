@@ -1,4 +1,6 @@
-package org.chessgame.view.awt.awtinterface;
+package org.chessgame.view.viewinterface;
+
+import org.chessgame.model.abstract_class.Piece;
 
 import java.awt.*;
 
@@ -8,7 +10,7 @@ public interface ILayer {
     int getTextureWidth();
     int getTextureHeight();
     void setTileSize(Dimension d);
-    void setTexture(String fileName);
+    void setTexture(Piece element);
     void setSpriteCount(int count);
     void setSpriteTexture(int index, int tileX, int tileY);
     void setSpriteLocation(int index, int screenX, int screenY);

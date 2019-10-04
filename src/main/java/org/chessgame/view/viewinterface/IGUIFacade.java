@@ -1,6 +1,4 @@
-package org.chessgame.view.awt.awtinterface;
-
-import org.chessgame.view.awt.AWTLayer;
+package org.chessgame.view.viewinterface;
 
 public interface IGUIFacade {
     void createWindow(String title);

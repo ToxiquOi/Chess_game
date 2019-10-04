@@ -1,8 +1,8 @@
 package org.chessgame.view.awt;
 
 import org.chessgame.share.constant.CWindow;
-import org.chessgame.view.awt.awtinterface.IGUIFacade;
-import org.chessgame.view.awt.awtinterface.ILayer;
+import org.chessgame.view.viewinterface.IGUIFacade;
+import org.chessgame.view.viewinterface.ILayer;
 
 import java.awt.*;
 
@@ -10,6 +10,7 @@ public class AWTGUIFacade implements IGUIFacade {
 
     private Graphics g;
     private GameMonitor monitor;
+    private ILayer layer;
 
 
     @Override
@@ -26,12 +27,23 @@ public class AWTGUIFacade implements IGUIFacade {
 
     @Override
     public void drawLayer(ILayer layer) {
+        if(this.g == null) {
+            return;
+        }
 
+        if (this.layer == null) {
+            throw new IllegalArgumentException("pas de layer");
+        }
+        if(!(this.layer instanceof AWTLayer)) {
+            throw new IllegalArgumentException("Type de layer Invalide");
+        }
+        AWTLayer awtLayer = (AWTLayer) this.layer;
+        awtLayer.draw(this.g);
     }
 
     @Override
     public ILayer createLayer() {
-        return null;
+        return new AWTLayer();
     }
 
     public boolean beginPaint() {
