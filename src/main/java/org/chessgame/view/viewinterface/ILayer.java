@@ -10,7 +10,7 @@ public interface ILayer {
     int getTextureWidth();
     int getTextureHeight();
     void setTileSize(Dimension d);
-    void setTexture(Piece element);
+    void setTexture(String fileName);
     void setSpriteCount(int count);
     void setSpriteTexture(int index, int tileX, int tileY);
     void setSpriteLocation(int index, int screenX, int screenY);

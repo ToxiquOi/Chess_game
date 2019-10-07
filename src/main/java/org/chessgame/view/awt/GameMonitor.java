@@ -21,10 +21,6 @@ import java.awt.image.BufferedImage;
 
 public class GameMonitor extends Frame {
 
-//    private Board board;
-//    private Mouse mouse;
-//    private static ChessLogger logger = new ChessLogger(GameMonitor.class);
-
     private BufferStrategy bs;
     private Dimension d = new Dimension(CWindow.WIDTH, CWindow.HEIGHT);
     private BoardComponent boardComponent;
@@ -68,7 +64,7 @@ public class GameMonitor extends Frame {
             this.bs = this.boardComponent.getBufferStrategy();
         }
 
-        return  this.boardComponent.getGraphics();
+        return this.boardComponent.getGraphics();
     }
 
     public void switchBuffer() {

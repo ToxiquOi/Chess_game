@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.logging.Level;
 
 import static java.awt.Transparency.TRANSLUCENT;
@@ -53,25 +54,14 @@ public class AWTLayer implements ILayer {
     }
 
     @Override
-    public void setTexture(Piece element) {
-        String firstChar = "" + element.getEelement().toString().charAt(0);
-        String elementNameFormated = element.getEelement().toString().toLowerCase().replace(firstChar.toLowerCase(), firstChar);
-        String spritePath = ((element.getEColorChess() == EColorChess.WHITE)? "White" : "Black") + elementNameFormated + ".png";
-
-        String rootPath = System.getProperty("user.dir");
-        if (rootPath.contains("test")) {
-            rootPath = rootPath.replace("src/test", "");
-        }
-
+    public void setTexture(String fileName) {
         if (tileWidth == 0 || tileHeight == 0) {
             throw new RuntimeException("Taille des tuiles non définie");
         }
         try {
-            texture = ImageIO.read(new FileInputStream(rootPath + "/src/main/resources/Pieces/" + spritePath));
-//            image = this.makeCompatibleFormatImage(image);
-
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, e.toString());
+            texture = ImageIO.read(Objects.requireNonNull(this.getClass().getClassLoader().getResource(fileName)));
+        } catch (IOException ex) {
+            logger.log(Level.SEVERE, ex.toString());
         }
         textureWidth = texture.getWidth() / tileWidth;
         textureHeight = texture.getHeight() / tileHeight;

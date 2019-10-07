@@ -80,10 +80,12 @@ public class Main implements Runnable {
 
     private void render() {
         if (!gui.beginPaint()){
+            logger.log(Level.INFO, "graphics is null");
             return;
         }
         try {
             gui.clearBackground();
+            gui.drawBackground();
         } finally {
             gui.endPaint();
         }
@@ -101,8 +103,6 @@ public class Main implements Runnable {
         long end = System.nanoTime();
         double fps = count / ((end - begin) / 1000000000.0);
         logger.log(Level.INFO,"FPS: " + fps);
-
-//        this.dispose();
     }
 
 }

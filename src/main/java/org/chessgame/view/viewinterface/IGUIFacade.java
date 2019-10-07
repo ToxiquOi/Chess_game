@@ -6,6 +6,7 @@ public interface IGUIFacade {
     void endPaint();
     void clearBackground();
     boolean isClosingRequested();
+    void drawBackground();
     void drawLayer(ILayer layer);
     ILayer createLayer();
 }
