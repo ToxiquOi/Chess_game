@@ -8,6 +8,7 @@ import org.chessgame.model.abstract_class.Piece;
 import org.chessgame.share.constant.CBoard;
 import org.chessgame.share.enumeration.EColorChess;
 import org.chessgame.share.constant.CWindow;
+import org.chessgame.share.enumeration.EElement;
 import org.chessgame.share.iterator.BoardIterator;
 import org.chessgame.share.services.ChessLogger;
 
@@ -16,7 +17,15 @@ import java.io.Serializable;
 public class Board implements Iterable<BoardElement>, Serializable {
 
     private static ChessLogger chessLogger = new ChessLogger(Board.class);
-    protected BoardElement[][] boardElement;
+    protected EElement[][] boardElement = {
+            {EElement.BLACK_ROOK, EElement.BLACK_KNIGHT, EElement.BLACK_BISHOP, EElement.BLACK_QUEEN, EElement.BLACK_KING, EElement.BLACK_BISHOP, EE},
+            {},
+            {},
+            {},
+            {},
+            {},
+
+    };
 
     public Board() {
         this.boardElement = new BoardElement[CBoard.TILE_HEIGHT_TAB][CBoard.TILE_WIDTH_TAB];

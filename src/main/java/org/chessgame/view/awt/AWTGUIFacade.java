@@ -2,7 +2,6 @@ package org.chessgame.view.awt;
 
 import org.chessgame.share.constant.CBoard;
 import org.chessgame.share.constant.CWindow;
-import org.chessgame.view.awt.component.BoardComponent;
 import org.chessgame.view.awt.graphics.CaseBoard;
 import org.chessgame.view.viewinterface.IGUIFacade;
 import org.chessgame.view.viewinterface.ILayer;
@@ -13,7 +12,6 @@ public class AWTGUIFacade implements IGUIFacade {
 
     private Graphics g;
     private GameMonitor monitor;
-    private ILayer layer;
 
 
     @Override
@@ -33,14 +31,13 @@ public class AWTGUIFacade implements IGUIFacade {
         if (this.g == null) {
             return;
         }
-
-        if (this.layer == null) {
+        if (layer == null) {
             throw new IllegalArgumentException("pas de layer");
         }
-        if (!(this.layer instanceof AWTLayer)) {
+        if (!(layer instanceof AWTLayer)) {
             throw new IllegalArgumentException("Type de layer Invalide");
         }
-        AWTLayer awtLayer = (AWTLayer) this.layer;
+        AWTLayer awtLayer = (AWTLayer) layer;
         awtLayer.draw(this.g);
     }
 

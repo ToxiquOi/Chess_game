@@ -1,9 +1,13 @@
 package org.chessgame;
 
+import org.chessgame.model.Board;
+import org.chessgame.share.constant.CBoard;
 import org.chessgame.share.services.ChessLogger;
 import org.chessgame.view.awt.AWTGUIFacade;
 import org.chessgame.view.viewinterface.IGUIFacade;
+import org.chessgame.view.viewinterface.ILayer;
 
+import java.awt.*;
 import java.util.logging.Level;
 
 /**
@@ -14,7 +18,9 @@ public class Main implements Runnable {
 
     private static final String APP_TITLE = "chess";
     private IGUIFacade gui;
+    private ILayer charsLayer;
     private static ChessLogger logger = new ChessLogger(Main.class);
+    private final Board board = new Board();
 
     /**
      * @param args the command line arguments
@@ -40,12 +46,36 @@ public class Main implements Runnable {
     }
 
     public void start() {
+        this.init();
         Thread thread = new Thread(this, "Chess_Game");
         thread.start();
     }
 
     private void setGui(IGUIFacade gui) {
         this.gui = gui;
+    }
+
+    private void init() {
+        this.charsLayer = this.gui.createLayer();
+        this.charsLayer.setTileSize(new Dimension(60, 60));
+        this.charsLayer.setTexture("chess_pieces.png");
+        this.charsLayer.setSpriteCount(1);
+        this.charsLayer.setSpriteTexture(0, 1, 1);
+        this.charsLayer.setSpriteLocation(0, 1 * this.charsLayer.getTileWidth(), 4 * this.charsLayer.getTileHeight());
+    }
+
+    private void defineAllSpriteInLayer(String fileName) {
+        ILayer layer = this.gui.createLayer();
+        layer.setTileSize(new Dimension(60, 60));
+        layer.setTexture("chess_pieces.png");
+        layer.setSpriteCount((2 * 5) * 2);
+        for (int j = 0; j < 8; j++) {
+            for (int i = 0; i < 8; i++) {
+                int index = i + j * 8;
+                layer.setSpriteLocation(index, i * CBoard.TILE_WIDTH_PX, j * CBoard.TILE_HEIGHT_PX);
+
+            }
+        }
     }
 
     public void run() {
@@ -86,6 +116,7 @@ public class Main implements Runnable {
         try {
             gui.clearBackground();
             gui.drawBackground();
+            this.gui.drawLayer(this.charsLayer);
         } finally {
             gui.endPaint();
         }

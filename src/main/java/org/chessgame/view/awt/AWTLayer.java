@@ -9,13 +9,10 @@ import org.chessgame.view.viewinterface.ILayer;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.logging.Level;
 
-import static java.awt.Transparency.TRANSLUCENT;
 
 public class AWTLayer implements ILayer {
 
@@ -55,16 +52,17 @@ public class AWTLayer implements ILayer {
 
     @Override
     public void setTexture(String fileName) {
-        if (tileWidth == 0 || tileHeight == 0) {
+        if (this.tileWidth == 0 || this.tileHeight == 0) {
             throw new RuntimeException("Taille des tuiles non définie");
         }
         try {
-            texture = ImageIO.read(Objects.requireNonNull(this.getClass().getClassLoader().getResource(fileName)));
+            this.texture = ImageIO.read(Objects.requireNonNull(this.getClass().getClassLoader().getResource("Pieces/" + fileName)));
+            System.out.println(this.getClass().getClassLoader().getResource(fileName));
         } catch (IOException ex) {
             logger.log(Level.SEVERE, ex.toString());
         }
-        textureWidth = texture.getWidth() / tileWidth;
-        textureHeight = texture.getHeight() / tileHeight;
+        this.textureWidth = this.texture.getWidth() / this.tileWidth;
+        this.textureHeight = this.texture.getHeight() / this.tileHeight;
     }
 
     @Override
@@ -77,40 +75,40 @@ public class AWTLayer implements ILayer {
         if (sprites == null) {
             throw new RuntimeException("Sprites non définis");
         }
-        if (index < 0 || index >= sprites.length) {
+        if (index < 0 || index >= this.sprites.length) {
             throw new IllegalArgumentException("Index sprite " + index + " invalide");
         }
-        if (tileX < 0 || tileX >= textureWidth || tileY < 0 || tileY >= textureHeight) {
+        if (tileX < 0 || tileX >= this.textureWidth || tileY < 0 || tileY >= this.textureHeight) {
             throw new IllegalArgumentException("Coordonnées tuiles " + tileX + "," + tileY + " invalides");
         }
-        sprites[index][0] = tileX;
-        sprites[index][1] = tileY;
+        this.sprites[index][0] = tileX;
+        this.sprites[index][1] = tileY;
     }
 
     @Override
     public void setSpriteLocation(int index, int screenX, int screenY) {
         if (sprites == null || index < 0 || index >= sprites.length)
             return;
-        sprites[index][2] = screenX;
-        sprites[index][3] = screenY;
+        this.sprites[index][2] = screenX;
+        this.sprites[index][3] = screenY;
     }
 
     public void draw(Graphics g) {
-        if (texture == null) {
+        if (this.texture == null) {
             throw new RuntimeException("Texture non chargée");
         }
-        if (sprites == null) {
+        if (this.sprites == null) {
             throw new RuntimeException("Sprites non définis");
         }
-        if (tileWidth == 0 || tileHeight == 0) {
+        if (this.tileWidth == 0 || this.tileHeight == 0) {
             throw new RuntimeException("Taille des tuiles non définie");
         }
-        for (int i = 0; i < sprites.length; i++) {
-            int tileX = sprites[i][0];
-            int tileY = sprites[i][1];
-            int screenX = sprites[i][2];
-            int screenY = sprites[i][3];
-            g.drawImage(texture, screenX, screenY, screenX + tileWidth, screenY + tileHeight, tileX * tileWidth, tileY * tileHeight, tileX * tileWidth + tileWidth, tileY * tileHeight + tileHeight, null);
+        for (int[] sprite : this.sprites) {
+            int tileX = sprite[0];
+            int tileY = sprite[1];
+            int screenX = sprite[2];
+            int screenY = sprite[3];
+            g.drawImage(this.texture, screenX, screenY, screenX + this.tileWidth, screenY + this.tileHeight, tileX * this.tileWidth, tileY * this.tileHeight, tileX * this.tileWidth + this.tileWidth, tileY * this.tileHeight + this.tileHeight, null);
         }
     }
 
