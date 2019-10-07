@@ -1,7 +1,7 @@
 package ChessGameTest.View.ClassTest;
 
 import org.chessgame.model.abstract_class.Piece;
-import org.chessgame.share.enumeration.EElement;
+import org.chessgame.share.enumeration.CElement;
 import org.chessgame.share.iterator.BoardIterator;
 import org.chessgame.view.awt.services.SpriteLoader;
 
@@ -17,7 +17,7 @@ public class SpriteLoaderClassTest extends SpriteLoader {
     }
 
     @Override
-    public ArrayList<HashMap<EElement, BufferedImage>> getBufferedImages() {
+    public ArrayList<HashMap<CElement, BufferedImage>> getBufferedImages() {
         return super.getBufferedImages();
     }
 

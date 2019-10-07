@@ -3,8 +3,8 @@ package org.chessgame.view.awt;
 import org.chessgame.share.constant.CBoard;
 import org.chessgame.share.constant.CWindow;
 import org.chessgame.view.awt.graphics.CaseBoard;
-import org.chessgame.view.viewinterface.IGUIFacade;
-import org.chessgame.view.viewinterface.ILayer;
+import org.chessgame.view.view_interface.IGUIFacade;
+import org.chessgame.view.view_interface.ILayer;
 
 import java.awt.*;
 

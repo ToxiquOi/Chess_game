@@ -9,8 +9,8 @@ import org.chessgame.share.constant.CWindow;
 import org.chessgame.share.iterator.BoardIterator;
 import org.chessgame.share.services.ChessLogger;
 import org.chessgame.view.awt.component.BoardComponent;
-import org.chessgame.view.awt.services.SpriteLoader;
-import org.chessgame.view.awt.services.TileSelector;
+//import org.chessgame.view.awt.services.SpriteLoader;
+//import org.chessgame.view.awt.services.TileSelector;
 
 import java.util.logging.Level;
 import java.awt.*;

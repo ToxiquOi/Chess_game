@@ -6,8 +6,8 @@ import org.chessgame.model.board_element.pieces.Pawn;
 import org.chessgame.model.board_element.static_element.Empty;
 import org.chessgame.model.abstract_class.BoardElement;
 import org.chessgame.share.constant.CBoard;
+import org.chessgame.share.enumeration.CElement;
 import org.chessgame.share.enumeration.EColorChess;
-import org.chessgame.share.enumeration.EElement;
 import org.chessgame.share.iterator.BoardIterator;
 import ChessGameTest.Model.ClassTest.BoardClassTest;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,7 +34,7 @@ class TestBoard {
         BoardIterator bi = this.boardClassTest.iterator();
 
         while (bi.hasNext()) {
-            if(bi.next().getEelement() == EElement.EMPTY) {
+            if(bi.next().getEelement() == CElement.EMPTY) {
                 count++;
             }
         }
@@ -48,11 +48,11 @@ class TestBoard {
         boolean validate = false;
 
         this.boardClassTest.initPiecesPosition(EColorChess.WHITE);
-        if (boardClassTest.getElement(1, 0).getEelement() == EElement.PAWN) {
+        if (boardClassTest.getElement(1, 0).getEelement() == CElement.PAWN) {
             isEmptyElement = true;
         }
 
-        if (boardClassTest.getElement(2, 0).getEelement() == EElement.EMPTY) {
+        if (boardClassTest.getElement(2, 0).getEelement() == CElement.EMPTY) {
             isPawnElement = true;
         }
 
@@ -141,14 +141,14 @@ class TestBoard {
 //
 //        boardElement = this.boardClassTest.getElement(initialPosY, initialPosX);
 //        System.out.println(boardElement.getEelement());
-//        if (boardElement.getEelement() == EElement.EMPTY) {
+//        if (boardElement.getEelement() == CElement.EMPTY) {
 //            isEmptyElement = true;
 //            System.out.println("isEmpty");
 //        }
 //
 //        boardElement = this.boardClassTest.getElement(movedPosY, movedPosX);
 //        System.out.println(boardElement.getEelement());
-//        if (boardElement.getEelement() == EElement.PAWN) {
+//        if (boardElement.getEelement() == CElement.PAWN) {
 //            isPawnElement = true;
 //            System.out.println("isPawn");
 //        }

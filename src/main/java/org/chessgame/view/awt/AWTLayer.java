@@ -1,10 +1,7 @@
 package org.chessgame.view.awt;
 
-import org.chessgame.model.abstract_class.Piece;
-import org.chessgame.share.constant.CBoard;
-import org.chessgame.share.enumeration.EColorChess;
 import org.chessgame.share.services.ChessLogger;
-import org.chessgame.view.viewinterface.ILayer;
+import org.chessgame.view.view_interface.ILayer;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

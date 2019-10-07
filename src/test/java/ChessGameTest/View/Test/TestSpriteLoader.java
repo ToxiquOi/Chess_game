@@ -3,7 +3,7 @@ package ChessGameTest.View.Test;
 import org.chessgame.model.Board;
 import org.chessgame.model.board_element.pieces.Pawn;
 import org.chessgame.share.enumeration.EColorChess;
-import org.chessgame.share.enumeration.EElement;
+import org.chessgame.share.enumeration.CElement;
 import org.chessgame.view.awt.GameMonitor;
 import ChessGameTest.View.ClassTest.SpriteLoaderClassTest;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,7 +29,7 @@ class TestSpriteLoader {
     @Test
     void testInitSpriteLoader() {
         this.spriteLoaderClassTest.init(this.board.iterator());
-        ArrayList<HashMap<EElement, BufferedImage>> arrayList = this.spriteLoaderClassTest.getBufferedImages();
+        ArrayList<HashMap<CElement, BufferedImage>> arrayList = this.spriteLoaderClassTest.getBufferedImages();
 
         assertNotNull(arrayList.get(0), "test init sprite loader");
     }

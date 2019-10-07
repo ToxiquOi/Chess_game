@@ -1,12 +1,12 @@
 package org.chessgame.share.iterator;
 
 import org.chessgame.model.Board;
-import org.chessgame.model.abstract_class.BoardElement;
+import org.chessgame.model.board_element.Spot;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class BoardIterator implements Iterator<BoardElement> {
+public class BoardIterator implements Iterator<Spot> {
 
     private Board board;
     private int x;
@@ -27,7 +27,7 @@ public class BoardIterator implements Iterator<BoardElement> {
     }
 
     @Override
-    public BoardElement next() {
+    public Spot next() {
         if(this.x + 1 < this.board.getWidth()) {
             this.x++;
         }
@@ -42,9 +42,9 @@ public class BoardIterator implements Iterator<BoardElement> {
         return this.board.getElement(this.x, this.y);
     }
 
-    public Boolean isInstanceOfPiece(BoardElement boardElement) {
-        return this.board.isInstanceOfPiece(boardElement);
-    }
+//    public Boolean isInstanceOfPiece(CElement boardElement) {
+//        return this.board.isInstanceOfPiece(boardElement);
+//    }
 
     public void resetIterator() {
         this.x = -1;

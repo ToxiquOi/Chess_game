@@ -7,6 +7,7 @@ package org.chessgame.model.board_element.pieces;
 
 
 import org.chessgame.model.abstract_class.Piece;
+import org.chessgame.share.enumeration.CElement;
 import org.chessgame.share.enumeration.EColorChess;
 import org.chessgame.share.enumeration.EMove;
 
@@ -28,7 +29,12 @@ public class Bishop extends Piece {
         super(eColorChess);
     }
 
-    public Bishop(Piece piece) {
-        super(piece);
+    @Override
+    public int getCElement() {
+        if (this.eColorChess == EColorChess.WHITE) {
+            return CElement.WHITE_BISHOP;
+        } else {
+            return CElement.BLACK_BISHOP;
+        }
     }
 }

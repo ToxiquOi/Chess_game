@@ -4,8 +4,8 @@ import org.chessgame.model.Board;
 import org.chessgame.share.constant.CBoard;
 import org.chessgame.share.services.ChessLogger;
 import org.chessgame.view.awt.AWTGUIFacade;
-import org.chessgame.view.viewinterface.IGUIFacade;
-import org.chessgame.view.viewinterface.ILayer;
+import org.chessgame.view.view_interface.IGUIFacade;
+import org.chessgame.view.view_interface.ILayer;
 
 import java.awt.*;
 import java.util.logging.Level;
@@ -69,11 +69,15 @@ public class Main implements Runnable {
         layer.setTileSize(new Dimension(60, 60));
         layer.setTexture("chess_pieces.png");
         layer.setSpriteCount((2 * 5) * 2);
-        for (int j = 0; j < 8; j++) {
-            for (int i = 0; i < 8; i++) {
-                int index = i + j * 8;
-                layer.setSpriteLocation(index, i * CBoard.TILE_WIDTH_PX, j * CBoard.TILE_HEIGHT_PX);
-
+        for (int y = 0; y < 8; y++) {
+            for (int x = 0; x < 8; x++) {
+                int index = x + y * 8;
+                layer.setSpriteLocation(index, x * CBoard.TILE_WIDTH_PX, y * CBoard.TILE_HEIGHT_PX);
+                int tileIndex = this.board.getElement(y, x).getBoardElement().getCElement();
+                if(tileIndex < 0) {
+                    tileIndex = 0;
+                }
+//                int tileX =
             }
         }
     }

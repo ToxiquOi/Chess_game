@@ -1,14 +1,15 @@
 package org.chessgame.model.abstract_class;
 
-import org.chessgame.share.enumeration.EElement;
+import org.chessgame.share.enumeration.CElement;
 import org.chessgame.model.interface_element.IElement;
+import org.chessgame.share.services.ChessLogger;
+
+import java.lang.reflect.Field;
+import java.util.logging.Level;
 
 public abstract class BoardElement implements IElement {
-    public BoardElement() {
-    }
-
-    public EElement getEelement() {
-        String className = this.getClass().getSimpleName();
-        return EElement.valueOf(className.toUpperCase());
+    @Override
+    public int getCElement() {
+        return -1;
     }
 }

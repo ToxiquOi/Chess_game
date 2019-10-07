@@ -1,6 +1,4 @@
-package org.chessgame.view.viewinterface;
-
-import org.chessgame.model.abstract_class.Piece;
+package org.chessgame.view.view_interface;
 
 import java.awt.*;
 

@@ -1,4 +1,4 @@
-package org.chessgame.view.viewinterface;
+package org.chessgame.view.view_interface;
 
 public interface IGUIFacade {
     void createWindow(String title);
