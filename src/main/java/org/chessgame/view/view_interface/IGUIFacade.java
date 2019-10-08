@@ -1,5 +1,7 @@
 package org.chessgame.view.view_interface;
 
+import org.chessgame.model.Board;
+
 public interface IGUIFacade {
     void createWindow(String title);
     boolean beginPaint();
@@ -8,5 +10,7 @@ public interface IGUIFacade {
     boolean isClosingRequested();
     void drawBackground();
     void drawLayer(ILayer layer);
+    void drawChars();
+    void createSpriteLoader(Board board);
     ILayer createLayer();
 }

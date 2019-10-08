@@ -1,6 +1,7 @@
 package org.chessgame.share.iterator;
 
 import org.chessgame.model.Board;
+import org.chessgame.model.abstract_class.BoardElement;
 import org.chessgame.model.board_element.Spot;
 
 import java.util.Iterator;
@@ -42,9 +43,9 @@ public class BoardIterator implements Iterator<Spot> {
         return this.board.getElement(this.x, this.y);
     }
 
-//    public Boolean isInstanceOfPiece(CElement boardElement) {
-//        return this.board.isInstanceOfPiece(boardElement);
-//    }
+    public Boolean isInstanceOfPiece(BoardElement boardElement) {
+        return this.board.isInstanceOfPiece(boardElement);
+    }
 
     public void resetIterator() {
         this.x = -1;

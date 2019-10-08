@@ -18,7 +18,7 @@ public class Main implements Runnable {
 
     private static final String APP_TITLE = "chess";
     private IGUIFacade gui;
-    private ILayer charsLayer;
+//    private ILayer charsLayer;
     private static ChessLogger logger = new ChessLogger(Main.class);
     private final Board board = new Board();
 
@@ -26,20 +26,6 @@ public class Main implements Runnable {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-//        Board board = new Board();
-//        InputController inputController = new InputController();
-//        GameMonitor gm = new GameMonitor(APP_TITLE);
-//
-//        gm.addBoard(board);
-//        gm.addMouse(inputController.getMouse());
-//        gm.setSriteLoader();
-//        gm.setTileSelector();
-//        gm.init();
-//
-//        gm.setVisible(true);
-//        gm.start();
-//        gm.bench();
-
         Main chess = new Main();
         chess.setGui(new AWTGUIFacade());
         chess.start();
@@ -56,18 +42,19 @@ public class Main implements Runnable {
     }
 
     private void init() {
-        this.charsLayer = this.gui.createLayer();
-        this.charsLayer.setTileSize(new Dimension(60, 60));
-        this.charsLayer.setTexture("chess_pieces.png");
-        this.charsLayer.setSpriteCount(1);
-        this.charsLayer.setSpriteTexture(0, 1, 1);
-        this.charsLayer.setSpriteLocation(0, 1 * this.charsLayer.getTileWidth(), 4 * this.charsLayer.getTileHeight());
+//        this.charsLayer = this.defineAllSpriteInLayer("chess_pieces.png");
+//        this.charsLayer = this.gui.createLayer();
+//        this.charsLayer.setTileSize(new Dimension(60, 60));
+//        this.charsLayer.setTexture("chess_pieces.png");
+//        this.charsLayer.setSpriteCount(1);
+//        this.charsLayer.setSpriteTexture(0, 1, 1);
+//        this.charsLayer.setSpriteLocation(0, 1 * this.charsLayer.getTileWidth(), 4 * this.charsLayer.getTileHeight());
     }
 
-    private void defineAllSpriteInLayer(String fileName) {
+    private ILayer defineAllSpriteInLayer(String fileName) {
         ILayer layer = this.gui.createLayer();
         layer.setTileSize(new Dimension(60, 60));
-        layer.setTexture("chess_pieces.png");
+        layer.setTexture(fileName);
         layer.setSpriteCount((2 * 5) * 2);
         for (int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
@@ -77,13 +64,21 @@ public class Main implements Runnable {
                 if(tileIndex < 0) {
                     tileIndex = 0;
                 }
-//                int tileX =
+                int tileX = (tileIndex - 1) % layer.getTextureWidth();
+                int tileY = (tileIndex - 1) / layer.getTextureHeight();
+                if (tileY >= layer.getTextureHeight()) {
+                    tileX = 0;
+                    tileY = 0;
+                }
+                layer.setSpriteTexture(tileIndex, tileX, tileY);
             }
         }
+        return layer;
     }
 
     public void run() {
         this.gui.createWindow(APP_TITLE);
+        this.gui.createSpriteLoader(this.board);
 
         int fps = 60;
         long nanoPerFrame = (long) (1000000000.0 / fps);
@@ -120,7 +115,8 @@ public class Main implements Runnable {
         try {
             gui.clearBackground();
             gui.drawBackground();
-            this.gui.drawLayer(this.charsLayer);
+            gui.drawChars();
+
         } finally {
             gui.endPaint();
         }

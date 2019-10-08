@@ -1,17 +1,26 @@
 package org.chessgame.view.awt;
 
+import org.chessgame.model.Board;
+import org.chessgame.model.abstract_class.BoardElement;
+import org.chessgame.model.abstract_class.Piece;
+import org.chessgame.model.board_element.Spot;
 import org.chessgame.share.constant.CBoard;
 import org.chessgame.share.constant.CWindow;
+import org.chessgame.share.iterator.BoardIterator;
 import org.chessgame.view.awt.graphics.CaseBoard;
+import org.chessgame.view.awt.services.SpriteLoader;
 import org.chessgame.view.view_interface.IGUIFacade;
 import org.chessgame.view.view_interface.ILayer;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class AWTGUIFacade implements IGUIFacade {
 
     private Graphics g;
+    private Board board;
     private GameMonitor monitor;
+    private SpriteLoader spriteLoader;
 
 
     @Override
@@ -20,6 +29,12 @@ public class AWTGUIFacade implements IGUIFacade {
         this.monitor.init();
         this.monitor.setLocationRelativeTo(null);
         this.monitor.setVisible(true);
+    }
+
+    public void createSpriteLoader(Board board) {
+        this.board = board;
+        this.spriteLoader = new SpriteLoader(this.monitor);
+        this.spriteLoader.init(board.iterator());
     }
 
     public boolean isClosingRequested() {
@@ -73,6 +88,29 @@ public class AWTGUIFacade implements IGUIFacade {
         this.g.fillRect(0, 0, CWindow.WIDTH, CWindow.HEIGHT);
     }
 
+    public void drawChars() {
+        if(this.g == null) {
+            return;
+        }
+        BoardIterator bi = this.board.iterator();
+
+        while(bi.hasNext()) {
+            Spot spot = bi.next();
+            BoardElement boardElement = spot.getBoardElement();
+
+            boolean b = bi.isInstanceOfPiece(boardElement);
+            if (Boolean.TRUE.equals(b)) {
+                Piece piece = (Piece) boardElement;
+
+                BufferedImage image = this.spriteLoader.getBufferedImage(piece);
+                g.drawImage(image, spot.getY() * CBoard.TILE_HEIGHT_PX + (CBoard.TILE_HEIGHT_PX / 2 - (image.getHeight() / 2)),
+                        spot.getX() * CBoard.TILE_WIDTH_PX + (CBoard.TILE_WIDTH_PX / 2 - (image.getWidth() / 2)),
+                        image.getWidth(), image.getHeight(), null);
+
+            }
+        }
+
+    }
 
     public void drawBackground() {
         if (this.g == null) {

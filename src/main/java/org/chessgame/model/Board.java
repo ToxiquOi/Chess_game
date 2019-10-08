@@ -79,8 +79,8 @@ public class Board implements Iterable<Spot>, Serializable {
         return new BoardIterator(this);
     }
 
-    public Boolean isInstanceOfPiece(Spot spot) {
-        return spot.getBoardElement() instanceof Piece;
+    public Boolean isInstanceOfPiece(BoardElement boardElement) {
+        return boardElement instanceof Piece;
     }
 
 //    public Position findPiecePosition(Piece piece) {
