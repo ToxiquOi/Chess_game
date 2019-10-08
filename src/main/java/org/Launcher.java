@@ -9,11 +9,11 @@ import java.util.logging.Level;
 
 public class Launcher {
 
-    private final static ChessLogger launcherLogger = new ChessLogger(Launcher.class);
+    private static final ChessLogger launcherLogger = new ChessLogger(Launcher.class);
 
     private static class StreamPrinter implements Runnable {
 
-        private final static ChessLogger StreamPrinterLogger = new ChessLogger(StreamPrinter.class);
+        private static final ChessLogger StreamPrinterLogger = new ChessLogger(StreamPrinter.class);
 
         private final InputStream inputStream;
 
@@ -37,7 +37,7 @@ public class Launcher {
 
     public static boolean run(String className,boolean enableOpenGL) {
         try {
-            ArrayList<String> argumentList = new ArrayList<String>();
+            ArrayList<String> argumentList = new ArrayList<>();
             String javaHome = System.getProperty("java.home");
             argumentList.add( new File(javaHome, "bin/java").getPath() );
             argumentList.add("-cp");
@@ -59,8 +59,9 @@ public class Launcher {
             p.waitFor();
 
             return p.exitValue() == 0;
-        } catch (IOException | InterruptedException e) {
+        } catch (InterruptedException | IOException e) {
             launcherLogger.log(Level.SEVERE, e.toString());
+            Thread.currentThread().interrupt();
             return false;
         }
     }

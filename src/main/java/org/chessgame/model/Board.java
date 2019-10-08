@@ -1,6 +1,5 @@
 package org.chessgame.model;
 
-import org.chessgame.model.abstract_class.Position;
 import org.chessgame.model.board_element.Spot;
 import org.chessgame.model.board_element.pieces.*;
 import org.chessgame.model.board_element.static_element.Empty;
@@ -13,7 +12,6 @@ import org.chessgame.share.iterator.BoardIterator;
 import org.chessgame.share.services.ChessLogger;
 
 import java.io.Serializable;
-import java.util.Iterator;
 
 public class Board implements Iterable<Spot>, Serializable {
 

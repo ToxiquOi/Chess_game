@@ -10,6 +10,7 @@ import org.chessgame.view.view_interface.ILayer;
 import java.awt.*;
 import java.util.logging.Level;
 
+
 /**
  *
  * @author tox
@@ -42,13 +43,7 @@ public class Main implements Runnable {
     }
 
     private void init() {
-//        this.charsLayer = this.defineAllSpriteInLayer("chess_pieces.png");
-//        this.charsLayer = this.gui.createLayer();
-//        this.charsLayer.setTileSize(new Dimension(60, 60));
-//        this.charsLayer.setTexture("chess_pieces.png");
-//        this.charsLayer.setSpriteCount(1);
-//        this.charsLayer.setSpriteTexture(0, 1, 1);
-//        this.charsLayer.setSpriteLocation(0, 1 * this.charsLayer.getTileWidth(), 4 * this.charsLayer.getTileHeight());
+
     }
 
     private ILayer defineAllSpriteInLayer(String fileName) {
@@ -110,6 +105,7 @@ public class Main implements Runnable {
     private void render() {
         if (!gui.beginPaint()){
             logger.log(Level.INFO, "graphics is null");
+            System.out.println("graphics is null");
             return;
         }
         try {

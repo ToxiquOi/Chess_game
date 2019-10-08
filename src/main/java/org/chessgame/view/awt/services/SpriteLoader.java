@@ -3,7 +3,6 @@ package org.chessgame.view.awt.services;
 import org.chessgame.model.abstract_class.BoardElement;
 import org.chessgame.model.abstract_class.Piece;
 import org.chessgame.share.enumeration.EColorChess;
-import org.chessgame.share.enumeration.CElement;
 import org.chessgame.share.iterator.BoardIterator;
 import org.chessgame.share.services.ChessLogger;
 

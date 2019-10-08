@@ -1,4 +1,4 @@
-package org.chessgame.view.awt;
+package org.chessgame.view.awt.component;
 
 import org.chessgame.share.services.ChessLogger;
 import org.chessgame.view.view_interface.ILayer;
@@ -15,9 +15,11 @@ public class AWTLayer implements ILayer {
 
     private static ChessLogger logger = new ChessLogger(AWTLayer.class);
 
-    private int tileWidth, tileHeight;
+    private int tileWidth;
+    private int tileHeight;
     private BufferedImage texture;
-    private int textureWidth, textureHeight;
+    private int textureWidth;
+    private int textureHeight;
     private int[][] sprites;
 
 
