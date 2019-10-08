@@ -21,11 +21,11 @@ import java.util.logging.Level;
 
 public class AWTGUIFacade implements IGUIFacade {
 
-    private Graphics g;
-    private GameMonitor monitor;
-    private SpriteLoader spriteLoader;
-    private Board board;
-    private static ChessLogger chessLogger = new ChessLogger(AWTGUIFacade.class);
+    protected Graphics g;
+    protected GameMonitor monitor;
+    protected SpriteLoader spriteLoader;
+    protected Board board;
+    protected static ChessLogger chessLogger = new ChessLogger(AWTGUIFacade.class);
 
 
     @Override

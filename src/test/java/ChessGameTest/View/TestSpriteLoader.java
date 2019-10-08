@@ -1,13 +1,16 @@
-package ChessGameTest.View.Test;
+package ChessGameTest.View;
 
 import org.chessgame.model.Board;
+import org.chessgame.model.abstract_class.Piece;
 import org.chessgame.model.board_element.pieces.Pawn;
 import org.chessgame.share.enumeration.EColorChess;
+import org.chessgame.share.iterator.BoardIterator;
 import org.chessgame.view.awt.component.GameMonitor;
-import ChessGameTest.View.ClassTest.SpriteLoaderClassTest;
+import org.chessgame.view.awt.services.SpriteLoader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,6 +18,38 @@ import java.util.HashMap;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class TestSpriteLoader {
+
+    public static class SpriteLoaderClassTest extends SpriteLoader {
+
+        public SpriteLoaderClassTest( Frame frame) {
+            super(frame);
+        }
+
+        @Override
+        public ArrayList<HashMap<String, BufferedImage>> getBufferedImages() {
+            return super.getBufferedImages();
+        }
+
+        @Override
+        public void init(BoardIterator boardIterator) {
+            super.init(boardIterator);
+        }
+
+        @Override
+        public BufferedImage getBufferedImage(Piece piece) {
+            return super.getBufferedImage(piece);
+        }
+
+        @Override
+        public void getTextureFromFile(Piece element) {
+            super.getTextureFromFile(element);
+        }
+
+        @Override
+        public BufferedImage makeCompatibleFormatImage(BufferedImage image) {
+            return super.makeCompatibleFormatImage(image);
+        }
+    }
 
     private Board board = new Board();
     private GameMonitor gm = new GameMonitor("test");

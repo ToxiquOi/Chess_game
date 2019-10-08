@@ -1,11 +1,12 @@
-package ChessGameTest.Model.Test;
+package ChessGameTest.Model;
 
+import org.chessgame.model.Board;
+import org.chessgame.model.board_element.Spot;
 import org.chessgame.model.board_element.pieces.Pawn;
 import org.chessgame.model.board_element.static_element.Empty;
 import org.chessgame.model.abstract_class.BoardElement;
 import org.chessgame.share.constant.CBoard;
 import org.chessgame.share.iterator.BoardIterator;
-import ChessGameTest.Model.ClassTest.BoardClassTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +15,54 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 class TestBoard {
+
+    public static class BoardClassTest extends Board {
+
+
+        public BoardClassTest() {
+
+        }
+
+        @Override
+        public int getHeight() {
+            return super.getHeight();
+        }
+
+        @Override
+        public int getWidth() {
+            return super.getWidth();
+        }
+
+        @Override
+        public void generateBoard() {
+            super.generateBoard();
+        }
+
+        @Override
+        public Spot getElement(int y, int x) {
+            return super.getElement(y, x);
+        }
+
+//    @Override
+//    public Position findPiecePosition(Piece piece) {
+//        return super.findPiecePosition(piece);
+//    }
+
+        @Override
+        public Boolean isInstanceOfPiece(BoardElement boardElement) {
+            return super.isInstanceOfPiece(boardElement);
+        }
+
+        @Override
+        public void setEmptyElement(int y, int x) {
+            super.setEmptyElement(y, x);
+        }
+
+        @Override
+        public void initPiecesPosition() {
+            super.initPiecesPosition();
+        }
+    }
 
     private BoardClassTest boardClassTest;
 

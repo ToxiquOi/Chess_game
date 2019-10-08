@@ -9,10 +9,10 @@ import java.awt.image.BufferStrategy;
 
 public class GameMonitor extends Frame {
 
-    private BufferStrategy bs;
-    private Dimension d = new Dimension(CWindow.WIDTH, CWindow.HEIGHT);
-    private BoardComponent boardComponent;
-    private  boolean closingRequested = false;
+    protected BufferStrategy bs;
+    protected Dimension d = new Dimension(CWindow.WIDTH, CWindow.HEIGHT);
+    protected BoardComponent boardComponent;
+    protected boolean closingRequested = false;
 
 
     public GameMonitor(String title) {
@@ -51,7 +51,7 @@ public class GameMonitor extends Frame {
         this.bs = this.boardComponent.getBufferStrategy();
         if (this.bs == null) {
             this.boardComponent.createBufferStrategy(2);
-            return null;
+            this.bs = this.boardComponent.getBufferStrategy();
         }
 
         return this.bs.getDrawGraphics();
