@@ -56,7 +56,6 @@ public class AWTLayer implements ILayer {
         }
         try {
             this.texture = ImageIO.read(Objects.requireNonNull(this.getClass().getClassLoader().getResource("Pieces/" + fileName)));
-            System.out.println(this.getClass().getClassLoader().getResource(fileName));
         } catch (IOException ex) {
             logger.log(Level.SEVERE, ex.toString());
         }

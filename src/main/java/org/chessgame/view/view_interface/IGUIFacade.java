@@ -13,4 +13,5 @@ public interface IGUIFacade {
     void drawChars();
     void createSpriteLoader(Board board);
     ILayer createLayer();
+    void dispose();
 }

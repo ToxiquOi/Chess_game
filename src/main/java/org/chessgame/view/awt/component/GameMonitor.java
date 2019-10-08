@@ -26,7 +26,6 @@ public class GameMonitor extends Frame {
     public void init() {
         this.setSize(this.d);
         this.setResizable(false);
-        this.createBoardComponent();
 //        this.setLayout(new BorderLayout());
         this.setVisible(true);
 
@@ -40,19 +39,20 @@ public class GameMonitor extends Frame {
         this.closingRequested = false;
     }
 
-    private void createBoardComponent() {
+    public void createBoardComponent() {
         this.boardComponent = new BoardComponent(d);
         this.add(boardComponent);
         this.pack();
     }
 
     public Graphics createGraphics() {
+        this.bs = this.boardComponent.getBufferStrategy();
         if (this.bs == null) {
             this.boardComponent.createBufferStrategy(2);
-            this.bs = this.boardComponent.getBufferStrategy();
+            return null;
         }
 
-        return this.boardComponent.getGraphics();
+        return this.bs.getDrawGraphics();
     }
 
     public void switchBuffer() {

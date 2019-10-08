@@ -22,9 +22,9 @@ import java.util.logging.Level;
 public class AWTGUIFacade implements IGUIFacade {
 
     private Graphics g;
-    private Board board;
     private GameMonitor monitor;
     private SpriteLoader spriteLoader;
+    private Board board;
     private static ChessLogger chessLogger = new ChessLogger(AWTGUIFacade.class);
 
 
@@ -32,33 +32,9 @@ public class AWTGUIFacade implements IGUIFacade {
     public void createWindow(String title) {
         this.monitor = new GameMonitor(title);
         this.monitor.init();
+        this.monitor.createBoardComponent();
         this.monitor.setLocationRelativeTo(null);
         this.monitor.setVisible(true);
-    }
-
-    public void createSpriteLoader(Board board) {
-        this.board = board;
-        this.spriteLoader = new SpriteLoader(this.monitor);
-        this.spriteLoader.init(board.iterator());
-    }
-
-    public boolean isClosingRequested() {
-        return this.monitor.isClosingRequested();
-    }
-
-    @Override
-    public void drawLayer(ILayer layer) {
-        if (this.g == null) {
-            return;
-        }
-        if (layer == null) {
-            throw new IllegalArgumentException("pas de layer");
-        }
-        if (!(layer instanceof AWTLayer)) {
-            throw new IllegalArgumentException("Type de layer Invalide");
-        }
-        AWTLayer awtLayer = (AWTLayer) layer;
-        awtLayer.draw(this.g);
     }
 
     @Override
@@ -66,46 +42,59 @@ public class AWTGUIFacade implements IGUIFacade {
         return new AWTLayer();
     }
 
+    @Override
+    public void createSpriteLoader(Board board) {
+        this.board = board;
+        this.spriteLoader = new SpriteLoader(this.monitor);
+        this.spriteLoader.init(board.iterator());
+    }
+
+    @Override
+    public void dispose() {
+        this.monitor.dispose();
+    }
+
+    public boolean isClosingRequested() {
+        return this.monitor.isClosingRequested();
+    }
+
+
+    @Override
     public boolean beginPaint() {
         if (this.g != null) {
-            chessLogger.log(Level.INFO, "begin paint: g != null");
-            System.out.println("begin paint: g != null");
             this.g.dispose();
         }
-        System.out.println("begin paint: g == null");
         this.g = this.monitor.createGraphics();
-
         return this.g != null;
     }
 
+    @Override
     public void endPaint() {
         if (this.g == null) {
-            chessLogger.log(Level.INFO, "end paint: g == null");
-            System.out.println("end paint: g == null");
             return;
         }
-        System.out.println("end paint: g != null");
         this.g.dispose();
         this.g = null;
         this.monitor.switchBuffer();
     }
 
+    @Override
     public void clearBackground() {
         if (this.g == null) {
             chessLogger.log(Level.INFO, "clearBackground: g == null");
             return;
         }
-        System.out.println("clearBackground: g != null");
         this.g.setColor(Color.BLACK);
         this.g.fillRect(0, 0, CWindow.WIDTH, CWindow.HEIGHT);
     }
 
+    @Override
     public void drawChars() {
         if(this.g == null) {
             chessLogger.log(Level.INFO, "drawChars: g == null");
             return;
         }
-        System.out.println("drawChars: g != null");
+
         BoardIterator bi = this.board.iterator();
 
         while(bi.hasNext()) {
@@ -127,11 +116,12 @@ public class AWTGUIFacade implements IGUIFacade {
         bi.resetIterator();
     }
 
+    @Override
     public void drawBackground() {
         if (this.g == null) {
+//            System.out.println("drawBackground: " + this.g == null);
             return;
         }
-
         for(int x = 0; x < (this.monitor.getWidth() / CBoard.TILE_WIDTH_PX); x++) {
             for(int y = 0; y < (this.monitor.getHeight() / CBoard.TILE_HEIGHT_PX); y++) {
                 if(((x + y) % 2) == 1) {
@@ -144,4 +134,20 @@ public class AWTGUIFacade implements IGUIFacade {
             }
         }
     }
+
+    @Override
+    public void drawLayer(ILayer layer) {
+        if (this.g == null) {
+            return;
+        }
+        if (layer == null) {
+            throw new IllegalArgumentException("pas de layer");
+        }
+        if (!(layer instanceof AWTLayer)) {
+            throw new IllegalArgumentException("Type de layer Invalide");
+        }
+        AWTLayer awtLayer = (AWTLayer) layer;
+        awtLayer.draw(this.g);
+    }
+
 }

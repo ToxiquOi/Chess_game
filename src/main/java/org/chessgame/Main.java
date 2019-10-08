@@ -19,7 +19,7 @@ public class Main implements Runnable {
 
     private static final String APP_TITLE = "chess";
     private IGUIFacade gui;
-//    private ILayer charsLayer;
+    private ILayer charsLayer;
     private static ChessLogger logger = new ChessLogger(Main.class);
     private final Board board = new Board();
 
@@ -29,13 +29,8 @@ public class Main implements Runnable {
     public static void main(String[] args) {
         Main chess = new Main();
         chess.setGui(new AWTGUIFacade());
-        chess.start();
-    }
-
-    public void start() {
-        this.init();
-        Thread thread = new Thread(this, "Chess_Game");
-        thread.start();
+        chess.init();
+        chess.run();
     }
 
     private void setGui(IGUIFacade gui) {
@@ -43,33 +38,14 @@ public class Main implements Runnable {
     }
 
     private void init() {
-
+        this.charsLayer = this.gui.createLayer();
+        this.charsLayer.setSpriteCount(1);
+        this.charsLayer.setTileSize(new Dimension(70, 50));
+        this.charsLayer.setTexture("chess_pieces.png");
+        this.charsLayer.setSpriteTexture(0, 4, 0);
+        this.charsLayer.setSpriteLocation(0, 35, 25 );
     }
 
-    private ILayer defineAllSpriteInLayer(String fileName) {
-        ILayer layer = this.gui.createLayer();
-        layer.setTileSize(new Dimension(60, 60));
-        layer.setTexture(fileName);
-        layer.setSpriteCount((2 * 5) * 2);
-        for (int y = 0; y < 8; y++) {
-            for (int x = 0; x < 8; x++) {
-                int index = x + y * 8;
-                layer.setSpriteLocation(index, x * CBoard.TILE_WIDTH_PX, y * CBoard.TILE_HEIGHT_PX);
-                int tileIndex = this.board.getElement(y, x).getBoardElement().getCElement();
-                if(tileIndex < 0) {
-                    tileIndex = 0;
-                }
-                int tileX = (tileIndex - 1) % layer.getTextureWidth();
-                int tileY = (tileIndex - 1) / layer.getTextureHeight();
-                if (tileY >= layer.getTextureHeight()) {
-                    tileX = 0;
-                    tileY = 0;
-                }
-                layer.setSpriteTexture(tileIndex, tileX, tileY);
-            }
-        }
-        return layer;
-    }
 
     public void run() {
         this.gui.createWindow(APP_TITLE);
@@ -100,12 +76,11 @@ public class Main implements Runnable {
                 }
             }
         }
+        this.gui.dispose();
     }
 
     private void render() {
-        if (!gui.beginPaint()){
-            logger.log(Level.INFO, "graphics is null");
-            System.out.println("graphics is null");
+        if (!gui.beginPaint()) {
             return;
         }
         try {
@@ -121,6 +96,9 @@ public class Main implements Runnable {
     public void bench() {
         int count = 0;
         long begin = System.nanoTime();
+
+        this.gui.createWindow(APP_TITLE);
+        this.gui.createSpriteLoader(this.board);
 
         while(!this.gui.isClosingRequested()) {
             this.render();

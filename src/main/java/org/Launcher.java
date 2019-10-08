@@ -42,6 +42,7 @@ public class Launcher {
             argumentList.add( new File(javaHome, "bin/java").getPath() );
             argumentList.add("-cp");
             argumentList.add( System.getProperty("java.class.path") );
+
             if (enableOpenGL) {
                 argumentList.add("-Dsun.java2d.opengl=True");
             }
