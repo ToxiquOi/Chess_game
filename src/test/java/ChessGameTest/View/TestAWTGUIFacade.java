@@ -50,6 +50,6 @@ public class TestAWTGUIFacade {
         this.awtguiFacade.beginPaint();
         this.awtguiFacade.clearBackground();
 
-        assertEquals(this.awtguiFacade.getGraphics().getColor(), Color.BLACK, "testClearBackground");
+        assertEquals(Color.BLACK, this.awtguiFacade.getGraphics().getColor(), "testClearBackground");
     }
 }

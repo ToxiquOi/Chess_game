@@ -40,23 +40,21 @@ public class TileSelector implements Serializable {
     }
 
     public void clickChecker() {
-        if (this.mouse.isButtonPressed(MouseEvent.BUTTON1)) {
-            if(this.selectTile()) {
-                this.colorSelect = new Color(0x128E00);
+        if (this.mouse.isButtonPressed(MouseEvent.BUTTON1) && this.selectTile()) {
+            this.colorSelect = new Color(0x128E00);
+
+        } else if (this.mouse.isButtonPressed(MouseEvent.BUTTON3) && this.selectTile()) {
+
+            this.colorSelect = new Color(0xEB0900);
+            BoardElement boardElement = this.board.getElement(this.mouse.getY() / CBoard.TILE_HEIGHT_PX, this.mouse.getX() / CBoard.TILE_WIDTH_PX).getBoardElement();
+            boolean b = this.board.isInstanceOfPiece(boardElement);
+
+            if(Boolean.TRUE.equals(b)) {
+                Piece piece = (Piece) boardElement;
+                piece.die();
+                this.board.setEmptyElement(this.mouse.getY() / CBoard.TILE_HEIGHT_PX, this.mouse.getX() / CBoard.TILE_WIDTH_PX);
             }
 
-        } else if (this.mouse.isButtonPressed(MouseEvent.BUTTON3)) {
-            if(this.selectTile()) {
-                this.colorSelect = new Color(0xEB0900);
-                BoardElement boardElement = this.board.getElement(this.mouse.getY() / CBoard.TILE_HEIGHT_PX, this.mouse.getX() / CBoard.TILE_WIDTH_PX).getBoardElement();
-                boolean b = this.board.isInstanceOfPiece(boardElement);
-
-                if(Boolean.TRUE.equals(b)) {
-                    Piece piece = (Piece) boardElement;
-                    piece.die();
-                    this.board.setEmptyElement(this.mouse.getY() / CBoard.TILE_HEIGHT_PX, this.mouse.getX() / CBoard.TILE_WIDTH_PX);
-                }
-            }
         }
     }
 

@@ -21,7 +21,7 @@ import static java.awt.Transparency.TRANSLUCENT;
 public class SpriteLoader implements Serializable {
 
     private static ChessLogger chessLogger = new ChessLogger(SpriteLoader.class);
-    private ArrayList<HashMap<String, BufferedImage>> bufferedImages = new ArrayList<>(2);
+    private transient ArrayList<HashMap<String, BufferedImage>> bufferedImages = new ArrayList<>(2);
     private Frame frame;
 
     public SpriteLoader( Frame frame) {

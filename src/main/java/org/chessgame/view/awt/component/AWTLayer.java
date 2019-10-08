@@ -1,5 +1,6 @@
 package org.chessgame.view.awt.component;
 
+import org.chessgame.share.exception.LayerException;
 import org.chessgame.share.services.ChessLogger;
 import org.chessgame.view.view_interface.ILayer;
 
@@ -52,7 +53,7 @@ public class AWTLayer implements ILayer {
     @Override
     public void setTexture(String fileName) {
         if (this.tileWidth == 0 || this.tileHeight == 0) {
-            throw new RuntimeException("Taille des tuiles non définie");
+            throw new LayerException("Taille des tuiles non définie");
         }
         try {
             this.texture = ImageIO.read(Objects.requireNonNull(this.getClass().getClassLoader().getResource("Pieces/" + fileName)));
@@ -71,7 +72,7 @@ public class AWTLayer implements ILayer {
     @Override
     public void setSpriteTexture(int index, int tileX, int tileY) {
         if (sprites == null) {
-            throw new RuntimeException("Sprites non définis");
+            throw new LayerException("Sprites non définis");
         }
         if (index < 0 || index >= this.sprites.length) {
             throw new IllegalArgumentException("Index sprite " + index + " invalide");
@@ -93,13 +94,13 @@ public class AWTLayer implements ILayer {
 
     public void draw(Graphics g) {
         if (this.texture == null) {
-            throw new RuntimeException("Texture non chargée");
+            throw new LayerException("Texture non chargée");
         }
         if (this.sprites == null) {
-            throw new RuntimeException("Sprites non définis");
+            throw new LayerException("Sprites non définis");
         }
         if (this.tileWidth == 0 || this.tileHeight == 0) {
-            throw new RuntimeException("Taille des tuiles non définie");
+            throw new LayerException("Taille des tuiles non définie");
         }
         for (int[] sprite : this.sprites) {
             int tileX = sprite[0];

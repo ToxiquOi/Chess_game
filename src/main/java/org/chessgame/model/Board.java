@@ -14,7 +14,7 @@ import java.io.Serializable;
 
 public class Board implements Iterable<Spot>, Serializable {
 
-    protected Spot[][] boardElement = new Spot[CBoard.TILE_HEIGHT_TAB][CBoard.TILE_WIDTH_TAB];
+    protected transient Spot[][] boardElement = new Spot[CBoard.TILE_HEIGHT_TAB][CBoard.TILE_WIDTH_TAB];
 
     public Board() {
         this.generateBoard();

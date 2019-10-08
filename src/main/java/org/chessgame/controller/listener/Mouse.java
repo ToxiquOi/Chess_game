@@ -15,6 +15,14 @@ public class Mouse implements MouseListener, MouseMotionListener, Serializable {
     private int x;
     private int y;
 
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
     public int getX() {
         return this.x;
     }
@@ -59,13 +67,13 @@ public class Mouse implements MouseListener, MouseMotionListener, Serializable {
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        this.x = e.getX();
-        this.y = e.getY();
+        this.setX(e.getX());
+        this.setY(e.getY());
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        this.x = e.getX();
-        this.y = e.getY();
+        this.setX(e.getX());
+        this.setY(e.getY());
     }
 }
