@@ -9,7 +9,6 @@ import org.chessgame.share.constant.CBoard;
 import org.chessgame.share.enumeration.EColorChess;
 import org.chessgame.share.constant.CWindow;
 import org.chessgame.share.iterator.BoardIterator;
-import org.chessgame.share.services.ChessLogger;
 
 import java.io.Serializable;
 

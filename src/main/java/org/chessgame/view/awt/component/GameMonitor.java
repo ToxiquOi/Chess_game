@@ -12,7 +12,7 @@ public class GameMonitor extends Frame {
     private BufferStrategy bs;
     private Dimension d = new Dimension(CWindow.WIDTH, CWindow.HEIGHT);
     private BoardComponent boardComponent;
-    private static boolean closingRequested = false;
+    private  boolean closingRequested = false;
 
 
     public GameMonitor(String title) {
