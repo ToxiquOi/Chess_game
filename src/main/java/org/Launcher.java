@@ -27,7 +27,7 @@ public class Launcher {
             String line = "";
             try {
                 while ((line = br.readLine()) != null) {
-                    System.out.println(line);
+                    launcherLogger.log(Level.INFO, line);
                 }
             } catch (IOException e) {
                 StreamPrinterLogger.log(Level.SEVERE, e.toString());

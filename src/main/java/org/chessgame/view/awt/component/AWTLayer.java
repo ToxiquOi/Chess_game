@@ -109,12 +109,4 @@ public class AWTLayer implements ILayer {
             g.drawImage(this.texture, screenX, screenY, screenX + this.tileWidth, screenY + this.tileHeight, tileX * this.tileWidth, tileY * this.tileHeight, tileX * this.tileWidth + this.tileWidth, tileY * this.tileHeight + this.tileHeight, null);
         }
     }
-
-//    protected BufferedImage makeCompatibleFormatImage(BufferedImage image) {
-//        BufferedImage compatibleTexture = this.frame.getGraphicsConfiguration().createCompatibleImage(image.getWidth(), image.getHeight(), TRANSLUCENT);
-//        Graphics gCompText = compatibleTexture.createGraphics();
-//        gCompText.drawImage(image, 0, 0, null);
-//
-//        return compatibleTexture;
-//    }
 }

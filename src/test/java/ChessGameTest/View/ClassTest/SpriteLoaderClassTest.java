@@ -1,7 +1,6 @@
 package ChessGameTest.View.ClassTest;
 
 import org.chessgame.model.abstract_class.Piece;
-import org.chessgame.share.enumeration.CElement;
 import org.chessgame.share.iterator.BoardIterator;
 import org.chessgame.view.awt.services.SpriteLoader;
 

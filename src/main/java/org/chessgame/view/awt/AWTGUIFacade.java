@@ -31,6 +31,7 @@ public class AWTGUIFacade implements IGUIFacade {
     @Override
     public void createWindow(String title) {
         this.monitor = new GameMonitor(title);
+        this.monitor.setLayout(new BorderLayout());
         this.monitor.init();
         this.monitor.createBoardComponent();
         this.monitor.setLocationRelativeTo(null);
@@ -119,11 +120,10 @@ public class AWTGUIFacade implements IGUIFacade {
     @Override
     public void drawBackground() {
         if (this.g == null) {
-//            System.out.println("drawBackground: " + this.g == null);
             return;
         }
-        for(int x = 0; x < (this.monitor.getWidth() / CBoard.TILE_WIDTH_PX); x++) {
-            for(int y = 0; y < (this.monitor.getHeight() / CBoard.TILE_HEIGHT_PX); y++) {
+        for(int x = 0; x < CBoard.TILE_HEIGHT_TAB; x++) {
+            for(int y = 0; y < CBoard.TILE_WIDTH_TAB; y++) {
                 if(((x + y) % 2) == 1) {
                     this.g.setColor(Color.WHITE);
                 }

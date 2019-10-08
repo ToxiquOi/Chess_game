@@ -1,6 +1,9 @@
-package org.chessgame.share.enumeration;
+package org.chessgame.share.constant;
 
 public class CElement {
+    private CElement() {
+    }
+
     public static final int EMPTY = 0;
     public static final int BLACK_PAWN = 1;
     public static final int BLACK_KING = 2;

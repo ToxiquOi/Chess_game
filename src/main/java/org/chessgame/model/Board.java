@@ -15,7 +15,6 @@ import java.io.Serializable;
 
 public class Board implements Iterable<Spot>, Serializable {
 
-    private static ChessLogger chessLogger = new ChessLogger(Board.class);
     protected Spot[][] boardElement = new Spot[CBoard.TILE_HEIGHT_TAB][CBoard.TILE_WIDTH_TAB];
 
     public Board() {

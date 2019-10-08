@@ -1,7 +1,8 @@
 package org.chessgame;
 
 import org.chessgame.model.Board;
-import org.chessgame.share.constant.CBoard;
+import org.chessgame.model.board_element.pieces.Pawn;
+import org.chessgame.share.enumeration.EColorChess;
 import org.chessgame.share.services.ChessLogger;
 import org.chessgame.view.awt.AWTGUIFacade;
 import org.chessgame.view.view_interface.IGUIFacade;
@@ -19,7 +20,6 @@ public class Main implements Runnable {
 
     private static final String APP_TITLE = "chess";
     private IGUIFacade gui;
-    private ILayer charsLayer;
     private static ChessLogger logger = new ChessLogger(Main.class);
     private final Board board = new Board();
 
@@ -38,17 +38,11 @@ public class Main implements Runnable {
     }
 
     private void init() {
-        this.charsLayer = this.gui.createLayer();
-        this.charsLayer.setSpriteCount(1);
-        this.charsLayer.setTileSize(new Dimension(70, 50));
-        this.charsLayer.setTexture("chess_pieces.png");
-        this.charsLayer.setSpriteTexture(0, 4, 0);
-        this.charsLayer.setSpriteLocation(0, 35, 25 );
+        this.gui.createWindow(APP_TITLE);
     }
 
 
     public void run() {
-        this.gui.createWindow(APP_TITLE);
         this.gui.createSpriteLoader(this.board);
 
         int fps = 60;

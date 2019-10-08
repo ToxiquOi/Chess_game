@@ -7,7 +7,7 @@ package org.chessgame.model.board_element.pieces;
 
 
 import org.chessgame.model.abstract_class.Piece;
-import org.chessgame.share.enumeration.CElement;
+import org.chessgame.share.constant.CElement;
 import org.chessgame.share.enumeration.EColorChess;
 import org.chessgame.share.enumeration.EMove;
 

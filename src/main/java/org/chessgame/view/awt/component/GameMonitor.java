@@ -12,7 +12,7 @@ public class GameMonitor extends Frame {
     private BufferStrategy bs;
     private Dimension d = new Dimension(CWindow.WIDTH, CWindow.HEIGHT);
     private BoardComponent boardComponent;
-    private boolean closingRequested = false;
+    private static boolean closingRequested = false;
 
 
     public GameMonitor(String title) {
@@ -20,28 +20,30 @@ public class GameMonitor extends Frame {
     }
 
     public boolean isClosingRequested() {
-        return this.closingRequested;
+        return closingRequested;
     }
 
     public void init() {
+        closingRequested = false;
         this.setSize(this.d);
         this.setResizable(false);
-//        this.setLayout(new BorderLayout());
         this.setVisible(true);
 
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 closingRequested = true;
-                dispose();
             }
         });
-        this.closingRequested = false;
+    }
+
+    public void setLayoutManager(LayoutManager layoutManager) {
+        this.setLayout(layoutManager);
     }
 
     public void createBoardComponent() {
         this.boardComponent = new BoardComponent(d);
-        this.add(boardComponent);
+        this.add(BorderLayout.CENTER, boardComponent);
         this.pack();
     }
 
