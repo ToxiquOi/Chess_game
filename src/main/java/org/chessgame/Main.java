@@ -1,14 +1,10 @@
 package org.chessgame;
 
 import org.chessgame.model.Board;
-import org.chessgame.model.board_element.pieces.Pawn;
-import org.chessgame.share.enumeration.EColorChess;
 import org.chessgame.share.services.ChessLogger;
 import org.chessgame.view.awt.AWTGUIFacade;
 import org.chessgame.view.view_interface.IGUIFacade;
-import org.chessgame.view.view_interface.ILayer;
 
-import java.awt.*;
 import java.util.logging.Level;
 
 
