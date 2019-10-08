@@ -1,5 +1,6 @@
 package org.chessgame.model;
 
+import org.chessgame.model.abstract_class.Position;
 import org.chessgame.model.board_element.Spot;
 import org.chessgame.model.board_element.pieces.*;
 import org.chessgame.model.board_element.static_element.Empty;
@@ -82,23 +83,4 @@ public class Board implements Iterable<Spot>, Serializable {
     public Boolean isInstanceOfPiece(BoardElement boardElement) {
         return boardElement instanceof Piece;
     }
-
-//    public Position findPiecePosition(Piece piece) {
-//        BoardIterator boardIterator = this.iterator();
-//
-//        while (boardIterator.hasNext()) {
-//            CElement boardElement = boardIterator.next();
-//            Boolean b = this.isInstanceOfPiece(boardElement);
-//
-//            if (Boolean.TRUE.equals(b)) {
-//                Piece p = (Piece) boardElement;
-//                if (p.getEelement() == piece.getEelement() && p.getEColorChess() == piece.getEColorChess()) {
-//                    break;
-//                }
-//            }
-//
-//        }
-//
-//        return new Position(boardIterator.getY(), boardIterator.getX());
-//    }
 }

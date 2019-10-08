@@ -17,7 +17,7 @@ public class SpriteLoaderClassTest extends SpriteLoader {
     }
 
     @Override
-    public ArrayList<HashMap<CElement, BufferedImage>> getBufferedImages() {
+    public ArrayList<HashMap<String, BufferedImage>> getBufferedImages() {
         return super.getBufferedImages();
     }
 

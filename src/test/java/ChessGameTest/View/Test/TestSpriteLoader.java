@@ -29,7 +29,7 @@ class TestSpriteLoader {
     @Test
     void testInitSpriteLoader() {
         this.spriteLoaderClassTest.init(this.board.iterator());
-        ArrayList<HashMap<CElement, BufferedImage>> arrayList = this.spriteLoaderClassTest.getBufferedImages();
+        ArrayList<HashMap<String, BufferedImage>> arrayList = this.spriteLoaderClassTest.getBufferedImages();
 
         assertNotNull(arrayList.get(0), "test init sprite loader");
     }
@@ -41,7 +41,7 @@ class TestSpriteLoader {
         this.spriteLoaderClassTest.init(this.board.iterator());
         this.spriteLoaderClassTest.getTextureFromFile(pawn);
 
-        assertNotNull(this.spriteLoaderClassTest.getBufferedImages().get(0).get(pawn.getEelement()), "test get texture from file");
+        assertNotNull(this.spriteLoaderClassTest.getBufferedImages().get(0).get(pawn.getClass().getSimpleName()), "test get texture from file");
     }
 
     @Test

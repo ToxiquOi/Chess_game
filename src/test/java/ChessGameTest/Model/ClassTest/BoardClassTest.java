@@ -4,6 +4,7 @@ import org.chessgame.model.abstract_class.Position;
 import org.chessgame.model.Board;
 import org.chessgame.model.abstract_class.BoardElement;
 import org.chessgame.model.abstract_class.Piece;
+import org.chessgame.model.board_element.Spot;
 import org.chessgame.share.enumeration.EColorChess;
 
 public class BoardClassTest extends Board {
@@ -29,19 +30,14 @@ public class BoardClassTest extends Board {
     }
 
     @Override
-    public BoardElement getElement(int y, int x) {
+    public Spot getElement(int y, int x) {
         return super.getElement(y, x);
     }
 
-    @Override
-    public Position findPiecePosition(Piece piece) {
-        return super.findPiecePosition(piece);
-    }
-
-    @Override
-    public void moveElement(int y, int x, BoardElement boardElement) {
-        super.moveElement(y, x, boardElement);
-    }
+//    @Override
+//    public Position findPiecePosition(Piece piece) {
+//        return super.findPiecePosition(piece);
+//    }
 
     @Override
     public Boolean isInstanceOfPiece(BoardElement boardElement) {
@@ -54,7 +50,7 @@ public class BoardClassTest extends Board {
     }
 
     @Override
-    public void initPiecesPosition(EColorChess eColorChess) {
-        super.initPiecesPosition(eColorChess);
+    public void initPiecesPosition() {
+        super.initPiecesPosition();
     }
 }
