@@ -16,18 +16,12 @@ public abstract class Piece extends BoardElement {
 
     private boolean isAlive;
     protected EColorChess eColorChess;
-    private EMove[] moves;
+    private EMove[] moves = {};
 
 
     public Piece(EColorChess eColorChess) {
         this.eColorChess = eColorChess;
         this.isAlive = true;
-    }
-
-    public Piece(Piece piece) {
-        this.isAlive = piece.getIsAlive();
-        this.eColorChess = piece.getEColorChess();
-        this.moves = piece.getMoves();
     }
 
     public boolean getIsAlive() {
@@ -36,10 +30,6 @@ public abstract class Piece extends BoardElement {
 
     public EMove[] getMoves() {
         return this.moves;
-    }
-
-    public boolean isAlive() {
-        return this.isAlive;
     }
 
     public void die() {

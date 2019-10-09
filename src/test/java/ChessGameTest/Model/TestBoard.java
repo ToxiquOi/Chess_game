@@ -43,11 +43,6 @@ class TestBoard {
             return super.getElement(y, x);
         }
 
-//    @Override
-//    public Position findPiecePosition(Piece piece) {
-//        return super.findPiecePosition(piece);
-//    }
-
         @Override
         public Boolean isInstanceOfPiece(BoardElement boardElement) {
             return super.isInstanceOfPiece(boardElement);
