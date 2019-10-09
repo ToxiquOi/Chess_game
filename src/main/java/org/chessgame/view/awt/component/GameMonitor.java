@@ -9,7 +9,7 @@ import java.awt.image.BufferStrategy;
 
 public class GameMonitor extends Frame {
 
-    protected BufferStrategy bs;
+    protected transient BufferStrategy bs;
     protected Dimension d = new Dimension(CWindow.WIDTH, CWindow.HEIGHT);
     protected BoardComponent boardComponent;
     protected boolean closingRequested = false;
