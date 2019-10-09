@@ -4,13 +4,13 @@ import org.chessgame.model.Board;
 
 public interface IGUIFacade {
     void createWindow(String title);
-    boolean beginPaint();
-    void endPaint();
-    void clearBackground();
+    Boolean beginPaint();
+    Boolean endPaint();
+    Boolean clearBackground();
     boolean isClosingRequested();
-    void drawBackground();
-    void drawLayer(ILayer layer);
-    void drawChars();
+    Boolean drawBackground();
+    Boolean drawLayer(ILayer layer);
+    Boolean drawChars();
     void createSpriteLoader(Board board);
     ILayer createLayer();
     void dispose();

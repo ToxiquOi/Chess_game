@@ -25,7 +25,7 @@ public class AWTGUIFacade implements IGUIFacade {
     protected GameMonitor monitor;
     protected SpriteLoader spriteLoader;
     protected Board board;
-    protected static ChessLogger chessLogger = new ChessLogger(AWTGUIFacade.class);
+    private static ChessLogger chessLogger = new ChessLogger(AWTGUIFacade.class);
 
 
     @Override
@@ -61,39 +61,44 @@ public class AWTGUIFacade implements IGUIFacade {
 
 
     @Override
-    public boolean beginPaint() {
+    public Boolean beginPaint() {
         if (this.g != null) {
             this.g.dispose();
+            return null;
         }
         this.g = this.monitor.createGraphics();
         return this.g != null;
     }
 
     @Override
-    public void endPaint() {
+    public Boolean endPaint() {
         if (this.g == null) {
-            return;
+            return null;
         }
+
         this.g.dispose();
         this.g = null;
         this.monitor.switchBuffer();
+        return true;
     }
 
     @Override
-    public void clearBackground() {
+    public Boolean clearBackground() {
         if (this.g == null) {
-            chessLogger.log(Level.INFO, "clearBackground: g == null");
-            return;
+            chessLogger.log(Level.INFO, "clearBackground: Graphics is null");
+            return null;
         }
         this.g.setColor(Color.BLACK);
         this.g.fillRect(0, 0, CWindow.WIDTH, CWindow.HEIGHT);
+
+        return true;
     }
 
     @Override
-    public void drawChars() {
+    public Boolean drawChars() {
         if(this.g == null) {
-            chessLogger.log(Level.INFO, "drawChars: g == null");
-            return;
+            chessLogger.log(Level.INFO, "drawChars: Graphics is null");
+            return null;
         }
 
         BoardIterator bi = this.board.iterator();
@@ -115,12 +120,13 @@ public class AWTGUIFacade implements IGUIFacade {
         }
 
         bi.resetIterator();
+        return true;
     }
 
     @Override
-    public void drawBackground() {
+    public Boolean drawBackground() {
         if (this.g == null) {
-            return;
+            return null;
         }
         for(int x = 0; x < CBoard.TILE_HEIGHT_TAB; x++) {
             for(int y = 0; y < CBoard.TILE_WIDTH_TAB; y++) {
@@ -133,12 +139,14 @@ public class AWTGUIFacade implements IGUIFacade {
                 CaseBoard.draw(x, y, this.g);
             }
         }
+
+        return true;
     }
 
     @Override
-    public void drawLayer(ILayer layer) {
+    public Boolean drawLayer(ILayer layer) {
         if (this.g == null) {
-            return;
+            return null;
         }
         if (layer == null) {
             throw new IllegalArgumentException("pas de layer");
@@ -148,6 +156,7 @@ public class AWTGUIFacade implements IGUIFacade {
         }
         AWTLayer awtLayer = (AWTLayer) layer;
         awtLayer.draw(this.g);
+        return true;
     }
 
 }
