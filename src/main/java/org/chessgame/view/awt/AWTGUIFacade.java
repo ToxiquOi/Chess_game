@@ -67,13 +67,14 @@ public class AWTGUIFacade implements IGUIFacade {
             return null;
         }
         this.g = this.monitor.createGraphics();
-        return this.g != null;
+        boolean b = this.g != null;
+        return b;
     }
 
     @Override
     public Boolean endPaint() {
         if (this.g == null) {
-            return null;
+            return false;
         }
 
         this.g.dispose();
@@ -86,7 +87,7 @@ public class AWTGUIFacade implements IGUIFacade {
     public Boolean clearBackground() {
         if (this.g == null) {
             chessLogger.log(Level.INFO, "clearBackground: Graphics is null");
-            return null;
+            return false;
         }
         this.g.setColor(Color.BLACK);
         this.g.fillRect(0, 0, CWindow.WIDTH, CWindow.HEIGHT);
@@ -98,7 +99,7 @@ public class AWTGUIFacade implements IGUIFacade {
     public Boolean drawChars() {
         if(this.g == null) {
             chessLogger.log(Level.INFO, "drawChars: Graphics is null");
-            return null;
+            return false;
         }
 
         BoardIterator bi = this.board.iterator();
@@ -126,7 +127,7 @@ public class AWTGUIFacade implements IGUIFacade {
     @Override
     public Boolean drawBackground() {
         if (this.g == null) {
-            return null;
+            return false;
         }
         for(int x = 0; x < CBoard.TILE_HEIGHT_TAB; x++) {
             for(int y = 0; y < CBoard.TILE_WIDTH_TAB; y++) {
@@ -146,7 +147,7 @@ public class AWTGUIFacade implements IGUIFacade {
     @Override
     public Boolean drawLayer(ILayer layer) {
         if (this.g == null) {
-            return null;
+            return false;
         }
         if (layer == null) {
             throw new IllegalArgumentException("pas de layer");

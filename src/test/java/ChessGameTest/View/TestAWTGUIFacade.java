@@ -2,6 +2,7 @@ package ChessGameTest.View;
 
 import org.chessgame.model.Board;
 import org.chessgame.view.awt.AWTGUIFacade;
+import org.chessgame.view.awt.component.AWTLayer;
 import org.chessgame.view.awt.component.GameMonitor;
 import org.chessgame.view.awt.services.SpriteLoader;
 import org.junit.jupiter.api.BeforeEach;
@@ -62,21 +63,20 @@ class TestAWTGUIFacade {
 
     @Test
     void testEndPaintIfGraphicsIsNull() {
-        assertNull(this.awtguiFacade.endPaint(), "test endPaint if Graphics is null");
+        assertFalse(this.awtguiFacade.endPaint(), "test endPaint if Graphics is null");
     }
 
     @Test
     void testClearBackground() {
         this.awtguiFacade.beginPaint();
-        this.awtguiFacade.clearBackground();
-
-        assertEquals(Color.BLACK, this.awtguiFacade.getGraphics().getColor(), "testClearBackground");
+        assertTrue(this.awtguiFacade.clearBackground(), "testClearBackground");
     }
 
     @Test
     void testClearBackgroundIfGraphicsIsNull() {
-        assertNull(this.awtguiFacade.clearBackground(), "test clear background if graphics is null");
+        assertFalse(this.awtguiFacade.clearBackground(), "test clear background if graphics is null");
     }
+
 
     @Test
     void testCreateNewLayer() {
@@ -105,6 +105,36 @@ class TestAWTGUIFacade {
     @Test
     void testDrawCharIfGraphicsIsNull() {
         this.awtguiFacade.createSpriteLoader(new Board());
-        assertNull(this.awtguiFacade.drawChars(), "test draw characters if graphics is null");
+        assertFalse(this.awtguiFacade.drawChars(), "test draw characters if graphics is null");
     }
+
+    @Test
+    void testDrawBackground() {
+        this.awtguiFacade.beginPaint();
+        assertTrue(this.awtguiFacade.drawBackground(), "test draw background");
+    }
+
+    @Test
+    void testDrawBackgroundIfGraphicsIsNull() {
+        assertFalse(this.awtguiFacade.drawBackground(), "test draw background if graphics is null");
+    }
+
+    @Test
+    void testDrawLayer() {
+        this.awtguiFacade.beginPaint();
+        AWTLayer awtLayer = new AWTLayer();
+        awtLayer.setSpriteCount(1);
+        awtLayer.setTileSize(new Dimension(75, 50));
+        awtLayer.setTexture("chess_pieces.png");
+        awtLayer.setSpriteTexture(0, 0, 0);
+        awtLayer.setSpriteLocation(0, 1, 2);
+
+        assertTrue(this.awtguiFacade.drawLayer(awtLayer), "test draw layer");
+    }
+
+    @Test
+    void testDrawLayerIfGraphicsIsNull() {
+        assertFalse(this.awtguiFacade.drawLayer(new AWTLayer()));
+    }
+
 }
