@@ -9,10 +9,10 @@ import java.awt.image.BufferStrategy;
 
 public class GameMonitor extends Frame {
 
-    protected transient BufferStrategy bs;
-    protected Dimension d = new Dimension(CWindow.WIDTH, CWindow.HEIGHT);
-    protected BoardComponent boardComponent;
-    protected boolean closingRequested = false;
+    private transient BufferStrategy bs;
+    private Dimension d = new Dimension(CWindow.WIDTH, CWindow.HEIGHT);
+    private BoardComponent boardComponent;
+    private boolean closingRequested = false;
 
 
     public GameMonitor(String title) {
@@ -33,6 +33,7 @@ public class GameMonitor extends Frame {
             @Override
             public void windowClosing(WindowEvent e) {
                 closingRequested = true;
+                dispose();
             }
         });
     }

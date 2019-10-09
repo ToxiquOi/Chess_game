@@ -1,7 +1,7 @@
 package ChessGameTest.View;
 
 import org.chessgame.model.Board;
-import org.chessgame.model.abstract_class.Piece;
+import org.chessgame.model.abstracts.Piece;
 import org.chessgame.model.board_element.pieces.Pawn;
 import org.chessgame.share.enumeration.EColorChess;
 import org.chessgame.share.iterator.BoardIterator;

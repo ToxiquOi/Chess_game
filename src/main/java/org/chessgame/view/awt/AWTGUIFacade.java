@@ -1,9 +1,11 @@
 package org.chessgame.view.awt;
 
+import org.chessgame.share.interfaces.IKeyboard;
+import org.chessgame.share.interfaces.IMouse;
 import org.chessgame.model.Board;
-import org.chessgame.model.abstract_class.BoardElement;
-import org.chessgame.model.abstract_class.Piece;
-import org.chessgame.model.board_element.Spot;
+import org.chessgame.model.abstracts.BoardElement;
+import org.chessgame.model.abstracts.Piece;
+import org.chessgame.model.board_element.static_element.Spot;
 import org.chessgame.share.constant.CBoard;
 import org.chessgame.share.constant.CWindow;
 import org.chessgame.share.iterator.BoardIterator;
@@ -12,8 +14,8 @@ import org.chessgame.view.awt.component.AWTLayer;
 import org.chessgame.view.awt.component.GameMonitor;
 import org.chessgame.view.awt.graphics.CaseBoard;
 import org.chessgame.view.awt.services.SpriteLoader;
-import org.chessgame.view.view_interface.IGUIFacade;
-import org.chessgame.view.view_interface.ILayer;
+import org.chessgame.share.interfaces.IGUIFacade;
+import org.chessgame.share.interfaces.ILayer;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -53,6 +55,16 @@ public class AWTGUIFacade implements IGUIFacade {
     @Override
     public void dispose() {
         this.monitor.dispose();
+    }
+
+    @Override
+    public IKeyboard getKeyboard() {
+        return null;
+    }
+
+    @Override
+    public IMouse getMouse() {
+        return null;
     }
 
     public boolean isClosingRequested() {

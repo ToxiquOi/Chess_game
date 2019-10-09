@@ -1,7 +1,7 @@
 package org.chessgame.view.awt.services;
 
-import org.chessgame.model.abstract_class.BoardElement;
-import org.chessgame.model.abstract_class.Piece;
+import org.chessgame.model.abstracts.BoardElement;
+import org.chessgame.model.abstracts.Piece;
 import org.chessgame.share.enumeration.EColorChess;
 import org.chessgame.share.iterator.BoardIterator;
 import org.chessgame.share.services.ChessLogger;

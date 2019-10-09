@@ -1,10 +1,10 @@
 package ChessGameTest.Model;
 
 import org.chessgame.model.Board;
-import org.chessgame.model.board_element.Spot;
+import org.chessgame.model.board_element.static_element.Spot;
 import org.chessgame.model.board_element.pieces.Pawn;
 import org.chessgame.model.board_element.static_element.Empty;
-import org.chessgame.model.abstract_class.BoardElement;
+import org.chessgame.model.abstracts.BoardElement;
 import org.chessgame.share.constant.CBoard;
 import org.chessgame.share.iterator.BoardIterator;
 import org.junit.jupiter.api.BeforeEach;

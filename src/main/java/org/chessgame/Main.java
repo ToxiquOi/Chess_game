@@ -1,10 +1,12 @@
 package org.chessgame;
 
-import org.chessgame.model.Board;
+import org.chessgame.view.awt.mode.PlayGameMode;
 import org.chessgame.share.services.ChessLogger;
 import org.chessgame.view.awt.AWTGUIFacade;
-import org.chessgame.view.view_interface.IGUIFacade;
+import org.chessgame.share.interfaces.IGUIFacade;
+import org.chessgame.share.interfaces.GameMode;
 
+import javax.swing.*;
 import java.util.logging.Level;
 
 
@@ -15,31 +17,41 @@ import java.util.logging.Level;
 public class Main implements Runnable {
 
     private static final String APP_TITLE = "chess";
-    private IGUIFacade gui;
+
     private static ChessLogger logger = new ChessLogger(Main.class);
-    private final Board board = new Board();
+    GameMode currentMode;
+    IGUIFacade gui;
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         Main chess = new Main();
-        chess.setGui(new AWTGUIFacade());
-        chess.init();
+        chess.setGuiFacade(new AWTGUIFacade());
+        chess.setGameMode(new PlayGameMode());
         chess.run();
     }
 
-    private void setGui(IGUIFacade gui) {
+    private void setGuiFacade(IGUIFacade gui) {
         this.gui = gui;
     }
 
-    private void init() {
-        this.gui.createWindow(APP_TITLE);
+    public synchronized void setGameMode(GameMode mode) {
+        //TODO: make it works
+        try {
+            this.currentMode.setParent(this);
+            this.currentMode.setGuiFacade(this.gui);
+            this.currentMode.setTitle(APP_TITLE);
+            this.currentMode.init();
+            this.currentMode = mode;
+        } catch(Exception ex) {
+            logger.log(Level.WARNING, ex.toString());
+            JOptionPane.showMessageDialog(null, ex.toString(),"Erreur",JOptionPane.ERROR_MESSAGE);
+        }
     }
 
 
     public void run() {
-        this.gui.createSpriteLoader(this.board);
 
         int fps = 60;
         long nanoPerFrame = (long) (1000000000.0 / fps);
@@ -53,7 +65,10 @@ public class Main implements Runnable {
             }
             lastTime = nowTime;
 
-            this.render();
+            synchronized (this) {
+                this.currentMode.handleInput();
+                this.currentMode.render();
+            }
 
             long elapsed = System.nanoTime() - lastTime;
             long millisleep = (nanoPerFrame - elapsed) / 1000000;
@@ -69,29 +84,13 @@ public class Main implements Runnable {
         this.gui.dispose();
     }
 
-    private void render() {
-        if (!gui.beginPaint()) {
-            return;
-        }
-        try {
-            gui.clearBackground();
-            gui.drawBackground();
-            gui.drawChars();
-
-        } finally {
-            gui.endPaint();
-        }
-    }
 
     public void bench() {
         int count = 0;
         long begin = System.nanoTime();
 
-        this.gui.createWindow(APP_TITLE);
-        this.gui.createSpriteLoader(this.board);
-
         while(!this.gui.isClosingRequested()) {
-            this.render();
+            this.currentMode.render();
             count++;
         }
 

@@ -1,4 +1,4 @@
-package org.chessgame.view.view_interface;
+package org.chessgame.share.interfaces;
 
 import java.awt.*;
 

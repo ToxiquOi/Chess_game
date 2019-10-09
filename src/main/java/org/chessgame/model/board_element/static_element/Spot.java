@@ -1,6 +1,6 @@
-package org.chessgame.model.board_element;
+package org.chessgame.model.board_element.static_element;
 
-import org.chessgame.model.abstract_class.BoardElement;
+import org.chessgame.model.abstracts.BoardElement;
 
 public class Spot {
     private BoardElement boardElement;

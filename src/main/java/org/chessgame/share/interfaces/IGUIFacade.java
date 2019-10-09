@@ -1,4 +1,4 @@
-package org.chessgame.view.view_interface;
+package org.chessgame.share.interfaces;
 
 import org.chessgame.model.Board;
 
@@ -14,4 +14,6 @@ public interface IGUIFacade {
     void createSpriteLoader(Board board);
     ILayer createLayer();
     void dispose();
+    IKeyboard getKeyboard();
+    IMouse getMouse();
 }

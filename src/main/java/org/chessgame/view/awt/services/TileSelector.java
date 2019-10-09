@@ -1,8 +1,8 @@
 package org.chessgame.view.awt.services;
 
 import org.chessgame.controller.listener.Mouse;
-import org.chessgame.model.abstract_class.BoardElement;
-import org.chessgame.model.abstract_class.Piece;
+import org.chessgame.model.abstracts.BoardElement;
+import org.chessgame.model.abstracts.Piece;
 import org.chessgame.model.Board;
 import org.chessgame.share.constant.CBoard;
 import org.chessgame.view.awt.graphics.BorderTile;

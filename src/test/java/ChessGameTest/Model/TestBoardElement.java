@@ -1,6 +1,6 @@
 package ChessGameTest.Model;
 
-import org.chessgame.model.abstract_class.BoardElement;
+import org.chessgame.model.abstracts.BoardElement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

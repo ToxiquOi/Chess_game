@@ -1,10 +1,10 @@
 package org.chessgame.model;
 
-import org.chessgame.model.board_element.Spot;
+import org.chessgame.model.board_element.static_element.Spot;
 import org.chessgame.model.board_element.pieces.*;
 import org.chessgame.model.board_element.static_element.Empty;
-import org.chessgame.model.abstract_class.BoardElement;
-import org.chessgame.model.abstract_class.Piece;
+import org.chessgame.model.abstracts.BoardElement;
+import org.chessgame.model.abstracts.Piece;
 import org.chessgame.share.constant.CBoard;
 import org.chessgame.share.enumeration.EColorChess;
 import org.chessgame.share.constant.CWindow;

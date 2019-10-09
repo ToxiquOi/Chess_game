@@ -19,7 +19,7 @@ public class Runner implements Runnable {
 
     public void start() {
         this.isRunning = true;
-        Thread thread = new Thread(this, "Game");
+        Thread thread = new Thread(this, "Chess");
         thread.start();
     }
 

@@ -1,6 +1,6 @@
-package org.chessgame.model.abstract_class;
+package org.chessgame.model.abstracts;
 
-import org.chessgame.model.interface_element.IElement;
+import org.chessgame.share.interfaces.IElement;
 
 public abstract class BoardElement implements IElement {
     @Override

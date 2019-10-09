@@ -1,8 +1,7 @@
 package ChessGameTest.Model;
 
-import org.chessgame.model.abstract_class.Piece;
+import org.chessgame.model.abstracts.Piece;
 import org.chessgame.share.enumeration.EColorChess;
-import org.chessgame.share.enumeration.EMove;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

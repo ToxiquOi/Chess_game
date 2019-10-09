@@ -2,7 +2,7 @@ package org.chessgame.view.awt.component;
 
 import org.chessgame.share.exception.LayerException;
 import org.chessgame.share.services.ChessLogger;
-import org.chessgame.view.view_interface.ILayer;
+import org.chessgame.share.interfaces.ILayer;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

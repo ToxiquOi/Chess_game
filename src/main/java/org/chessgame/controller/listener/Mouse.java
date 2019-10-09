@@ -1,5 +1,6 @@
 package org.chessgame.controller.listener;
 
+import org.chessgame.share.interfaces.IMouse;
 import org.chessgame.share.services.ChessLogger;
 
 import java.awt.event.MouseEvent;
@@ -8,7 +9,7 @@ import java.awt.event.MouseMotionListener;
 import java.io.Serializable;
 import java.util.logging.Level;
 
-public class Mouse implements MouseListener, MouseMotionListener, Serializable {
+public class Mouse implements IMouse, MouseListener, MouseMotionListener, Serializable {
 
     private static ChessLogger chessLogger = new ChessLogger(Mouse.class);
     private boolean[] buttons = new boolean[4];
