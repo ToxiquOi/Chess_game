@@ -37,6 +37,13 @@ public class GameMonitor extends Frame {
                 Thread.currentThread().interrupt();
             }
         });
+        addWindowFocusListener(new WindowAdapter() {
+            public void windowGainedFocus(WindowEvent e) {
+                if (boardComponent != null) {
+                    boardComponent.requestFocusInWindow();
+                }
+            }
+        });
     }
 
     public void setLayoutManager(LayoutManager layoutManager) {

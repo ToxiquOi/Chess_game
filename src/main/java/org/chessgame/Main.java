@@ -5,6 +5,7 @@ import org.chessgame.share.services.ChessLogger;
 import org.chessgame.view.awt.AWTGUIFacade;
 import org.chessgame.share.interfaces.IGUIFacade;
 import org.chessgame.view.awt.abstracts.GameMode;
+import org.chessgame.view.awt.mode.WelcomeGameMode;
 
 import javax.swing.*;
 import java.util.logging.Level;
@@ -29,7 +30,7 @@ public class Main implements Runnable {
     public static void main(String[] args) {
         Main chess = new Main();
         chess.setGuiFacade(new AWTGUIFacade());
-        chess.setGameMode(new PlayGameMode());
+        chess.setGameMode(new WelcomeGameMode()) ;
         chess.run();
     }
 
