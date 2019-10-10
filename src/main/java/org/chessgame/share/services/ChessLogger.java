@@ -1,5 +1,6 @@
 package org.chessgame.share.services;
 
+import java.util.logging.ConsoleHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,6 +12,7 @@ public class ChessLogger {
 
     public ChessLogger(Class c) {
          this.logger = Logger.getLogger(c.getSimpleName());
+         this.setHandler(new ConsoleHandler());
     }
 
     public String getName() {

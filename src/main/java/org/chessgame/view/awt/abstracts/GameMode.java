@@ -2,12 +2,14 @@ package org.chessgame.view.awt.abstracts;
 
 import org.chessgame.Main;
 import org.chessgame.share.interfaces.IGUIFacade;
+import org.chessgame.share.services.ChessLogger;
 
 public abstract class GameMode {
 
     protected String title;
     private Main parent;
     protected IGUIFacade gui;
+    protected ChessLogger logger = new ChessLogger(this.getClass());
 
     public void setTitle(String title) {
         this.title = title;

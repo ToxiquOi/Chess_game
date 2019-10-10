@@ -20,12 +20,11 @@ public class GameMonitor extends Frame {
     }
 
     public boolean isClosingRequested() {
-        return closingRequested;
+        return this.closingRequested;
     }
 
     public void init() {
-        closingRequested = false;
-        System.out.println("----------- GameMonitor init --------------");
+        this.closingRequested = false;
         this.setSize(this.d);
         this.setResizable(false);
         this.setVisible(true);
@@ -33,9 +32,9 @@ public class GameMonitor extends Frame {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                System.out.println("----------- closing request --------------");
                 closingRequested = true;
                 dispose();
+                Thread.currentThread().interrupt();
             }
         });
     }

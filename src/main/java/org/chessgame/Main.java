@@ -17,6 +17,7 @@ import java.util.logging.Level;
 public class Main implements Runnable {
 
     private static final String APP_TITLE = "chess";
+    protected Thread thread;
 
     private static ChessLogger logger = new ChessLogger(Main.class);
     GameMode currentMode;
@@ -32,21 +33,21 @@ public class Main implements Runnable {
         chess.run();
     }
 
+
     private void setGuiFacade(IGUIFacade gui) {
         this.gui = gui;
     }
 
     public synchronized void setGameMode(GameMode mode) {
-        //TODO: make it works
         try {
+            this.currentMode = mode;
             this.currentMode.setParent(this);
             this.currentMode.setGuiFacade(this.gui);
             this.currentMode.setTitle(APP_TITLE);
             this.currentMode.init();
-            this.currentMode = mode;
         } catch(Exception ex) {
             logger.log(Level.WARNING, ex.toString());
-            JOptionPane.showMessageDialog(null, ex.toString(),"Erreur",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex.toString(),"Erreur", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -82,6 +83,7 @@ public class Main implements Runnable {
             }
         }
         this.gui.dispose();
+        Thread.currentThread().interrupt();
     }
 
 

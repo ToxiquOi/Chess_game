@@ -61,7 +61,7 @@ public class Launcher {
 
             return p.exitValue() == 0;
         } catch (InterruptedException | IOException e) {
-            launcherLogger.log(Level.SEVERE, e.toString());
+//            launcherLogger.log(Level.SEVERE, e.toString());
             Thread.currentThread().interrupt();
             return false;
         }
