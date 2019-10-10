@@ -32,6 +32,7 @@ public class AWTGUIFacade implements IGUIFacade {
 
     @Override
     public void createWindow(String title) {
+        chessLogger.log(Level.WARNING, "------------------------ create monitor --------------");
         this.monitor = new GameMonitor(title);
         this.monitor.setLayout(new BorderLayout());
         this.monitor.init();
@@ -68,6 +69,7 @@ public class AWTGUIFacade implements IGUIFacade {
     }
 
     public boolean isClosingRequested() {
+        chessLogger.log(Level.WARNING, "------------------------ isClosingRequest--------------");
         return this.monitor.isClosingRequested();
     }
 
@@ -76,6 +78,7 @@ public class AWTGUIFacade implements IGUIFacade {
     public Boolean beginPaint() {
         if (this.g != null) {
             this.g.dispose();
+            chessLogger.log(Level.WARNING, "------------------------ g != null --------------");
             return null;
         }
         this.g = this.monitor.createGraphics();

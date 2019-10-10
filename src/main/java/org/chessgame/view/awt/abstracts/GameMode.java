@@ -1,6 +1,7 @@
-package org.chessgame.share.interfaces;
+package org.chessgame.view.awt.abstracts;
 
 import org.chessgame.Main;
+import org.chessgame.share.interfaces.IGUIFacade;
 
 public abstract class GameMode {
 
@@ -21,7 +22,7 @@ public abstract class GameMode {
     }
 
     public void init() {
-
+        this.gui.createWindow(this.title);
     }
 
     public void render() {

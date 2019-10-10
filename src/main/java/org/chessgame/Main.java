@@ -4,7 +4,7 @@ import org.chessgame.view.awt.mode.PlayGameMode;
 import org.chessgame.share.services.ChessLogger;
 import org.chessgame.view.awt.AWTGUIFacade;
 import org.chessgame.share.interfaces.IGUIFacade;
-import org.chessgame.share.interfaces.GameMode;
+import org.chessgame.view.awt.abstracts.GameMode;
 
 import javax.swing.*;
 import java.util.logging.Level;
