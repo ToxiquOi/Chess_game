@@ -1,5 +1,7 @@
 package org.chessgame.share.interfaces;
 
+import org.chessgame.controller.listener.Keyboard;
+import org.chessgame.controller.listener.Mouse;
 import org.chessgame.model.Board;
 
 public interface IGUIFacade {
@@ -8,12 +10,13 @@ public interface IGUIFacade {
     Boolean endPaint();
     Boolean clearBackground();
     boolean isClosingRequested();
+    void setClosingRequest(boolean b);
     Boolean drawBackground();
     Boolean drawLayer(ILayer layer);
     Boolean drawChars();
     void createSpriteLoader(Board board);
     ILayer createLayer();
     void dispose();
-    IKeyboard getKeyboard();
-    IMouse getMouse();
+    Keyboard getKeyboard();
+    Mouse getMouse();
 }

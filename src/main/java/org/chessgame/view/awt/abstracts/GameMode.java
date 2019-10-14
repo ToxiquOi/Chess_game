@@ -1,17 +1,12 @@
 package org.chessgame.view.awt.abstracts;
 
 import org.chessgame.Main;
-import org.chessgame.controller.listener.Keyboard;
 import org.chessgame.share.interfaces.IGUIFacade;
-import org.chessgame.share.interfaces.IKeyboard;
 import org.chessgame.share.services.ChessLogger;
-
-import java.awt.event.KeyEvent;
 
 public abstract class GameMode {
 
     protected ChessLogger logger = new ChessLogger(this.getClass());
-    protected IKeyboard keyboard = new Keyboard();
     protected String title;
     private Main parent;
     protected IGUIFacade gui;
