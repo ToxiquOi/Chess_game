@@ -9,6 +9,7 @@ import org.chessgame.view.awt.mode.WelcomeGameMode;
 
 import javax.swing.*;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -20,7 +21,7 @@ public class Main implements Runnable {
     private static final String APP_TITLE = "chess";
     protected Thread thread;
 
-    private static ChessLogger logger = new ChessLogger(Main.class);
+    private static Logger logger = Logger.getLogger(Main.class.getSimpleName());
     GameMode currentMode;
     IGUIFacade gui;
 

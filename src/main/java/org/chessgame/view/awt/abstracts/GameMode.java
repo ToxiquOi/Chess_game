@@ -2,14 +2,14 @@ package org.chessgame.view.awt.abstracts;
 
 import org.chessgame.Main;
 import org.chessgame.share.interfaces.IGUIFacade;
-import org.chessgame.share.services.ChessLogger;
+import org.chessgame.share.interfaces.IKeyboard;
 
 public abstract class GameMode {
 
     protected String title;
     private Main parent;
     protected IGUIFacade gui;
-
+    protected IKeyboard keyboard;
 
     public void setTitle(String title) {
         this.title = title;

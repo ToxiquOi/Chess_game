@@ -1,19 +1,18 @@
 package org;
 
-import org.chessgame.share.services.ChessLogger;
-
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Launcher {
 
-    private static final ChessLogger launcherLogger = new ChessLogger(Launcher.class);
+    private static final Logger launcherLogger = Logger.getLogger(Launcher.class.getSimpleName());
 
     private static class StreamPrinter implements Runnable {
 
-        private static final ChessLogger StreamPrinterLogger = new ChessLogger(StreamPrinter.class);
+        private static final Logger StreamPrinterLogger = Logger.getLogger(StreamPrinter.class.getSimpleName());
 
         private final InputStream inputStream;
 

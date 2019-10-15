@@ -2,11 +2,11 @@ package org.chessgame.view.awt.component;
 
 import java.awt.*;
 
-public class BoardComponent extends Canvas {
+public class BoardCanvas extends Canvas {
 
     private Dimension d;
 
-    public BoardComponent(Dimension d) {
+    public BoardCanvas(Dimension d) {
         this.d = d;
         this.init();
     }

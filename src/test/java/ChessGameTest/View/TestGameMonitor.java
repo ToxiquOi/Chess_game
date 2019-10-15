@@ -50,7 +50,7 @@ public class TestGameMonitor  {
 
     @Test
     void testCreateGraphics() {
-        this.monitor.createBoardComponent();
+        this.monitor.createBoardPanel();
         Graphics g = this.monitor.createGraphics();
         assertNotNull(g, "test create graphics");
     }

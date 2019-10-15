@@ -22,16 +22,16 @@ public class Board implements Iterable<Spot>, Serializable {
     }
 
     public int getHeight(){
-        return CWindow.HEIGHT / CBoard.TILE_HEIGHT_PX;
+        return CBoard.TILE_HEIGHT_TAB;
     }
 
     public int getWidth() {
-        return CWindow.WIDTH / CBoard.TILE_WIDTH_PX;
+        return CBoard.TILE_WIDTH_TAB;
     }
 
     protected void generateBoard() {
-        for (int y = 0; y < CBoard.TILE_HEIGHT_TAB; y++) {
-            for (int x = 0; x < CBoard.TILE_WIDTH_TAB; x++) {
+        for (int x = 0; x < CBoard.TILE_HEIGHT_TAB; x++) {
+            for (int y = 0; y < CBoard.TILE_WIDTH_TAB; y++) {
                 this.boardElement[y][x] = new Spot(x, y, new Empty());
             }
         }
@@ -49,26 +49,26 @@ public class Board implements Iterable<Spot>, Serializable {
     }
 
     protected void initPiecesPosition() {
-        this.boardElement[0][0].setPiece(new Rook(EColorChess.BLACK));
-        this.boardElement[0][1].setPiece(new Knight(EColorChess.BLACK));
-        this.boardElement[0][2].setPiece(new Bishop(EColorChess.BLACK));
-        this.boardElement[0][3].setPiece(new Queen(EColorChess.BLACK));
-        this.boardElement[0][4].setPiece(new King(EColorChess.BLACK));
-        this.boardElement[0][5].setPiece(new Bishop(EColorChess.BLACK));
-        this.boardElement[0][6].setPiece(new Knight(EColorChess.BLACK));
-        this.boardElement[0][7].setPiece(new Rook(EColorChess.BLACK));
-        for (int i = 0; i < 8; i++) {
-            this.boardElement[1][i].setPiece(new Pawn(EColorChess.BLACK));
-            this.boardElement[6][i].setPiece(new Pawn(EColorChess.WHITE));
-        }
+        this.boardElement[0][0].setPiece(new Rook(EColorChess.WHITE));
+        this.boardElement[1][0].setPiece(new Knight(EColorChess.WHITE));
+        this.boardElement[2][0].setPiece(new Bishop(EColorChess.WHITE));
+        this.boardElement[3][0].setPiece(new Queen(EColorChess.WHITE));
+        this.boardElement[4][0].setPiece(new King(EColorChess.WHITE));
+        this.boardElement[5][0].setPiece(new Bishop(EColorChess.WHITE));
+        this.boardElement[6][0].setPiece(new Knight(EColorChess.WHITE));
         this.boardElement[7][0].setPiece(new Rook(EColorChess.WHITE));
-        this.boardElement[7][1].setPiece(new Knight(EColorChess.WHITE));
-        this.boardElement[7][2].setPiece(new Bishop(EColorChess.WHITE));
-        this.boardElement[7][3].setPiece(new Queen(EColorChess.WHITE));
-        this.boardElement[7][4].setPiece(new King(EColorChess.WHITE));
-        this.boardElement[7][5].setPiece(new Bishop(EColorChess.WHITE));
-        this.boardElement[7][6].setPiece(new Knight(EColorChess.WHITE));
-        this.boardElement[7][7].setPiece(new Rook(EColorChess.WHITE));
+        for (int i = 0; i < 8; i++) {
+            this.boardElement[i][1].setPiece(new Pawn(EColorChess.WHITE));
+            this.boardElement[i][6].setPiece(new Pawn(EColorChess.BLACK));
+        }
+        this.boardElement[0][7].setPiece(new Rook(EColorChess.BLACK));
+        this.boardElement[1][7].setPiece(new Knight(EColorChess.BLACK));
+        this.boardElement[2][7].setPiece(new Bishop(EColorChess.BLACK));
+        this.boardElement[3][7].setPiece(new Queen(EColorChess.BLACK));
+        this.boardElement[4][7].setPiece(new King(EColorChess.BLACK));
+        this.boardElement[5][7].setPiece(new Bishop(EColorChess.BLACK));
+        this.boardElement[6][7].setPiece(new Knight(EColorChess.BLACK));
+        this.boardElement[7][7].setPiece(new Rook(EColorChess.BLACK));
     }
 
     @Override

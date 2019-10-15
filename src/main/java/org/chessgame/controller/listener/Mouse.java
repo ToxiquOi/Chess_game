@@ -1,17 +1,18 @@
 package org.chessgame.controller.listener;
 
 import org.chessgame.share.interfaces.IMouse;
-import org.chessgame.share.services.ChessLogger;
 
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.Serializable;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class Mouse implements IMouse,  MouseListener, MouseMotionListener, Serializable {
+public class Mouse extends MouseAdapter implements IMouse, Serializable {
 
-    private static ChessLogger chessLogger = new ChessLogger(Mouse.class);
+    private static Logger logger = Logger.getLogger(MouseAdapter.class.getSimpleName());
     private boolean[] buttons;
     private int x;
     private int y;
@@ -80,7 +81,7 @@ public class Mouse implements IMouse,  MouseListener, MouseMotionListener, Seria
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        chessLogger.log(Level.INFO, "mouse moved x: " + e.getX());
+        logger.log(Level.INFO, "mouse moved x: " + e.getX());
         this.setX(e.getX());
         this.setY(e.getY());
     }

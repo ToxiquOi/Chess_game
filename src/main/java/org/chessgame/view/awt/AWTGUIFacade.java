@@ -1,25 +1,24 @@
 package org.chessgame.view.awt;
 
 import org.chessgame.share.exception.MonitorNullException;
-import org.chessgame.share.interfaces.IKeyboard;
-import org.chessgame.share.interfaces.IMouse;
+import org.chessgame.share.interfaces.*;
 import org.chessgame.model.Board;
 import org.chessgame.model.abstracts.BoardElement;
 import org.chessgame.model.abstracts.Piece;
 import org.chessgame.model.board_element.static_element.Spot;
 import org.chessgame.share.constant.CBoard;
-import org.chessgame.share.constant.CWindow;
 import org.chessgame.share.iterator.BoardIterator;
-import org.chessgame.share.services.ChessLogger;
+import org.chessgame.view.awt.component.AWTImage;
 import org.chessgame.view.awt.component.AWTLayer;
 import org.chessgame.view.awt.component.GameMonitor;
 import org.chessgame.view.awt.graphics.CaseBoard;
 import org.chessgame.view.awt.services.SpriteLoader;
-import org.chessgame.share.interfaces.IGUIFacade;
-import org.chessgame.share.interfaces.ILayer;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,13 +31,21 @@ public class AWTGUIFacade implements IGUIFacade {
 
     private static Logger chessLogger = Logger.getLogger(AWTGUIFacade.class.getSimpleName());
 
+    @Override
+    public void setColor(Color c) {
+        if (this.g == null) {
+            chessLogger.log(Level.WARNING, "g == null" + '\n');
+            return;
+        }
+        this.g.setColor(c);
+    }
 
     @Override
     public void createWindow(String title) {
         this.monitor = new GameMonitor(title);
         this.monitor.setLayout(new BorderLayout());
         this.monitor.init();
-        this.monitor.createBoardComponent();
+        this.monitor.createBoardPanel(BorderLayout.CENTER);
         this.monitor.setLocationRelativeTo(null);
         this.monitor.setVisible(true);
     }
@@ -110,11 +117,11 @@ public class AWTGUIFacade implements IGUIFacade {
     @Override
     public Boolean clearBackground() {
         if (this.g == null) {
-            chessLogger.log(Level.INFO, "clearBackground: Graphics is null");
+            chessLogger.log(Level.INFO, "clearBackground: Graphics is null" + '\n');
             return false;
         }
         this.g.setColor(Color.BLACK);
-        this.g.fillRect(0, 0, CWindow.WIDTH, CWindow.HEIGHT);
+        this.g.fillRect(0, 0, CBoard.BOARD_WIDTH, CBoard.BOARD_HEIGHT);
 
         return true;
     }
@@ -122,7 +129,7 @@ public class AWTGUIFacade implements IGUIFacade {
     @Override
     public Boolean drawChars() {
         if(this.g == null) {
-            chessLogger.log(Level.INFO, "drawChars: Graphics is null");
+            chessLogger.log(Level.INFO, "drawChars: Graphics is null" + '\n');
             return false;
         }
 
@@ -184,4 +191,68 @@ public class AWTGUIFacade implements IGUIFacade {
         return true;
     }
 
+    @Override
+    public void saveLayer(AWTLayer layer) {
+        BufferedImage image = new BufferedImage(this.monitor.getBoardPanelWidth(), this.monitor.getBoardPanelHeight(), BufferedImage.TYPE_4BYTE_ABGR);
+        Graphics g = image.getGraphics();
+        layer.draw(g);
+        g.dispose();
+        try {
+            ImageIO.write(image, "png", new File(layer.toString()+".png"));
+        } catch (IOException ex) {
+            Logger.getLogger(AWTGUIFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public IImage createImage(String fileName) {
+        AWTImage image = new AWTImage();
+        image.loadImage(fileName);
+        return image;
+    }
+
+    public void drawImage(IImage image,int x,int y) {
+        if (this.g == null) {
+            return;
+        }
+        if (image == null)
+            throw new IllegalArgumentException("Pas de image");
+        if (!(image instanceof AWTImage))
+            throw new IllegalArgumentException("Type de image invalide");
+        AWTImage awtImage = (AWTImage) image;
+        awtImage.draw(this.g, x, y);
+    }
+
+    @Override
+    public Dimension getTextMetrics(String text) {
+        FontMetrics fm = this.g.getFontMetrics();
+        int textWidth = fm.stringWidth(text);
+        int textHeight = fm.getHeight();
+        return new Dimension(textWidth,textHeight);
+    }
+
+    @Override
+    public void setTextSize(int size) {
+        if (this.g == null)
+            return;
+        for (int i=2*size;i>=4;i--) {
+            Font font = new Font("Arial",Font.PLAIN,i);
+            this.g.setFont(font);
+            FontMetrics fm = this.g.getFontMetrics();
+            if (fm.getHeight() < size) {
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void drawText(String text, int x, int y, int width, int height) {
+        if (this.g == null)
+            return;
+        FontMetrics fm = this.g.getFontMetrics();
+        chessLogger.log(Level.SEVERE, "Font Metrics: " + fm);
+        this.g.clipRect(x, y, width, height);
+        this.g.drawString(text, x, y + fm.getAscent());
+        this.g.setClip(null);
+    }
 }

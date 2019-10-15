@@ -3,18 +3,18 @@ package org.chessgame.view.awt.component;
 import org.chessgame.controller.listener.Keyboard;
 import org.chessgame.controller.listener.Mouse;
 import org.chessgame.share.constant.CWindow;
+import org.chessgame.share.interfaces.IKeyboard;
+import org.chessgame.share.interfaces.IMouse;
 
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.image.BufferStrategy;
-import java.security.Key;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GameMonitor extends Frame {
 
-    private transient BufferStrategy bs;
+    private static Logger logger = Logger.getLogger(GameMonitor.class.getSimpleName());
     private Dimension d = new Dimension(CWindow.WIDTH, CWindow.HEIGHT);
-    private BoardComponent boardComponent;
+    private BoardPanel boardPanel;
     private boolean closingRequested = false;
     private Keyboard keyboard;
     private Mouse mouse;
@@ -22,6 +22,14 @@ public class GameMonitor extends Frame {
 
     public GameMonitor(String title) {
         super(title);
+    }
+
+    public int getBoardPanelWidth() {
+        return this.boardPanel.getWidth();
+    }
+
+    public int getBoardPanelHeight() {
+        return this.boardPanel.getHeight();
     }
 
     public boolean isClosingRequested() {
@@ -34,60 +42,50 @@ public class GameMonitor extends Frame {
 
     public void init() {
         this.closingRequested = false;
+        this.setLayout(new BorderLayout());
         this.setSize(this.d);
         this.setResizable(false);
         this.setVisible(true);
 
-        this.addWindowListener(new WindowAdapterCustom(this, this.boardComponent));
+        this.addWindowListener(new WindowAdapterCustom(this, this.boardPanel));
     }
 
     public void setLayoutManager(LayoutManager layoutManager) {
         this.setLayout(layoutManager);
     }
 
-    public void createBoardComponent() {
-        if (this.boardComponent == null) {
-            this.boardComponent = new BoardComponent(d);
-            this.add(this.boardComponent);
-        }
-        if (this.boardComponent.getWidth() != this.d.width || this.boardComponent.getHeight() != this.d.height) {
-            this.boardComponent.setPreferredSize(this.d);
-            this.boardComponent.setMinimumSize(this.d);
-            this.boardComponent.setMaximumSize(this.d);
+    public void createBoardPanel(String layout) {
+        if (this.boardPanel == null) {
+            this.boardPanel = new BoardPanel();
+            this.boardPanel.init();
+            this.add(layout, this.boardPanel);
             this.pack();
         }
         if (this.keyboard == null) {
             this.keyboard = new Keyboard();
-            this.addKeyListener(this.keyboard);
+            logger.log(Level.INFO, "keyboard set" + '\n' );
+            this.boardPanel.addKeyListener(this.keyboard);
         }
         if (this.mouse == null) {
             this.mouse = new Mouse();
-            this.addMouseMotionListener(this.mouse);
-            this.addMouseListener(this.mouse);
+            logger.log(Level.INFO, "mouse set" + '\n');
+            this.boardPanel.addMouseListener(this.mouse);
         }
     }
 
-    public Keyboard getKeyboard() {
+    public IKeyboard getKeyboard() {
         return this.keyboard;
     }
 
-    public Mouse getMouse() {
+    public IMouse getMouse() {
         return this.mouse;
     }
 
     public Graphics createGraphics() {
-        this.bs = this.boardComponent.getBufferStrategy();
-        if (this.bs == null) {
-            this.boardComponent.createBufferStrategy(2);
-            this.bs = this.boardComponent.getBufferStrategy();
-        }
-
-        return this.bs.getDrawGraphics();
+        return this.boardPanel.createGraphics();
     }
 
     public void switchBuffer() {
-        if(this.bs != null) {
-            this.bs.show();
-        }
+        this.boardPanel.switchBuffer();
     }
 }

@@ -4,7 +4,6 @@ import org.chessgame.model.abstracts.BoardElement;
 import org.chessgame.model.abstracts.Piece;
 import org.chessgame.share.enumeration.EColorChess;
 import org.chessgame.share.iterator.BoardIterator;
-import org.chessgame.share.services.ChessLogger;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -64,7 +63,7 @@ public class SpriteLoader implements Serializable {
             image = this.makeCompatibleFormatImage(image);
 
         } catch (IOException e) {
-            chessLogger.log(Level.WARNING, e.toString());
+            chessLogger.log(Level.WARNING, e.toString() + '\n');
         }
 
         this.bufferedImages.get(element.getEColorChess() == EColorChess.WHITE? 0 : 1).put(element.getClass().getSimpleName(), image);

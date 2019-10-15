@@ -9,11 +9,11 @@ public class WindowAdapterCustom extends WindowAdapter {
 
     private static Logger logger = Logger.getLogger(WindowAdapterCustom.class.getSimpleName());
     GameMonitor monitor;
-    BoardComponent boardComponent;
+    BoardPanel boardPanel;
 
-    public WindowAdapterCustom(GameMonitor monitor, BoardComponent boardComponent) {
+    public WindowAdapterCustom(GameMonitor monitor, BoardPanel boardPanel) {
         this.monitor = monitor;
-        this.boardComponent = boardComponent;
+        this.boardPanel = boardPanel;
     }
 
     @Override
@@ -22,14 +22,13 @@ public class WindowAdapterCustom extends WindowAdapter {
         this.monitor.setClosingRequest(true);
         this.monitor.dispose();
         Thread.currentThread().interrupt();
-        super.windowClosing(e);
+        System.exit(0);
     }
 
     @Override
     public void windowGainedFocus(WindowEvent e) {
-        if (this.boardComponent != null) {
-            this.boardComponent.requestFocusInWindow();
-            super.windowClosing(e);
+        if (this.boardPanel != null) {
+            this.boardPanel.requestFocusInWindow();
         }
     }
 }
