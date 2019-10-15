@@ -1,11 +1,15 @@
 package org.chessgame.view.awt.mode;
 
-import org.chessgame.controller.listener.Keyboard;
+import org.chessgame.share.interfaces.IMouse;
 import org.chessgame.view.awt.abstracts.GameMode;
 
-import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class WelcomeGameMode extends GameMode {
+
+    private Logger logger = Logger.getLogger(WelcomeGameMode.class.getSimpleName());
 
     @Override
     public void init() {
@@ -32,19 +36,14 @@ public class WelcomeGameMode extends GameMode {
 
     @Override
     public void handleInput() {
-        Keyboard keyboard = gui.getKeyboard();
+        IMouse mouse = this.gui.getMouse();
+        logger.log(Level.WARNING, "x: " + mouse.getX());
+        if (mouse.isButtonPressed(MouseEvent.BUTTON1)) {
+            logger.log(Level.WARNING, "btn1");
+        }
 
-        switch(keyboard.getLastPressedKey()) {
-            case KeyEvent.VK_ESCAPE:
-                gui.setClosingRequest(true);
-                return;
-
-            case KeyEvent.VK_SPACE:
-
-            case KeyEvent.VK_ENTER:
-                keyboard.consumeLastPressedKey();
-                setGameMode(new PlayGameMode());
-                return;
+        if (mouse.isButtonPressed(MouseEvent.BUTTON2)) {
+            logger.log(Level.WARNING, "btn2");
         }
     }
 }

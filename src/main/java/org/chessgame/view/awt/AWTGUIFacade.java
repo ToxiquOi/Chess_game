@@ -1,7 +1,5 @@
 package org.chessgame.view.awt;
 
-import org.chessgame.controller.listener.Keyboard;
-import org.chessgame.controller.listener.Mouse;
 import org.chessgame.share.exception.MonitorNullException;
 import org.chessgame.share.interfaces.IKeyboard;
 import org.chessgame.share.interfaces.IMouse;
@@ -23,6 +21,7 @@ import org.chessgame.share.interfaces.ILayer;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AWTGUIFacade implements IGUIFacade {
 
@@ -31,7 +30,7 @@ public class AWTGUIFacade implements IGUIFacade {
     protected SpriteLoader spriteLoader;
     protected Board board;
 
-    private static ChessLogger chessLogger = new ChessLogger(AWTGUIFacade.class);
+    private static Logger chessLogger = Logger.getLogger(AWTGUIFacade.class.getSimpleName());
 
 
     @Override
@@ -61,26 +60,29 @@ public class AWTGUIFacade implements IGUIFacade {
         this.monitor.dispose();
     }
 
+    @Override
     public void setClosingRequest(boolean b) {
         this.monitor.setClosingRequest(b);
     }
 
-    public Keyboard getKeyboard() {
+    @Override
+    public IKeyboard getKeyboard() {
         if (this.monitor == null)
             throw new MonitorNullException("Il faut d'abord créer une fenêtre");
         return this.monitor.getKeyboard();
     }
 
-    public Mouse getMouse() {
+    @Override
+    public IMouse getMouse() {
         if (this.monitor == null)
             throw new MonitorNullException("Il faut d'abord créer une fenêtre");
         return this.monitor.getMouse();
     }
 
+    @Override
     public boolean isClosingRequested() {
         return this.monitor.isClosingRequested();
     }
-
 
     @Override
     public Boolean beginPaint() {

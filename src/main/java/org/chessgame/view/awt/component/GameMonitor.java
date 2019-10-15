@@ -38,22 +38,7 @@ public class GameMonitor extends Frame {
         this.setResizable(false);
         this.setVisible(true);
 
-        this.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                setClosingRequest(true);
-                dispose();
-                Thread.currentThread().interrupt();
-            }
-        });
-
-        addWindowFocusListener(new WindowAdapter() {
-            public void windowGainedFocus(WindowEvent e) {
-                if (boardComponent != null) {
-                    boardComponent.requestFocusInWindow();
-                }
-            }
-        });
+        this.addWindowListener(new WindowAdapterCustom(this, this.boardComponent));
     }
 
     public void setLayoutManager(LayoutManager layoutManager) {
@@ -63,7 +48,7 @@ public class GameMonitor extends Frame {
     public void createBoardComponent() {
         if (this.boardComponent == null) {
             this.boardComponent = new BoardComponent(d);
-            this.add(BorderLayout.CENTER, this.boardComponent);
+            this.add(this.boardComponent);
         }
         if (this.boardComponent.getWidth() != this.d.width || this.boardComponent.getHeight() != this.d.height) {
             this.boardComponent.setPreferredSize(this.d);
@@ -77,6 +62,7 @@ public class GameMonitor extends Frame {
         }
         if (this.mouse == null) {
             this.mouse = new Mouse();
+            this.addMouseMotionListener(this.mouse);
             this.addMouseListener(this.mouse);
         }
     }

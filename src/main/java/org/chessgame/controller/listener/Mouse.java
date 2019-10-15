@@ -9,12 +9,16 @@ import java.awt.event.MouseMotionListener;
 import java.io.Serializable;
 import java.util.logging.Level;
 
-public class Mouse implements IMouse, MouseListener, MouseMotionListener, Serializable {
+public class Mouse implements IMouse,  MouseListener, MouseMotionListener, Serializable {
 
     private static ChessLogger chessLogger = new ChessLogger(Mouse.class);
-    private boolean[] buttons = new boolean[4];
+    private boolean[] buttons;
     private int x;
     private int y;
+
+    public Mouse() {
+        this.buttons = new boolean[4];
+    }
 
     public void setX(int x) {
         this.x = x;
@@ -32,8 +36,12 @@ public class Mouse implements IMouse, MouseListener, MouseMotionListener, Serial
         return this.y;
     }
 
-    public boolean isButtonPressed(int button){
-        return this.buttons[button];
+
+    public boolean isButtonPressed(int button) {
+        if (button >= buttons.length) {
+            return false;
+        }
+        return buttons[button];
     }
 
     @Override
@@ -58,12 +66,10 @@ public class Mouse implements IMouse, MouseListener, MouseMotionListener, Serial
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        chessLogger.log(Level.INFO, "enter in window");
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        chessLogger.log(Level.INFO, "exit window");
     }
 
     @Override
@@ -74,6 +80,7 @@ public class Mouse implements IMouse, MouseListener, MouseMotionListener, Serial
 
     @Override
     public void mouseMoved(MouseEvent e) {
+        chessLogger.log(Level.INFO, "mouse moved x: " + e.getX());
         this.setX(e.getX());
         this.setY(e.getY());
     }

@@ -30,7 +30,7 @@ public class Main implements Runnable {
     public static void main(String[] args) {
         Main chess = new Main();
         chess.setGuiFacade(new AWTGUIFacade());
-        chess.setGameMode(new PlayGameMode()) ;
+        chess.setGameMode(new WelcomeGameMode()) ;
         chess.run();
     }
 

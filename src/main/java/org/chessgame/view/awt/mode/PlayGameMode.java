@@ -1,7 +1,6 @@
 package org.chessgame.view.awt.mode;
 
 import org.chessgame.model.Board;
-import org.chessgame.share.interfaces.IKeyboard;
 import org.chessgame.view.awt.abstracts.GameMode;
 
 public class PlayGameMode extends GameMode {

@@ -15,12 +15,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static java.awt.Transparency.TRANSLUCENT;
 
 public class SpriteLoader implements Serializable {
 
-    private static ChessLogger chessLogger = new ChessLogger(SpriteLoader.class);
+    private static Logger chessLogger = Logger.getLogger(SpriteLoader.class.getSimpleName());
     private transient ArrayList<HashMap<String, BufferedImage>> bufferedImages = new ArrayList<>(2);
     private Frame frame;
 

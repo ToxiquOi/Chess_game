@@ -6,7 +6,6 @@ import org.chessgame.share.services.ChessLogger;
 
 public abstract class GameMode {
 
-    protected ChessLogger logger = new ChessLogger(this.getClass());
     protected String title;
     private Main parent;
     protected IGUIFacade gui;
