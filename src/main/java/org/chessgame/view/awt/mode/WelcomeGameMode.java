@@ -21,15 +21,7 @@ public class WelcomeGameMode extends GameMode {
 
     @Override
     public void render() {
-        if (!this.gui.beginPaint()) {
-            return;
-        }
-        try {
-            this.gui.clearBackground();
-
-        } finally {
-            this.gui.endPaint();
-        }
+        this.gui.clearBackground();
     }
 
     @Override

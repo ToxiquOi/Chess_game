@@ -1,5 +1,6 @@
 package org.chessgame;
 
+import org.chessgame.view.awt.mode.MainMenuGameMode;
 import org.chessgame.view.awt.mode.PlayGameMode;
 import org.chessgame.share.services.ChessLogger;
 import org.chessgame.view.awt.AWTGUIFacade;
@@ -31,7 +32,7 @@ public class Main implements Runnable {
     public static void main(String[] args) {
         Main chess = new Main();
         chess.setGuiFacade(new AWTGUIFacade());
-        chess.setGameMode(new WelcomeGameMode()) ;
+        chess.setGameMode(new MainMenuGameMode()) ;
         chess.run();
     }
 
@@ -42,11 +43,12 @@ public class Main implements Runnable {
 
     public synchronized void setGameMode(GameMode mode) {
         try {
+
+            mode.setParent(this);
+            mode.setGuiFacade(this.gui);
+            mode.setTitle(APP_TITLE);
+            mode.init();
             this.currentMode = mode;
-            this.currentMode.setParent(this);
-            this.currentMode.setGuiFacade(this.gui);
-            this.currentMode.setTitle(APP_TITLE);
-            this.currentMode.init();
         } catch(Exception ex) {
             logger.log(Level.WARNING, ex.toString());
             JOptionPane.showMessageDialog(null, ex.toString(),"Erreur", JOptionPane.ERROR_MESSAGE);
@@ -68,9 +70,16 @@ public class Main implements Runnable {
             }
             lastTime = nowTime;
 
-            synchronized (this) {
-                this.currentMode.handleInput();
-                this.currentMode.render();
+            if (!this.gui.beginPaint()) {
+                return;
+            }
+            try {
+                synchronized (this) {
+                    this.currentMode.handleInput();
+                    this.currentMode.render();
+                }
+            } finally {
+                this.gui.endPaint();
             }
 
             long elapsed = System.nanoTime() - lastTime;

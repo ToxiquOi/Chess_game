@@ -1,5 +1,6 @@
 package org.chessgame.view.awt.mode;
 
+import org.chessgame.share.constant.CBoard;
 import org.chessgame.share.constant.CWindow;
 import org.chessgame.share.interfaces.IImage;
 import org.chessgame.view.awt.abstracts.GameMode;
@@ -12,7 +13,7 @@ public class MainMenuGameMode extends GameMode {
 
     private ArrayList<String> items = new ArrayList<>(3);
 
-    private int selectedItem;
+    private int selectedItem = 0;
 
     private IImage selectImage;
 
@@ -24,6 +25,7 @@ public class MainMenuGameMode extends GameMode {
 
     @Override
     public void init() {
+        this.gui.createWindow("Chess");
         this.keyboard = this.gui.getKeyboard();
         this.selectImage = this.gui.createImage("select.png");
     }
@@ -34,7 +36,7 @@ public class MainMenuGameMode extends GameMode {
         this.gui.setColor(Color.WHITE);
 
         Dimension menuSize = this.paintMenu(0, 0, true);
-//        this.paintMenu((CWindow.WIDTH - menuSize.width) / 2, (CWindow.HEIGHT - menuSize.height) / 2, false);
+        this.paintMenu(CBoard.BOARD_WIDTH / 2, CBoard.BOARD_HEIGHT / 2, false);
     }
 
     @Override
@@ -89,13 +91,13 @@ public class MainMenuGameMode extends GameMode {
         int menuWidth = 0;
         int menuHeight = 0;
 
-        for (int i=0;i<items.size();i++) {
+        for (int i=0; i < items.size(); i++) {
             String text = items.get(i);
             Dimension textSize = gui.getTextMetrics(text);
             if (!computeSize) {
                 gui.drawText(text, x, y, textSize.width, textSize.height);
                 if (i == selectedItem) {
-                    gui.drawImage(selectImage, x - selectImage.getWidth(), y);
+                    gui.drawImage(selectImage, x - selectImage.getWidth(), y - 1);
                 }
             }
             y += textSize.height;

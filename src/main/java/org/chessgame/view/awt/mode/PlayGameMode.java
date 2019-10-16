@@ -18,17 +18,9 @@ public class PlayGameMode extends GameMode {
 
     @Override
     public void render() {
-        if (!this.gui.beginPaint()) {
-            return;
-        }
-        try {
-            this.gui.clearBackground();
-            this.gui.drawBackground();
-            this.gui.drawChars();
-
-        } finally {
-            this.gui.endPaint();
-        }
+        this.gui.clearBackground();
+        this.gui.drawBackground();
+        this.gui.drawChars();
     }
 
     @Override

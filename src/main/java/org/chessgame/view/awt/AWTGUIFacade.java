@@ -211,7 +211,7 @@ public class AWTGUIFacade implements IGUIFacade {
         return image;
     }
 
-    public void drawImage(IImage image,int x,int y) {
+    public void drawImage(IImage image, int x, int y) {
         if (this.g == null) {
             return;
         }
@@ -236,7 +236,7 @@ public class AWTGUIFacade implements IGUIFacade {
         if (this.g == null)
             return;
         for (int i=2*size;i>=4;i--) {
-            Font font = new Font("Arial",Font.PLAIN,i);
+            Font font = new Font("Arial", Font.PLAIN, i);
             this.g.setFont(font);
             FontMetrics fm = this.g.getFontMetrics();
             if (fm.getHeight() < size) {
@@ -250,7 +250,6 @@ public class AWTGUIFacade implements IGUIFacade {
         if (this.g == null)
             return;
         FontMetrics fm = this.g.getFontMetrics();
-        chessLogger.log(Level.SEVERE, "Font Metrics: " + fm);
         this.g.clipRect(x, y, width, height);
         this.g.drawString(text, x, y + fm.getAscent());
         this.g.setClip(null);
