@@ -32,6 +32,7 @@ public class Main implements Runnable {
     public static void main(String[] args) {
         Main chess = new Main();
         chess.setGuiFacade(new AWTGUIFacade());
+        chess.createWindow();
         chess.setGameMode(new MainMenuGameMode()) ;
         chess.run();
     }
@@ -43,18 +44,20 @@ public class Main implements Runnable {
 
     public synchronized void setGameMode(GameMode mode) {
         try {
-
-            mode.setParent(this);
-            mode.setGuiFacade(this.gui);
-            mode.setTitle(APP_TITLE);
-            mode.init();
             this.currentMode = mode;
+            this.currentMode.setParent(this);
+            this.currentMode.setGuiFacade(this.gui);
+            this.currentMode.setTitle(APP_TITLE);
+            this.currentMode.init();
         } catch(Exception ex) {
             logger.log(Level.WARNING, ex.toString());
             JOptionPane.showMessageDialog(null, ex.toString(),"Erreur", JOptionPane.ERROR_MESSAGE);
         }
     }
 
+    public void createWindow() {
+        this.gui.createWindow(APP_TITLE);
+    }
 
     public void run() {
 

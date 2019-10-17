@@ -24,7 +24,7 @@ public abstract class GameMode {
     }
 
     public void init() {
-        this.gui.createWindow(this.title);
+
     }
 
     public void render() {
@@ -42,4 +42,5 @@ public abstract class GameMode {
     public void setGuiFacade(IGUIFacade gui) {
         this.gui = gui;
     }
+
 }
