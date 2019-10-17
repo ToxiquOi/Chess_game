@@ -63,12 +63,10 @@ public class GameMonitor extends Frame {
         }
         if (this.keyboard == null) {
             this.keyboard = new Keyboard();
-            logger.log(Level.INFO, "keyboard set" + '\n' );
             this.boardPanel.addKeyListener(this.keyboard);
         }
         if (this.mouse == null) {
             this.mouse = new Mouse();
-            logger.log(Level.INFO, "mouse set" + '\n');
             this.boardPanel.addMouseListener(this.mouse);
         }
     }

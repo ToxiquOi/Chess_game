@@ -36,7 +36,7 @@ public class MainMenuGameMode extends GameMode {
         this.gui.setColor(Color.WHITE);
 
         Dimension menuSize = this.paintMenu(0, 0, true);
-        this.paintMenu(CBoard.BOARD_WIDTH / 2, CBoard.BOARD_HEIGHT / 2, false);
+        this.paintMenu((CBoard.BOARD_WIDTH - menuSize.width) / 2, (CBoard.BOARD_HEIGHT - menuSize.height) / 2, false);
     }
 
     @Override
@@ -93,11 +93,12 @@ public class MainMenuGameMode extends GameMode {
 
         for (int i=0; i < items.size(); i++) {
             String text = items.get(i);
+            this.gui.setTextSize(30);
             Dimension textSize = gui.getTextMetrics(text);
             if (!computeSize) {
                 gui.drawText(text, x, y, textSize.width, textSize.height);
                 if (i == selectedItem) {
-                    gui.drawImage(selectImage, x - selectImage.getWidth(), y - 1);
+                    gui.drawImage(selectImage, x - selectImage.getWidth(), y - 10);
                 }
             }
             y += textSize.height;
