@@ -12,7 +12,7 @@ import org.chessgame.view.awt.component.AWTImage;
 import org.chessgame.view.awt.component.AWTLayer;
 import org.chessgame.view.awt.component.GameMonitor;
 import org.chessgame.view.awt.graphics.CaseBoard;
-import org.chessgame.view.awt.services.SpriteLoader;
+import org.chessgame.view.awt.factory.FlyweightSpriteFactory;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -26,7 +26,7 @@ public class AWTGUIFacade implements IGUIFacade {
 
     protected Graphics g;
     protected GameMonitor monitor;
-    protected SpriteLoader spriteLoader;
+    protected FlyweightSpriteFactory flyweightSpriteFactory;
     protected Board board;
 
     private static Logger chessLogger = Logger.getLogger(AWTGUIFacade.class.getSimpleName());
@@ -58,8 +58,8 @@ public class AWTGUIFacade implements IGUIFacade {
     @Override
     public void createSpriteLoader(Board board) {
         this.board = board;
-        this.spriteLoader = new SpriteLoader(this.monitor);
-        this.spriteLoader.init(board.iterator());
+        this.flyweightSpriteFactory = new FlyweightSpriteFactory(this.monitor);
+        this.flyweightSpriteFactory.init(board.iterator());
     }
 
     @Override
@@ -143,7 +143,7 @@ public class AWTGUIFacade implements IGUIFacade {
             if (Boolean.TRUE.equals(b)) {
                 Piece piece = (Piece) boardElement;
 
-                BufferedImage image = this.spriteLoader.getBufferedImage(piece);
+                BufferedImage image = this.flyweightSpriteFactory.getBufferedImage(piece);
                 g.drawImage(image, spot.getY() * CBoard.TILE_HEIGHT_PX + (CBoard.TILE_HEIGHT_PX / 2 - (image.getHeight() / 2)),
                         spot.getX() * CBoard.TILE_WIDTH_PX + (CBoard.TILE_WIDTH_PX / 2 - (image.getWidth() / 2)),
                         image.getWidth(), image.getHeight(), null);

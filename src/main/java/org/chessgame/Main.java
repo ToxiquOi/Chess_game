@@ -1,12 +1,10 @@
 package org.chessgame;
 
 import org.chessgame.view.awt.mode.MainMenuGameMode;
-import org.chessgame.view.awt.mode.PlayGameMode;
-import org.chessgame.share.services.ChessLogger;
 import org.chessgame.view.awt.AWTGUIFacade;
 import org.chessgame.share.interfaces.IGUIFacade;
 import org.chessgame.view.awt.abstracts.GameMode;
-import org.chessgame.view.awt.mode.WelcomeGameMode;
+import org.chessgame.view.awt.factory.FlyWeightMenuFactory;
 
 import javax.swing.*;
 import java.util.logging.Level;
@@ -23,8 +21,9 @@ public class Main implements Runnable {
     protected Thread thread;
 
     private static Logger logger = Logger.getLogger(Main.class.getSimpleName());
-    GameMode currentMode;
-    IGUIFacade gui;
+    private FlyWeightMenuFactory menuFactory;
+    private GameMode currentMode;
+    private IGUIFacade gui;
 
     /**
      * @param args the command line arguments
@@ -33,10 +32,15 @@ public class Main implements Runnable {
         Main chess = new Main();
         chess.setGuiFacade(new AWTGUIFacade());
         chess.createWindow();
-        chess.setGameMode(new MainMenuGameMode()) ;
-        chess.run();
+        chess.setMenuFactory(new FlyWeightMenuFactory());
+        chess.setGameMode(chess.getMenuFactory().getMenuItems(MainMenuGameMode.class)) ;
+        chess.start();
     }
 
+    public void start() {
+        Thread thread = new Thread(this, "chess_main");
+        thread.start();
+    }
 
     private void setGuiFacade(IGUIFacade gui) {
         this.gui = gui;
@@ -53,6 +57,18 @@ public class Main implements Runnable {
             logger.log(Level.WARNING, ex.toString());
             JOptionPane.showMessageDialog(null, ex.toString(),"Erreur", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    public void setMenuFactory(FlyWeightMenuFactory menuFactory) {
+        this.menuFactory = menuFactory;
+    }
+
+    public FlyWeightMenuFactory getMenuFactory() {
+        if (this.menuFactory == null) {
+            logger.log(Level.WARNING, "Factory menu is null");
+            return null;
+        }
+        return this.menuFactory;
     }
 
     public void createWindow() {

@@ -6,7 +6,7 @@ import org.chessgame.model.board_element.pieces.Pawn;
 import org.chessgame.share.enumeration.EColorChess;
 import org.chessgame.share.iterator.BoardIterator;
 import org.chessgame.view.awt.component.GameMonitor;
-import org.chessgame.view.awt.services.SpriteLoader;
+import org.chessgame.view.awt.factory.FlyweightSpriteFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,11 +17,11 @@ import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class TestSpriteLoader {
+class TestFlyweightSpriteFactory {
 
-    public static class SpriteLoaderClassTest extends SpriteLoader {
+    public static class FlyweightSpriteFactoryClassTest extends FlyweightSpriteFactory {
 
-        public SpriteLoaderClassTest( Frame frame) {
+        public FlyweightSpriteFactoryClassTest(Frame frame) {
             super(frame);
         }
 
@@ -53,11 +53,11 @@ class TestSpriteLoader {
 
     private Board board = new Board();
     private GameMonitor gm = new GameMonitor("test");
-    private SpriteLoaderClassTest spriteLoaderClassTest;
+    private FlyweightSpriteFactoryClassTest spriteLoaderClassTest;
 
     @BeforeEach
     void setUp() {
-        this.spriteLoaderClassTest = new SpriteLoaderClassTest(gm);
+        this.spriteLoaderClassTest = new FlyweightSpriteFactoryClassTest(gm);
     }
 
     @Test

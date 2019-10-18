@@ -12,7 +12,9 @@ public class MenuGameMode extends GameMode {
 
     protected int selectedItem = 0;
 
-    protected IImage selectImage;
+    private IImage backgroundImage;
+
+    private IImage selectImage;
 
     @Override
     public void init() {
@@ -23,8 +25,8 @@ public class MenuGameMode extends GameMode {
     @Override
     public void render() {
         this.gui.clearBackground();
-        this.gui.setColor(Color.WHITE);
 
+        this.gui.setColor(Color.WHITE);
         Dimension menuSize = this.paintMenu(0, 0, true);
         this.paintMenu((CBoard.BOARD_WIDTH - menuSize.width) / 2, (CBoard.BOARD_HEIGHT - menuSize.height) / 2, false);
     }

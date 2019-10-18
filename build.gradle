@@ -57,3 +57,14 @@ sonarqube {
 jacoco {
     toolVersion = "0.8.4"
 }
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'Chess_game',
+                'Implementation-Version': '0.0.1',
+                'Main-Class': 'org.Launcher'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}

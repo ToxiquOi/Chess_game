@@ -1,14 +1,9 @@
 package org.chessgame.view.awt.mode;
 
-import org.chessgame.share.constant.CBoard;
-import org.chessgame.share.constant.CWindow;
-import org.chessgame.share.interfaces.IImage;
-import org.chessgame.view.awt.abstracts.GameMode;
 import org.chessgame.view.awt.abstracts.MenuGameMode;
 
-import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
+
 
 public class MainMenuGameMode extends MenuGameMode {
 
@@ -64,7 +59,7 @@ public class MainMenuGameMode extends MenuGameMode {
                         break;
 
                     case 1:
-                        this.setGameMode(new OptionMenuGameMode());
+                        this.setGameMode(this.getMenuFactory().getMenuItems(OptionMenuGameMode.class));
                         break;
 
                     case 2:

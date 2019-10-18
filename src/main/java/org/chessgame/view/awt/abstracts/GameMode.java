@@ -3,6 +3,7 @@ package org.chessgame.view.awt.abstracts;
 import org.chessgame.Main;
 import org.chessgame.share.interfaces.IGUIFacade;
 import org.chessgame.share.interfaces.IKeyboard;
+import org.chessgame.view.awt.factory.FlyWeightMenuFactory;
 
 public abstract class GameMode {
 
@@ -19,7 +20,11 @@ public abstract class GameMode {
         this.parent = main;
     }
 
-    public void setGameMode(GameMode mode) {
+    protected FlyWeightMenuFactory getMenuFactory() {
+        return this.parent.getMenuFactory();
+    }
+
+    protected void setGameMode(GameMode mode) {
         parent.setGameMode(mode);
     }
 

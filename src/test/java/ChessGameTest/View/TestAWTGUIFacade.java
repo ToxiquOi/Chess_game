@@ -4,7 +4,7 @@ import org.chessgame.model.Board;
 import org.chessgame.view.awt.AWTGUIFacade;
 import org.chessgame.view.awt.component.AWTLayer;
 import org.chessgame.view.awt.component.GameMonitor;
-import org.chessgame.view.awt.services.SpriteLoader;
+import org.chessgame.view.awt.factory.FlyweightSpriteFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,8 +17,8 @@ class TestAWTGUIFacade {
         GameMonitor getMonitor() {
             return this.monitor;
         }
-        SpriteLoader getSpriteLoader() {
-            return this.spriteLoader;
+        FlyweightSpriteFactory getSpriteLoader() {
+            return this.flyweightSpriteFactory;
         }
         Board getBoard() {
             return this.board;

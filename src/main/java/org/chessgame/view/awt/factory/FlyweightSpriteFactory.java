@@ -1,4 +1,4 @@
-package org.chessgame.view.awt.services;
+package org.chessgame.view.awt.factory;
 
 import org.chessgame.model.abstracts.BoardElement;
 import org.chessgame.model.abstracts.Piece;
@@ -18,13 +18,13 @@ import java.util.logging.Logger;
 
 import static java.awt.Transparency.TRANSLUCENT;
 
-public class SpriteLoader implements Serializable {
+public class FlyweightSpriteFactory implements Serializable {
 
-    private static Logger chessLogger = Logger.getLogger(SpriteLoader.class.getSimpleName());
+    private static Logger chessLogger = Logger.getLogger(FlyweightSpriteFactory.class.getSimpleName());
     private transient ArrayList<HashMap<String, BufferedImage>> bufferedImages = new ArrayList<>(2);
     private Frame frame;
 
-    public SpriteLoader( Frame frame) {
+    public FlyweightSpriteFactory(Frame frame) {
         this.frame = frame;
     }
 
