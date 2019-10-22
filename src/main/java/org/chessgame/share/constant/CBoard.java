@@ -1,7 +1,10 @@
 package org.chessgame.share.constant;
 
 public class CBoard {
-    private CBoard() {}
+    private CBoard() {
+
+    }
+
 
     public static final int BOARD_WIDTH = 700;
     public static final int BOARD_HEIGHT = 700;

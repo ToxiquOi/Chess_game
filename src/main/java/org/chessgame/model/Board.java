@@ -39,7 +39,7 @@ public class Board implements Iterable<Spot>, Serializable {
 
     public Spot getElement(int y, int x) {
         if (y < CBoard.TILE_HEIGHT_TAB && x < CBoard.TILE_WIDTH_TAB && y >= 0 && x >= 0) {
-            return this.boardElement[y][x];
+            return this.boardElement[x][y];
         }
         return null;
     }

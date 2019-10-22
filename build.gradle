@@ -34,6 +34,8 @@ dependencies {
     implementation "org.lwjgl:lwjgl-openal:${lwjglVersion}"
     implementation "org.lwjgl:lwjgl-opengl:${lwjglVersion}"
     implementation "org.lwjgl:lwjgl-stb:${lwjglVersion}"
+    implementation "com.googlecode.json-simple:json-simple:1.1.1"
+    runtimeOnly "com.googlecode.json-simple:json-simple:1.1.1"
     runtimeOnly "org.lwjgl:lwjgl:${lwjglVersion}:${lwjglNatives}"
     runtimeOnly "org.lwjgl:lwjgl-assimp:${lwjglVersion}:${lwjglNatives}"
     runtimeOnly "org.lwjgl:lwjgl-glfw:${lwjglVersion}:${lwjglNatives}"
@@ -45,6 +47,7 @@ dependencies {
 }
 
 test {
+    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
     useJUnitPlatform()
 }
 
