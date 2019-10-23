@@ -4,14 +4,12 @@ import org.chessgame.view.awt.abstracts.MenuGameMode;
 
 import java.awt.event.KeyEvent;
 
+public class OptionMenuGM extends MenuGameMode {
 
-public class MainMenuGameMode extends MenuGameMode {
-
-
-    public MainMenuGameMode() {
-        this.items.add("Play");
-        this.items.add("Options");
-        this.items.add("Exit");
+    public OptionMenuGM() {
+        this.items.add("Screen");
+        this.items.add("Sound");
+        this.items.add("Return");
     }
 
     @Override
@@ -26,7 +24,6 @@ public class MainMenuGameMode extends MenuGameMode {
 
     @Override
     public void update() {
-
     }
 
     @Override
@@ -55,15 +52,11 @@ public class MainMenuGameMode extends MenuGameMode {
                 this.keyboard.consumeLastPressedKey();
                 switch (selectedItem) {
                     case 0:
-                        this.setGameMode(new PlayGameMode());
-                        break;
-
                     case 1:
-                        this.setGameMode(this.getMenuFactory().getMenuItems(OptionMenuGameMode.class));
                         break;
 
                     case 2:
-                        this.gui.setClosingRequest(true);
+                        this.setGameMode(new MainMenuGM());
                         break;
                 }
         }

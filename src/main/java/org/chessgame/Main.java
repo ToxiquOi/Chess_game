@@ -1,14 +1,13 @@
 package org.chessgame;
 
 import org.chessgame.share.config.JsonConfigRW;
-import org.chessgame.view.awt.mode.MainMenuGameMode;
+import org.chessgame.view.awt.mode.MainMenuGM;
 import org.chessgame.view.awt.AWTGUIFacade;
 import org.chessgame.share.interfaces.IGUIFacade;
 import org.chessgame.view.awt.abstracts.GameMode;
 import org.chessgame.view.awt.factory.FlyWeightMenuFactory;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,16 +34,11 @@ public class Main implements Runnable {
         chess.setGuiFacade(new AWTGUIFacade());
         chess.createWindow();
         chess.setMenuFactory(new FlyWeightMenuFactory());
-        chess.setGameMode(chess.getMenuFactory().getMenuItems(MainMenuGameMode.class)) ;
+        chess.setGameMode(chess.getMenuFactory().getMenuItems(MainMenuGM.class)) ;
         chess.start();
     }
 
     public void start() {
-        Dimension d = this.configRW.getDimension("board", "current");
-        logger.log(Level.INFO, "width: " + d.width + " height: " + d.height);
-        this.configRW.setDimension("board", "standard");
-        d = this.configRW.getDimension("board", "current");
-        logger.log(Level.INFO, "width: " + d.width + " height: " + d.height);
         Thread thread = new Thread(this, "chess_main");
         thread.start();
     }

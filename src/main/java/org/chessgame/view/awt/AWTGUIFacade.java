@@ -1,5 +1,6 @@
 package org.chessgame.view.awt;
 
+import org.chessgame.share.constant.CWindow;
 import org.chessgame.share.exception.MonitorNullException;
 import org.chessgame.share.interfaces.*;
 import org.chessgame.model.Board;
@@ -121,7 +122,7 @@ public class AWTGUIFacade implements IGUIFacade {
             return false;
         }
         this.g.setColor(Color.BLACK);
-        this.g.fillRect(0, 0, CBoard.BOARD_WIDTH, CBoard.BOARD_HEIGHT);
+        this.g.fillRect(0, 0, CWindow.WIDTH, CWindow.HEIGHT);
 
         return true;
     }

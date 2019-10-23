@@ -1,8 +1,13 @@
 package org.chessgame.share.constant;
 
+import org.chessgame.share.config.JsonConfigRW;
+
+import java.awt.*;
+
 public class CWindow {
     private CWindow() {}
 
-    public static final int HEIGHT = 720;
-    public static final int WIDTH = 1200;
+    private static Dimension d = new JsonConfigRW().getDimension("window", "current");
+    public static int HEIGHT = d.height;
+    public static int WIDTH = d.width;
 }

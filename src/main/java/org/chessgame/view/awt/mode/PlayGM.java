@@ -5,7 +5,7 @@ import org.chessgame.view.awt.abstracts.GameMode;
 
 import java.awt.event.KeyEvent;
 
-public class PlayGameMode extends GameMode {
+public class PlayGM extends GameMode {
 
     private final Board board = new Board();
 

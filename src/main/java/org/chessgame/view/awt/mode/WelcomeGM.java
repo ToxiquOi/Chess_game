@@ -1,17 +1,13 @@
 package org.chessgame.view.awt.mode;
 
-import org.chessgame.share.interfaces.IKeyboard;
-import org.chessgame.share.interfaces.IMouse;
 import org.chessgame.view.awt.abstracts.GameMode;
 
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class WelcomeGameMode extends GameMode {
+public class WelcomeGM extends GameMode {
 
-    private Logger logger = Logger.getLogger(WelcomeGameMode.class.getSimpleName());
+    private Logger logger = Logger.getLogger(WelcomeGM.class.getSimpleName());
 
     @Override
     public void init() {
@@ -37,7 +33,7 @@ public class WelcomeGameMode extends GameMode {
                 break;
             case KeyEvent.VK_ENTER:
                 keyboard.consumeLastPressedKey();
-                setGameMode(new MainMenuGameMode());
+                setGameMode(new MainMenuGM());
                 break;
         }
     }
