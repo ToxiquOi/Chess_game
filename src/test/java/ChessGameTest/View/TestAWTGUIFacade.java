@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TestAWTGUIFacade {
     private static class AWTFacadeClassTest extends AWTGUIFacade {
-        GameMonitor getMonitor() {
+        public GameMonitor getMonitor() {
             return this.monitor;
         }
         FlyweightSpriteFactory getSpriteLoader() {

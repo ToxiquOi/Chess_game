@@ -51,6 +51,10 @@ public class AWTGUIFacade implements IGUIFacade {
         this.monitor.setVisible(true);
     }
 
+    public GameMonitor getMonitor() {
+        return this.monitor;
+    }
+
     @Override
     public ILayer createLayer() {
         return new AWTLayer();
@@ -244,6 +248,11 @@ public class AWTGUIFacade implements IGUIFacade {
                 break;
             }
         }
+    }
+
+    public void drawChoice(String[] choiceList, int x, int y, int width, int height) {
+        if (this.g == null)
+            return;
     }
 
     @Override

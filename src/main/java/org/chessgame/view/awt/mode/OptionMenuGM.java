@@ -52,11 +52,12 @@ public class OptionMenuGM extends MenuGameMode {
                 this.keyboard.consumeLastPressedKey();
                 switch (selectedItem) {
                     case 0:
+                        this.setGameMode(this.getMenuFactory().getMenuItems(ScreenOptionMenuGM.class));
                     case 1:
                         break;
 
                     case 2:
-                        this.setGameMode(new MainMenuGM());
+                        this.setGameMode(this.getMenuFactory().getMenuItems(MainMenuGM.class));
                         break;
                 }
         }

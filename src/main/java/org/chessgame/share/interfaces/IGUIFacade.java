@@ -2,6 +2,7 @@ package org.chessgame.share.interfaces;
 
 import org.chessgame.model.Board;
 import org.chessgame.view.awt.component.AWTLayer;
+import org.chessgame.view.awt.component.GameMonitor;
 
 import java.awt.*;
 
@@ -14,6 +15,7 @@ public interface IGUIFacade {
     void setClosingRequest(boolean b);
     Boolean drawBackground();
     Boolean drawLayer(ILayer layer);
+    GameMonitor getMonitor();
     void saveLayer(AWTLayer layer);
     Boolean drawChars();
     void createSpriteLoader(Board board);

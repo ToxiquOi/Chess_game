@@ -30,11 +30,11 @@ public class JsonConfigRW {
             this.confJson = (JSONObject) data;
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            logger.log(Level.WARNING, e.toString());
         } catch (ParseException e) {
-            e.printStackTrace();
+            logger.log(Level.WARNING, e.toString());
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.WARNING, e.toString());
         }
     }
 
