@@ -20,7 +20,6 @@ import java.util.logging.Logger;
 public class Main implements Runnable {
 
     private static final String APP_TITLE = "chess";
-    protected Thread thread;
 
     private static Logger logger = Logger.getLogger(Main.class.getSimpleName());
     private FlyWeightMenuFactory menuFactory;
@@ -43,7 +42,7 @@ public class Main implements Runnable {
     public void start() {
         Dimension d = this.configRW.getDimension("board", "current");
         logger.log(Level.INFO, "width: " + d.width + " height: " + d.height);
-        this.configRW.setDimension("board", "small");
+        this.configRW.setDimension("board", "standard");
         d = this.configRW.getDimension("board", "current");
         logger.log(Level.INFO, "width: " + d.width + " height: " + d.height);
         Thread thread = new Thread(this, "chess_main");

@@ -10,8 +10,6 @@ import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-//TODO: make work this
-
 public class JsonConfigRW {
 
     private static final String PATH = System.getProperty("user.dir") + "/src/main/java/org/chessgame/share/config/config.json";
@@ -44,6 +42,7 @@ public class JsonConfigRW {
         try {
             FileWriter writer = new FileWriter(PATH);
             writer.write(this.confJson.toJSONString());
+            writer.flush();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -55,9 +54,10 @@ public class JsonConfigRW {
             JSONObject category = (JSONObject) this.confJson.get(nameCategory);
 
             if(nameSubCategory.equals("small") || nameSubCategory.equals("standard")) {
-                JSONObject dataToSet = (JSONObject) category.get(nameSubCategory);
+                JSONArray dataToSet = (JSONArray) category.get(nameSubCategory);
                 category.put("current", dataToSet);
                 this.confJson.put(nameCategory, category);
+                System.out.println(this.confJson.toJSONString());
                 this.writeConfig();
             }
             else {
