@@ -8,6 +8,8 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferStrategy;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class BoardPanel extends Panel {
 
@@ -16,7 +18,6 @@ public class BoardPanel extends Panel {
     private Dimension d = new Dimension(CBoard.BOARD_WIDTH, CBoard.BOARD_HEIGHT);
 
     public BoardPanel() {
-
     }
 
     public void init() {

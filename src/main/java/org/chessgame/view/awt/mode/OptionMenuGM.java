@@ -31,7 +31,7 @@ public class OptionMenuGM extends MenuGameMode {
         switch (this.keyboard.getLastPressedKey()) {
             case KeyEvent.VK_ESCAPE:
                 this.keyboard.consumeLastPressedKey();
-                this.gui.setClosingRequest(true);
+                this.setGameMode(this.getMenuFactory().getMenuItems(MainMenuGM.class));
                 break;
 
             case KeyEvent.VK_UP:

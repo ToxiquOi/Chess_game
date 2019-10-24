@@ -5,6 +5,7 @@ import org.chessgame.view.awt.component.AWTLayer;
 import org.chessgame.view.awt.component.GameMonitor;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public interface IGUIFacade {
     void createWindow(String title);
@@ -15,7 +16,8 @@ public interface IGUIFacade {
     void setClosingRequest(boolean b);
     Boolean drawBackground();
     Boolean drawLayer(ILayer layer);
-    GameMonitor getMonitor();
+    Choice addChoiceSelector(ArrayList<String> items, int posX, int posY, int width, int height);
+    void drawChoiceSelector(Choice c);
     void saveLayer(AWTLayer layer);
     Boolean drawChars();
     void createSpriteLoader(Board board);

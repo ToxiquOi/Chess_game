@@ -71,6 +71,11 @@ public class GameMonitor extends Frame {
         }
     }
 
+    @Override
+    public Component add(Component comp) {
+        return this.boardPanel.add(comp);
+    }
+
     public IKeyboard getKeyboard() {
         return this.keyboard;
     }

@@ -30,7 +30,8 @@ public class PlayGM extends GameMode {
     @Override
     public void handleInput() {
         if (this.keyboard.getLastPressedKey() == KeyEvent.VK_ESCAPE) {
-            this.gui.setClosingRequest(true);
+            this.keyboard.consumeLastPressedKey();
+            this.setGameMode(this.getMenuFactory().getMenuItems(MainMenuGM.class));
         }
     }
 

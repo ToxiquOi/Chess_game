@@ -20,6 +20,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -49,10 +50,6 @@ public class AWTGUIFacade implements IGUIFacade {
         this.monitor.createBoardPanel(BorderLayout.CENTER);
         this.monitor.setLocationRelativeTo(null);
         this.monitor.setVisible(true);
-    }
-
-    public GameMonitor getMonitor() {
-        return this.monitor;
     }
 
     @Override
@@ -118,6 +115,27 @@ public class AWTGUIFacade implements IGUIFacade {
         this.monitor.switchBuffer();
         return true;
     }
+
+    public Choice addChoiceSelector(ArrayList<String> items, int posX, int posY, int width, int height) {
+        if (this.g == null)
+            return null;
+
+        Choice c = new Choice();
+        c.setBounds(posX, posY, width, height);
+        for (String item : items) {
+            c.add(item);
+        }
+        c.setVisible(true);
+        this.monitor.add(c);
+
+        return c;
+    }
+
+    public void drawChoiceSelector(Choice c) {
+        this.g.setColor(Color.WHITE);
+        c.paint(this.g);
+    }
+
 
     @Override
     public Boolean clearBackground() {
@@ -251,8 +269,7 @@ public class AWTGUIFacade implements IGUIFacade {
     }
 
     public void drawChoice(String[] choiceList, int x, int y, int width, int height) {
-        if (this.g == null)
-            return;
+
     }
 
     @Override
