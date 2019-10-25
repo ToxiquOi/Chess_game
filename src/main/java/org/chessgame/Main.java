@@ -1,6 +1,7 @@
 package org.chessgame;
 
 import org.chessgame.share.config.JsonConfigRW;
+import org.chessgame.view.awt.abstracts.MenuGameMode;
 import org.chessgame.view.awt.mode.MainMenuGM;
 import org.chessgame.view.awt.AWTGUIFacade;
 import org.chessgame.share.interfaces.IGUIFacade;

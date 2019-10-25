@@ -2,9 +2,6 @@ package org.chessgame.view.awt.factory;
 
 import org.chessgame.view.awt.abstracts.GameMode;
 import org.chessgame.view.awt.abstracts.MenuGameMode;
-import org.chessgame.view.awt.mode.MainMenuGM;
-import org.chessgame.view.awt.mode.OptionMenuGM;
-import org.chessgame.view.awt.mode.ScreenOptionMenuGM;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -18,9 +15,7 @@ public class FlyWeightMenuFactory {
     private HashMap<String, MenuGameMode> menuItems = new HashMap<>();
 
     public FlyWeightMenuFactory() {
-        this.menuItems.put(MainMenuGM.class.getSimpleName(), null);
-        this.menuItems.put(OptionMenuGM.class.getSimpleName(), null);
-        this.menuItems.put(ScreenOptionMenuGM.class.getSimpleName() , null);
+
     }
 
     public GameMode getMenuItems(Class c) {

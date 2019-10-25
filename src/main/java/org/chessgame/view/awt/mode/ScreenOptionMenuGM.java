@@ -23,7 +23,10 @@ public class ScreenOptionMenuGM extends MenuGameMode {
     @Override
     public void init() {
         super.init();
-        this.c = this.gui.addChoiceSelector(this.choiceItems, 100, 100, 20, 20);
+        if(this.c == null)
+        {
+            this.c = this.gui.addChoiceSelector(this.choiceItems, 100, 100, 20, 20);
+        }
     }
 
     @Override
