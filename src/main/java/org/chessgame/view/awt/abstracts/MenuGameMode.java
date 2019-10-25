@@ -6,7 +6,7 @@ import org.chessgame.share.interfaces.IImage;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class MenuGameMode extends GameMode {
+public abstract class MenuGameMode extends GameMode {
 
     protected ArrayList<String> items = new ArrayList<>(3);
 
