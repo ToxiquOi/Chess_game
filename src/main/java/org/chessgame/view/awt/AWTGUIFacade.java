@@ -126,7 +126,7 @@ public class AWTGUIFacade implements IGUIFacade {
             c.add(item);
         }
         c.setVisible(true);
-        this.monitor.add(c);
+        this.monitor.add(BorderLayout.SOUTH, c);
 
         return c;
     }

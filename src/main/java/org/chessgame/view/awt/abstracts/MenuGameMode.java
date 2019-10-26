@@ -38,6 +38,7 @@ public abstract class MenuGameMode extends GameMode {
         for (int i=0; i < items.size(); i++) {
             String text = items.get(i);
             this.gui.setTextSize(30);
+
             Dimension textSize = gui.getTextMetrics(text);
             if (!computeSize) {
                 this.gui.drawText(text, x, y, textSize.width, textSize.height);
